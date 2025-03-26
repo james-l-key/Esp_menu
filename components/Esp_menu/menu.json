@@ -1,0 +1,18 @@
+[
+    {
+        "type": "menu",
+        "label": "Oscillator 1",
+        "items": [
+            { "type": "parameter", "label": "Waveform", "variable": "osc1_waveform", "values": ["Sine", "Square", "Saw", "Triangle"] },
+            { "type": "parameter", "label": "Frequency", "variable": "osc1_freq", "min": 20, "max": 20000, "step": 1 }
+        ]
+    },
+    {
+        "type": "parameter",
+        "label": "Global Volume",
+        "variable": "global_volume",
+        "min": 0,
+        "max": 1,
+        "step": 0.01
+    }
+]
