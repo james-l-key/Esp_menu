@@ -1,7 +1,7 @@
 # menu/CMakeLists.txt
 idf_component_register(SRCS "Esp_menu.c"
     INCLUDE_DIRS "include" "."
-    REQUIRES esp_lcd driver esp_lvgl_port)
+    REQUIRES esp_lcd driver esp_lvgl_port lvgl button knob)
 
 # Generate the menu header using custom command
 add_custom_command(

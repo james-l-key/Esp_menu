@@ -5,6 +5,8 @@
 
 #include <stdint.h>
 
+void i2c_communication_init(void);
+
 typedef enum
 {
     WAVE_SINE,

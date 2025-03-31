@@ -1,0 +1,133 @@
+---
+:project:
+  :which_ceedling: gem
+  :ceedling_version: 1.0.1
+  :use_mocks: TRUE
+  :use_test_preprocessor: :none
+  :use_deep_preprocessor: :none
+  :use_backtrace: :simple
+  :use_decorators: :auto
+  :build_root: ceedling_build
+  :test_file_prefix: test_
+  :default_tasks:
+    - test:all
+  :test_threads: 4 # Adjust based on your CPU cores
+  :compile_threads: 4 # Adjust based on your CPU cores
+  :release_build: FALSE
+
+:mixins:
+  :enabled: []
+  :load_paths: []
+
+:test_build:
+  :use_assembly: FALSE
+
+:release_build:
+  :output: MyApp.out
+  :use_assembly: FALSE
+  :artifacts: []
+
+:plugins:
+  :load_paths: []
+  :enabled:
+    # - module_generator
+    - report_tests_pretty_stdout
+    - report_tests_log_factory
+
+:report_tests_log_factory:
+  :reports:
+    - json
+    - junit
+    - cppunit
+    - html
+
+:extension:
+  :executable: .out # Back to .out for Linux
+
+:paths:
+  :test:
+    - +:test/** # Keep test files in the test folder
+    - -:test/support
+  :source:
+    - main/**
+    - +:components/**
+  :include:
+    - main/**
+    - +:components/**/include  # Add this line to include all component include directories
+    - +:components/**
+    - +:test/support/stub_esp_idf
+    - -:components/Esp_menu/include_esp
+  :support:
+    - test/support/**
+  :libraries: []
+
+:files:
+  :test: []
+  :source: []
+
+:defines:
+  :test:
+    - TEST
+    - UNITY_INCLUDE_CONFIG_H
+    - UNIT_TEST # Define a symbol for local tests
+  :release: []
+  :use_test_definition: FALSE
+
+:cmock:
+  :plugins:
+    - :ignore
+    - :callback
+  :verbosity: 2
+  :when_no_prototypes: :warn
+  :skeleton_path: ''
+  :mock_prefix: 'mock_'
+  :mock_suffix: ''
+  :strippables: ['(?:__attribute__\s*\([ (]*.*?[ )]*\)+)']
+  :attributes:
+    - __ramfunc
+    - __irq
+    - __fiq
+    - register
+    - extern
+  :c_calling_conventions:
+    - __stdcall
+    - __cdecl
+    - __fastcall
+  :treat_externs: :exclude
+  :treat_inlines: :exclude
+  :treat_as:
+    uint8: HEX8
+    uint16: HEX16
+    uint32: UINT32
+    int8: INT8
+    bool: UINT8
+  :memcmp_if_unknown: true
+  :when_ptr: :compare_data
+  :weak: ''
+  :enforce_strict_ordering: true
+  :fail_on_unexpected_calls: true
+  :callback_include_count: true
+  :callback_after_arg_check: false
+  :includes:
+    - driver/i2c_master.h
+    - esp_lcd_panel_io.h
+    - esp_lcd_panel_vendor.h
+    - esp_lcd_panel_ops.h
+    - driver/gpio.h
+    # - components/Esp_menu/Esp_menu.h   # REMOVE OR COMMENT THIS LINE
+  :exclude_setjmp_h: false
+
+:unity:
+  :defines:
+    - UNITY_EXCLUDE_FLOAT
+    - UNITY_INCLUDE_CONFIG_H
+
+:environment: []
+
+:libraries:
+  :placement: :end
+  :flag: "-l${1}"
+  :path_flag: "-L ${1}"
+  :system: []
+  :test: []
+  :release: []
