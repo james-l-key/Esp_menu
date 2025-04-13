@@ -1,0 +1,162 @@
+menu "Esp_Menu Configuration"
+    
+    config ESPMENU_ENABLE
+        bool "Enable Esp_Menu"
+        default y
+        help
+            Enable Esp_Menu component
+    
+    config ESPMENU_I2C_HOST
+        int "I2C Host"
+        default 0
+        help
+            I2C host to use for the SSD1306 display. Default is 0.
+            If you have a different display, check the datasheet for the correct host.
+   
+    choice ESPMENU_SSD1306_HEIGHT
+        prompt "SSD1306 Height in pixels"
+        default ESPMENU_SSD1306_HEIGHT_64
+        help
+            Height of the display in pixels. a.k.a vertical resolution
+
+        config ESPMENU_SSD1306_HEIGHT_64
+            bool "64"
+        config ESPMENU_SSD1306_HEIGHT_32
+            bool "32"
+    endchoice
+
+    config ESPMENU_SSD1306_HEIGHT
+        int
+        default 64 if ESPMENU_SSD1306_HEIGHT_64
+        default 32 if ESPMENU_SSD1306_HEIGHT_32
+
+    config ESPMENU_SSD1306_I2C_ADDRESS
+        hex "SSD1306 I2C Address"
+        default 0x3C
+        help
+            I2C address of the SSD1306 display. Default is 0x3C.
+            This is the default address for most SSD1306 displays.
+            If you have a different display, check the datasheet for the correct address.
+   
+    config ESPMENU_SSD1306_I2C_SDA
+        int "SSD1306 I2C SDA Pin"
+        default 21
+        help
+            I2C SDA pin for the SSD1306 display. Default is GPIO 21.
+            If you have a different display, check the datasheet for the correct pin.
+            
+    config ESPMENU_SSD1306_I2C_SCL
+        int "SSD1306 I2C SCL Pin"
+        default 22
+        help
+            I2C SCL pin for the SSD1306 display. Default is GPIO 22.
+            If you have a different display, check the datasheet for the correct pin.
+
+    choice ESPMENU_ROTARY_ENCODER_CNT
+        prompt "Rotary Encoder Count"
+        default ESPMENU_ROTARY_ENCODER_CNT_1
+        help
+            Number of rotary encoders to use. Default is 1.
+            If you have a different number of encoders, select the appropriate option.
+
+        config ESPMENU_ROTARY_ENCODER_CNT_1
+            bool "1"
+        config ESPMENU_ROTARY_ENCODER_CNT_2
+            bool "2"
+        config ESPMENU_ROTARY_ENCODER_CNT_3
+            bool "3"
+        config ESPMENU_ROTARY_ENCODER_CNT_4
+            bool "4"
+        
+    endchoice
+    
+    if ESPMENU_ROTARY_ENCODER_CNT_1 || ESPMENU_ROTARY_ENCODER_CNT_2 || ESPMENU_ROTARY_ENCODER_CNT_3 || ESPMENU_ROTARY_ENCODER_CNT_4
+        config ESPMENU_ROTARY_ENCODER_1_A
+            int "Rotary Encoder 1 A Pin"
+            default 34
+            help
+                GPIO pin for the first rotary encoder A channel. Default is GPIO 34.
+                If you have a different display, check the datasheet for the correct pin.
+                
+        config ESPMENU_ROTARY_ENCODER_1_B
+            int "Rotary Encoder 1 B Pin"
+            default 35
+            help
+                GPIO pin for the first rotary encoder B channel. Default is GPIO 35.
+                If you have a different display, check the datasheet for the correct pin.
+
+        config ESPMENU_ROTARY_ENCODER_1_BUTTON
+            int "Rotary Encoder 1 Button Pin"
+            default 0
+            help
+                GPIO pin for the first rotary encoder button. Default is GPIO 0.
+                If you have a different display, check the datasheet for the correct pin.
+    endif
+    if ESPMENU_ROTARY_ENCODER_CNT_2 || ESPMENU_ROTARY_ENCODER_CNT_3 || ESPMENU_ROTARY_ENCODER_CNT_4
+        config ESPMENU_ROTARY_ENCODER_2_A
+            int "Rotary Encoder 2 A Pin"
+            default 32
+            help
+                GPIO pin for the second rotary encoder A channel. Default is GPIO 32.
+                If you have a different display, check the datasheet for the correct pin.
+                
+        config ESPMENU_ROTARY_ENCODER_2_B
+            int "Rotary Encoder 2 B Pin"
+            default 33
+            help
+                GPIO pin for the second rotary encoder B channel. Default is GPIO 33.
+                If you have a different display, check the datasheet for the correct pin.
+
+        config ESPMENU_ROTARY_ENCODER_2_BUTTON
+            int "Rotary Encoder 2 Button Pin"
+            default 0
+            help
+                GPIO pin for the second rotary encoder button. Default is GPIO 0.
+                If you have a different display, check the datasheet for the correct pin.
+    endif
+    if ESPMENU_ROTARY_ENCODER_CNT_3 || ESPMENU_ROTARY_ENCODER_CNT_4
+        config ESPMENU_ROTARY_ENCODER_3_A
+            int "Rotary Encoder 3 A Pin"
+            default 32
+            help
+                GPIO pin for the third rotary encoder A channel. Default is GPIO 32.
+                If you have a different display, check the datasheet for the correct pin.
+                
+        config ESPMENU_ROTARY_ENCODER_3_B
+            int "Rotary Encoder 3 B Pin"
+            default 33
+            help
+                GPIO pin for the third rotary encoder B channel. Default is GPIO 33.
+                If you have a different display, check the datasheet for the correct pin.
+
+        config ESPMENU_ROTARY_ENCODER_3_BUTTON
+            int "Rotary Encoder 3 Button Pin"
+            default 0
+            help
+                GPIO pin for the third rotary encoder button. Default is GPIO 0.
+                If you have a different display, check the datasheet for the correct pin.
+    endif
+    if ESPMENU_ROTARY_ENCODER_CNT_4
+        config ESPMENU_ROTARY_ENCODER_4_A
+            int "Rotary Encoder 4 A Pin"
+            default 32
+            help
+                GPIO pin for the fourth rotary encoder A channel. Default is GPIO 32.
+                If you have a different display, check the datasheet for the correct pin.
+                
+        config ESPMENU_ROTARY_ENCODER_4_B
+            int "Rotary Encoder 4 B Pin"
+            default 33
+            help
+                GPIO pin for the fourth rotary encoder B channel. Default is GPIO 33.
+                If you have a different display, check the datasheet for the correct pin.
+
+        config ESPMENU_ROTARY_ENCODER_4_BUTTON
+            int "Rotary Encoder 4 Button Pin"
+            default 0
+            help
+                GPIO pin for the fourth rotary encoder button. Default is GPIO 0.
+                If you have a different display, check the datasheet for the correct pin.
+    endif
+        
+endmenu

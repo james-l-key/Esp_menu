@@ -1,6 +1,6 @@
 dependencies:
   espressif/button:
-    component_hash: ea6e01641b8dcf196ecc48be2961b1f20af397b61a752ab041a19282e41bafcb
+    component_hash: d8c89767960aa80f9cbb92a047282c24aecb96a4e963b06e8e2634284884ad73
     dependencies:
     - name: espressif/cmake_utilities
       registry_url: https://components.espressif.com
@@ -12,7 +12,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 4.1.1
+    version: 4.1.2
   espressif/cmake_utilities:
     component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
     dependencies:
@@ -54,7 +54,7 @@ dependencies:
   idf:
     source:
       type: idf
-    version: 5.4.0
+    version: 5.4.1
   lvgl/lvgl:
     component_hash: 096c69af22eaf8a2b721e3913da91918c5e6bf1a762a113ec01f401aa61337a0
     dependencies: []
