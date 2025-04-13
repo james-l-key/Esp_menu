@@ -1,6 +1,7 @@
 // menu/menu.c
 
 #include "Esp_menu.h"
+#include "menu_data.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_timer.h"
