@@ -1,0 +1,874 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d4/d34/main_2user__menu_2user__actions_8c" kind="file" language="C++">
+    <compoundname>user_actions.c</compoundname>
+    <includes refid="d7/ddf/user__actions_8h" local="yes">user_actions.h</includes>
+    <includes local="yes">Esp_menu.h</includes>
+    <includes local="yes">module_i2c_proto.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="yes">lvgl.h</includes>
+    <includes local="yes">freertos/FreeRTOS.h</includes>
+    <includes local="yes">freertos/task.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>main/user_menu/user_actions.c</label>
+        <link refid="d4/d34/main_2user__menu_2user__actions_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>user_actions.h</label>
+        <link refid="d7/ddf/user__actions_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Esp_menu.h</label>
+      </node>
+      <node id="8">
+        <label>freertos/FreeRTOS.h</label>
+      </node>
+      <node id="9">
+        <label>freertos/task.h</label>
+      </node>
+      <node id="3">
+        <label>lvgl.h</label>
+      </node>
+      <node id="6">
+        <label>module_i2c_proto.h</label>
+      </node>
+      <node id="7">
+        <label>string.h</label>
+      </node>
+      <node id="4">
+        <label>waveform_gen.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" prot="public" static="no">
+        <name>NUM_FAVORITE_SLOTS</name>
+        <initializer>4</initializer>
+        <briefdescription>
+<para>Number of favorite slots for parameter storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="18" column="9" bodyfile="main/user_menu/user_actions.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t current_slot</definition>
+        <argsstring></argsstring>
+        <name>current_slot</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Current favorite slot index (0–3). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="24" column="16" bodyfile="main/user_menu/user_actions.c" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" prot="public" static="no" mutable="no">
+        <type><ref refid="db/dd7/structMenuParams__t" kindref="compound">MenuParams_t</ref></type>
+        <definition>MenuParams_t menu_params</definition>
+        <argsstring></argsstring>
+        <name>menu_params</name>
+        <initializer>= {69, 0, OSC_WAVE_SINE, 65535, 32768, 0xFF, 0xFF, 0xFF}</initializer>
+        <briefdescription>
+<para>Global oscillator parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="21" column="14" bodyfile="main/user_menu/user_actions.c" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" prot="public" static="yes" mutable="no">
+        <type>lv_obj_t *</type>
+        <definition>lv_obj_t* param_label</definition>
+        <argsstring></argsstring>
+        <name>param_label</name>
+        <initializer>= NULL</initializer>
+        <briefdescription>
+<para>LVGL label for displaying parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="27" column="17" bodyfile="main/user_menu/user_actions.c" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a65132ad4f6ad73c9d3525ff85b6e24cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void amp_mod_slot_next</definition>
+        <argsstring>(void)</argsstring>
+        <name>amp_mod_slot_next</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the next amplitude modulation slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="333" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="333" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a24381152d2a1938ed421b18def4436fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void amp_mod_slot_prev</definition>
+        <argsstring>(void)</argsstring>
+        <name>amp_mod_slot_prev</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the previous amplitude modulation slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="347" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="347" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1aed41ee30d70cc48c3ed316937db3a7c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void clear_favorite</definition>
+        <argsstring>(uint8_t slot)</argsstring>
+        <name>clear_favorite</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+<para>Stub for clearing a favorite slot when NVS is disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The favorite slot index (0–3). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="183" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a8bd8bae6ed156c1a2cd5f750351a5a97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void clear_favorite_action</definition>
+        <argsstring>(void)</argsstring>
+        <name>clear_favorite_action</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Clears the current favorite slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="393" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="393" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1aa1b99af2979100c14dd614cf57335ca1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fine_tune_down</definition>
+        <argsstring>(void)</argsstring>
+        <name>fine_tune_down</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decrements the fine frequency adjustment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="291" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="291" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a34f853ccd6e7361a5dfc5f64f78daace" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fine_tune_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>fine_tune_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increments the fine frequency adjustment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="277" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="277" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a7c050927e53d5700d5b9df748456b66c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void level_down</definition>
+        <argsstring>(void)</argsstring>
+        <name>level_down</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decreases the output level. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="263" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="263" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1aafc87d89594136350fa8fbd7635eddbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void level_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>level_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increases the output level. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="249" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="249" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1ae2843f46936a01ca43e62643aa567333" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void load_favorite</definition>
+        <argsstring>(uint8_t slot)</argsstring>
+        <name>load_favorite</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+<para>Stub for loading from a favorite slot when NVS is disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The favorite slot index (0–3). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="177" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="177" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a18ae8957bff677c89b1e9c9c806321a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void load_favorite_action</definition>
+        <argsstring>(void)</argsstring>
+        <name>load_favorite_action</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Loads parameters from the current favorite slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="385" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="385" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void load_from_nvs</definition>
+        <argsstring>(void)</argsstring>
+        <name>load_from_nvs</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Stub for loading from NVS when NVS is disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="165" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="165" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a43b2d3a37debccdea0d3151a5d0ac4f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pitch_down</definition>
+        <argsstring>(void)</argsstring>
+        <name>pitch_down</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decrements the frequency pitch and updates the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Decrements the frequency pitch. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="204" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="204" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a74cbf8e3a7874e42b34190b245f8b5fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pitch_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>pitch_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increments the frequency pitch and updates the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Increments the frequency pitch. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="189" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="189" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1ac05788b1a20ff0303fd692d9fc134d92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pulse_width_down</definition>
+        <argsstring>(void)</argsstring>
+        <name>pulse_width_down</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decreases the pulse width for pulse wave. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="319" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="319" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a34b1d6b3c21cdb6999a551d5eef449c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pulse_width_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>pulse_width_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increases the pulse width for pulse wave. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="305" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="305" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a7bde8fb3f28d402b43c191c563a10856" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void save_favorite</definition>
+        <argsstring>(uint8_t slot)</argsstring>
+        <name>save_favorite</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+<para>Stub for saving to a favorite slot when NVS is disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The favorite slot index (0–3). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="171" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="171" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a8a0c07733299e9ac88c43934db343b24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void save_favorite_action</definition>
+        <argsstring>(void)</argsstring>
+        <name>save_favorite_action</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Saves parameters to the current favorite slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="377" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="377" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void save_to_nvs</definition>
+        <argsstring>(void)</argsstring>
+        <name>save_to_nvs</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Stub for saving to NVS when NVS is disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="160" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1ab9ec9f41ba66a066a71e91025b7ff50c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void select_favorite_slot_next</definition>
+        <argsstring>(void)</argsstring>
+        <name>select_favorite_slot_next</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the next favorite slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="361" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="361" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a4dd84d0ca00989df8bbb7fa87710c6fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void select_favorite_slot_prev</definition>
+        <argsstring>(void)</argsstring>
+        <name>select_favorite_slot_prev</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the previous favorite slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="369" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="369" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1aa8253cd89ed4b268472ed62f4f2074ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>user_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes project-specific state, including loading from NVS if enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="32" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="32" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_update_display</definition>
+        <argsstring>(void)</argsstring>
+        <name>user_update_display</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Updates the LVGL display with current parameters (pitch and waveform). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the LVGL display with current parameters. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="42" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="42" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a4dff26804ab35793764238efea0abe1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void waveform_next</definition>
+        <argsstring>(void)</argsstring>
+        <name>waveform_next</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the next waveform type and updates the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Selects the next waveform type. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="219" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="219" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d34/main_2user__menu_2user__actions_8c_1a7074c46297d58a8e3c476073c988c527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void waveform_prev</definition>
+        <argsstring>(void)</argsstring>
+        <name>waveform_prev</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Selects the previous waveform type and updates the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Selects the previous waveform type. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.c" line="234" column="6" bodyfile="main/user_menu/user_actions.c" bodystart="234" bodyend="244"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of user-defined menu actions for the oscillator module. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="d7/ddf/user__actions_8h" kindref="compound">user_actions.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Esp_menu.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;module_i2c_proto.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nvs_flash.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lvgl.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;freertos/FreeRTOS.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;freertos/task.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NUM_FAVORITE_SLOTS<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><ref refid="db/dd7/structMenuParams__t" kindref="compound">MenuParams_t</ref><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref><sp/>=<sp/>{69,<sp/>0,<sp/>OSC_WAVE_SINE,<sp/>65535,<sp/>32768,<sp/>0xFF,<sp/>0xFF,<sp/>0xFF};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>lv_obj_t<sp/>*<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kindref="member">param_label</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa8253cd89ed4b268472ed62f4f2074ae" kindref="member">user_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" kindref="member">load_from_nvs</ref>();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kindref="member">param_label</ref>)</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kindref="member">param_label</ref><sp/>=<sp/>lv_label_create(lv_scr_act());</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lv_obj_set_pos(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kindref="member">param_label</ref>,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[32];</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*wave_names[]<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;Sine&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Triangle&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Saw&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Square&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Pulse&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>snprintf(buf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buf),<sp/></highlight><highlight class="stringliteral">&quot;P:%d<sp/>W:%s&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref>,<sp/>wave_names[<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref>]);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>lv_label_set_text(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kindref="member">param_label</ref>,<sp/>buf);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" kindref="member">save_to_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_handle_t<sp/>nvs;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>err<sp/>=<sp/>nvs_open(</highlight><highlight class="stringliteral">&quot;oscillator&quot;</highlight><highlight class="normal">,<sp/>NVS_READWRITE,<sp/>&amp;nvs);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(err<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_pitch&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref>);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_i16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_fine&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;waveform&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;level&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref>);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;pulse_width&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref>);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;amp_mod_slot&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref>);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_mod_slot&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a2d5f4c8f05f6a507a3cd7525cd76729c" kindref="member">freq_mod_slot</ref>);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;sync_slot&quot;</highlight><highlight class="normal">,<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a106a57b186bf3252a4fbaf80f71a35c3" kindref="member">sync_source_slot</ref>);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_commit(nvs);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_close(nvs);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" kindref="member">load_from_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_handle_t<sp/>nvs;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>err<sp/>=<sp/>nvs_open(</highlight><highlight class="stringliteral">&quot;oscillator&quot;</highlight><highlight class="normal">,<sp/>NVS_READONLY,<sp/>&amp;nvs);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(err<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_pitch&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref>);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_i16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_fine&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref>);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;waveform&quot;</highlight><highlight class="normal">,<sp/>(uint8_t<sp/>*)&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref>);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;level&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref>);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u16(nvs,<sp/></highlight><highlight class="stringliteral">&quot;pulse_width&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref>);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;amp_mod_slot&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref>);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;freq_mod_slot&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a2d5f4c8f05f6a507a3cd7525cd76729c" kindref="member">freq_mod_slot</ref>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_u8(nvs,<sp/></highlight><highlight class="stringliteral">&quot;sync_slot&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a106a57b186bf3252a4fbaf80f71a35c3" kindref="member">sync_source_slot</ref>);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_close(nvs);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a7bde8fb3f28d402b43c191c563a10856" kindref="member">save_favorite</ref>(uint8_t<sp/>slot)</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(slot<sp/>&gt;=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref>)</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_handle_t<sp/>nvs;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>err<sp/>=<sp/>nvs_open(</highlight><highlight class="stringliteral">&quot;oscillator&quot;</highlight><highlight class="normal">,<sp/>NVS_READWRITE,<sp/>&amp;nvs);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(err<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>key[16];</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>snprintf(key,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(key),<sp/></highlight><highlight class="stringliteral">&quot;fav_slot_%d&quot;</highlight><highlight class="normal">,<sp/>slot);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_set_blob(nvs,<sp/>key,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="db/dd7/structMenuParams__t" kindref="compound">MenuParams_t</ref>));</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_commit(nvs);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_close(nvs);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1ae2843f46936a01ca43e62643aa567333" kindref="member">load_favorite</ref>(uint8_t<sp/>slot)</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(slot<sp/>&gt;=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref>)</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_handle_t<sp/>nvs;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>err<sp/>=<sp/>nvs_open(</highlight><highlight class="stringliteral">&quot;oscillator&quot;</highlight><highlight class="normal">,<sp/>NVS_READONLY,<sp/>&amp;nvs);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(err<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>key[16];</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>snprintf(key,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(key),<sp/></highlight><highlight class="stringliteral">&quot;fav_slot_%d&quot;</highlight><highlight class="normal">,<sp/>slot);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="d5/d23/namespacetemp_1aa3d6656320f1a7278c0c2c7fdf07617c" kindref="member">size</ref><sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="db/dd7/structMenuParams__t" kindref="compound">MenuParams_t</ref>);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_get_blob(nvs,<sp/>key,<sp/>&amp;<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>,<sp/>&amp;<ref refid="d5/d23/namespacetemp_1aa3d6656320f1a7278c0c2c7fdf07617c" kindref="member">size</ref>);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_close(nvs);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" kindref="member">save_to_nvs</ref>();</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aed41ee30d70cc48c3ed316937db3a7c1" kindref="member">clear_favorite</ref>(uint8_t<sp/>slot)</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(slot<sp/>&gt;=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref>)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_handle_t<sp/>nvs;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>err<sp/>=<sp/>nvs_open(</highlight><highlight class="stringliteral">&quot;oscillator&quot;</highlight><highlight class="normal">,<sp/>NVS_READWRITE,<sp/>&amp;nvs);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(err<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>key[16];</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>snprintf(key,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(key),<sp/></highlight><highlight class="stringliteral">&quot;fav_slot_%d&quot;</highlight><highlight class="normal">,<sp/>slot);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_erase_key(nvs,<sp/>key);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_commit(nvs);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>nvs_close(nvs);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" kindref="member">save_to_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" kindref="member">load_from_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a7bde8fb3f28d402b43c191c563a10856" kindref="member">save_favorite</ref>(uint8_t<sp/>slot)<sp/>{}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1ae2843f46936a01ca43e62643aa567333" kindref="member">load_favorite</ref>(uint8_t<sp/>slot)<sp/>{}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aed41ee30d70cc48c3ed316937db3a7c1" kindref="member">clear_favorite</ref>(uint8_t<sp/>slot)<sp/>{}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a74cbf8e3a7874e42b34190b245f8b5fa" kindref="member">pitch_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>&lt;<sp/>127<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>+<sp/>1<sp/>:<sp/>127;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="199"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a43b2d3a37debccdea0d3151a5d0ac4f6" kindref="member">pitch_down</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="205"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>&gt;<sp/>0<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kindref="member">frequency_pitch</ref><sp/>-<sp/>1<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4dff26804ab35793764238efea0abe1a" kindref="member">waveform_next</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="220"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref><sp/>=<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref><sp/>+<sp/>1)<sp/>%<sp/>5;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a7074c46297d58a8e3c476073c988c527" kindref="member">waveform_prev</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="235"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref><sp/>=<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kindref="member">waveform</ref><sp/>+<sp/>4)<sp/>%<sp/>5;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kindref="member">user_update_display</ref>();</highlight></codeline>
+<codeline lineno="244"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aafc87d89594136350fa8fbd7635eddbd" kindref="member">level_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="250"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>&lt;<sp/>65535<sp/>-<sp/>655<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>+<sp/>655<sp/>:<sp/>65535;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a7c050927e53d5700d5b9df748456b66c" kindref="member">level_down</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="264"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>&gt;<sp/>655<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kindref="member">level</ref><sp/>-<sp/>655<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a34f853ccd6e7361a5dfc5f64f78daace" kindref="member">fine_tune_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="278"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>&lt;<sp/>100<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>+<sp/>1<sp/>:<sp/>100;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa1b99af2979100c14dd614cf57335ca1" kindref="member">fine_tune_down</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="292"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>&gt;<sp/>-100<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kindref="member">frequency_fine</ref><sp/>-<sp/>1<sp/>:<sp/>-100;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a34b1d6b3c21cdb6999a551d5eef449c7" kindref="member">pulse_width_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="306"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>&lt;<sp/>65535<sp/>-<sp/>655<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>+<sp/>655<sp/>:<sp/>65535;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1ac05788b1a20ff0303fd692d9fc134d92" kindref="member">pulse_width_down</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="320"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>&gt;<sp/>655<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kindref="member">pulse_width</ref><sp/>-<sp/>655<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a65132ad4f6ad73c9d3525ff85b6e24cd" kindref="member">amp_mod_slot_next</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="334"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>==<sp/>0xFF<sp/>?<sp/>0<sp/>:<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>&lt;<sp/>15<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>+<sp/>1<sp/>:<sp/>0xFF);</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a24381152d2a1938ed421b18def4436fb" kindref="member">amp_mod_slot_prev</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="348"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>=<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>==<sp/>0xFF<sp/>?<sp/>15<sp/>:<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>&gt;<sp/>0<sp/>?<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kindref="member">menu_params</ref>.<ref refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kindref="member">amp_mod_slot</ref><sp/>-<sp/>1<sp/>:<sp/>0xFF);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>param_changed;</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>TickType_t<sp/>last_param_change;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>param_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>last_param_change<sp/>=<sp/>xTaskGetTickCount();</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1ab9ec9f41ba66a066a71e91025b7ff50c" kindref="member">select_favorite_slot_next</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="362"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref><sp/>=<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref><sp/>+<sp/>1)<sp/>%<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref>;</highlight></codeline>
+<codeline lineno="364"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4dd84d0ca00989df8bbb7fa87710c6fd" kindref="member">select_favorite_slot_prev</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="370"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref><sp/>=<sp/>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref><sp/>+<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref><sp/>-<sp/>1)<sp/>%<sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kindref="member">NUM_FAVORITE_SLOTS</ref>;</highlight></codeline>
+<codeline lineno="372"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a8a0c07733299e9ac88c43934db343b24" kindref="member">save_favorite_action</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="378"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a7bde8fb3f28d402b43c191c563a10856" kindref="member">save_favorite</ref>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref>);</highlight></codeline>
+<codeline lineno="380"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a18ae8957bff677c89b1e9c9c806321a2" kindref="member">load_favorite_action</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="386"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1ae2843f46936a01ca43e62643aa567333" kindref="member">load_favorite</ref>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref>);</highlight></codeline>
+<codeline lineno="388"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a8bd8bae6ed156c1a2cd5f750351a5a97" kindref="member">clear_favorite_action</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="394"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aed41ee30d70cc48c3ed316937db3a7c1" kindref="member">clear_favorite</ref>(<ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kindref="member">current_slot</ref>);</highlight></codeline>
+<codeline lineno="396"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="main/user_menu/user_actions.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="dc/dc7/namespacegenerate__menu" kind="namespace" language="Python">
+    <compoundname>generate_menu</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="dc/dc7/namespacegenerate__menu_1aa7f6fb63f0834dd7d1ed9f7c3e3e395f" prot="public" static="no" mutable="no">
+        <type>dictionary</type>
+        <definition>dictionary schema</definition>
+        <argsstring></argsstring>
+        <name>schema</name>
+        <qualifiedname>generate_menu.schema</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/generate_menu.py" line="27" column="1" bodyfile="components/Esp_menu/generate_menu.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="dc/dc7/namespacegenerate__menu_1a133b061e272f7ece605286a358a28bcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def generate_action_prototypes</definition>
+        <argsstring>(screens)</argsstring>
+        <name>generate_action_prototypes</name>
+        <qualifiedname>generate_menu.generate_action_prototypes</qualifiedname>
+        <param>
+          <type>screens</type>
+          <defname>screens</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generate function prototypes for menu actions.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/generate_menu.py" line="195" column="1" bodyfile="components/Esp_menu/generate_menu.py" bodystart="195" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dc7/namespacegenerate__menu_1acc223ca32c4db36de8c89ad077cc4b62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def generate_graphics_code</definition>
+        <argsstring>(graphics)</argsstring>
+        <name>generate_graphics_code</name>
+        <qualifiedname>generate_menu.generate_graphics_code</qualifiedname>
+        <param>
+          <type>graphics</type>
+          <defname>graphics</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generate C code for graphics (static, procedural, external).</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/generate_menu.py" line="162" column="1" bodyfile="components/Esp_menu/generate_menu.py" bodystart="162" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dc7/namespacegenerate__menu_1a11f2cf0f924dc0be833d06d4571f87c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def load_and_validate_config</definition>
+        <argsstring>(config_path)</argsstring>
+        <name>load_and_validate_config</name>
+        <qualifiedname>generate_menu.load_and_validate_config</qualifiedname>
+        <param>
+          <type>config_path</type>
+          <defname>config_path</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Load and validate the JSON configuration file.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/generate_menu.py" line="146" column="1" bodyfile="components/Esp_menu/generate_menu.py" bodystart="146" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dc7/namespacegenerate__menu_1a19a7b3cd609ad62e14a361b54bbad262" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <qualifiedname>generate_menu.main</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/generate_menu.py" line="207" column="1" bodyfile="components/Esp_menu/generate_menu.py" bodystart="207" bodyend="259"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>@file generate_menu.py
+@brief Component-specific menu code generator 
+@ingroup code_gen
+
+This script handles the component-specific aspects of menu code generation.
+It reads a menu.json configuration file, validates it against a schema,
+and uses Jinja2 templates to generate C code that implements the specified menu structure.
+
+Usage:
+    python3 generate_menu.py [path_to_menu_json] [output_directory]
+
+If no arguments are provided, default paths are used.
+
+@author ESP Menu Team
+@date May 10, 2025
+</verbatim> </para>
+    </detaileddescription>
+    <location file="components/Esp_menu/generate_menu.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

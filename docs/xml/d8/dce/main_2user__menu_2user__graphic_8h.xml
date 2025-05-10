@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d8/dce/main_2user__menu_2user__graphic_8h" kind="file" language="C++">
+    <compoundname>user_graphic.h</compoundname>
+    <includes local="yes">lvgl.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>main/user_menu/user_graphic.h</label>
+        <link refid="d8/dce/main_2user__menu_2user__graphic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lvgl.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d8/dce/main_2user__menu_2user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_graphic_init</definition>
+        <argsstring>(lv_obj_t *parent)</argsstring>
+        <name>user_graphic_init</name>
+        <param>
+          <type>lv_obj_t *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Initializes custom LVGL graphics for the project. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent LVGL object for the graphics. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_graphic.h" line="15" column="6" declfile="main/user_menu/user_graphic.h" declline="15" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header file for user-defined LVGL graphics for the oscillator module. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>USER_GRAPHIC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>USER_GRAPHIC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lvgl.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="d8/dce/main_2user__menu_2user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/dce/main_2user__menu_2user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="main/user_menu/user_graphic.h"/>
+  </compounddef>
+</doxygen>

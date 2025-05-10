@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d5/d23/namespacetemp" kind="namespace" language="Python">
+    <compoundname>temp</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a14d48c2e9f05d0b03044eb45f308fcb0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>body</definition>
+        <argsstring></argsstring>
+        <name>body</name>
+        <qualifiedname>temp.body</qualifiedname>
+        <initializer>=  func_def.get(&quot;body&quot;, [])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="59" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ae13053695c90ec7dcb51feef32a25e70" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>functions_data</definition>
+        <argsstring></argsstring>
+        <name>functions_data</name>
+        <qualifiedname>temp.functions_data</qualifiedname>
+        <initializer>=  data.get(&quot;functions&quot;, [])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="45" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a49de80dbaccde629a43daf7c1190cff9" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string functions_source_name</definition>
+        <argsstring></argsstring>
+        <name>functions_source_name</name>
+        <qualifiedname>temp.functions_source_name</qualifiedname>
+        <initializer>=  &quot;generated_functions.c&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="47" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a79c488e3b3ec6777372274a75ceb95d8" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>functions_source_path</definition>
+        <argsstring></argsstring>
+        <name>functions_source_path</name>
+        <qualifiedname>temp.functions_source_path</qualifiedname>
+        <initializer>=  os.path.join(output_dir, <ref refid="d5/d23/namespacetemp_1a49de80dbaccde629a43daf7c1190cff9" kindref="member">functions_source_name</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="48" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ad0cd52cb2735524d50ec1ce313c4277f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>graphics_data</definition>
+        <argsstring></argsstring>
+        <name>graphics_data</name>
+        <qualifiedname>temp.graphics_data</qualifiedname>
+        <initializer>=  data.get(&quot;graphics&quot;, [])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="99" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a5f7dc55649be2f3aa3d1353e41a0c32e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>graphics_header_file</definition>
+        <argsstring></argsstring>
+        <name>graphics_header_file</name>
+        <qualifiedname>temp.graphics_header_file</qualifiedname>
+        <initializer>=  os.path.join(output_dir, &quot;menu_graphics.h&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="80" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a423cfff5c018bfe4b8227f3bc68eac4e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>graphics_source_file</definition>
+        <argsstring></argsstring>
+        <name>graphics_source_file</name>
+        <qualifiedname>temp.graphics_source_file</qualifiedname>
+        <initializer>=  os.path.join(output_dir, &quot;menu_graphics.c&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="91" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ac8c68026b72a7e1a6c131b77c2449b31" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>header_name</definition>
+        <argsstring></argsstring>
+        <name>header_name</name>
+        <qualifiedname>temp.header_name</qualifiedname>
+        <initializer>=  header_def.get(&quot;name&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="28" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1adfac52421fcf4a9254c80b116108ecca" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>header_path</definition>
+        <argsstring></argsstring>
+        <name>header_path</name>
+        <qualifiedname>temp.header_path</qualifiedname>
+        <initializer>=  os.path.join(output_dir, <ref refid="d5/d23/namespacetemp_1ac8c68026b72a7e1a6c131b77c2449b31" kindref="member">header_name</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="30" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1afe520a74dd76d9b7f47c4d523b0988c5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>headers_data</definition>
+        <argsstring></argsstring>
+        <name>headers_data</name>
+        <qualifiedname>temp.headers_data</qualifiedname>
+        <initializer>=  data.get(&quot;headers&quot;, [])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="26" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ad62df22ac2eb113804ebbe75efb19232" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>menu_header_file</definition>
+        <argsstring></argsstring>
+        <name>menu_header_file</name>
+        <qualifiedname>temp.menu_header_file</qualifiedname>
+        <initializer>=  os.path.join(output_dir, &quot;menu_data.h&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="69" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ab74e6bf80237ddc4109968cedc58c151" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>temp.name</qualifiedname>
+        <initializer>=  func_def.get(&quot;name&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="56" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a41000f175dc0115080e2a682cc06dbe9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <qualifiedname>temp.params</qualifiedname>
+        <initializer>=  func_def.get(&quot;parameters&quot;, [])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="58" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1ae2975c08d38d715e6471d3254520e593" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string params_str</definition>
+        <argsstring></argsstring>
+        <name>params_str</name>
+        <qualifiedname>temp.params_str</qualifiedname>
+        <initializer>=  &quot;, &quot;.join([f &apos;{p[&quot;type&quot;]} {p[&quot;name&quot;]}&apos; for p in <ref refid="d5/d23/namespacetemp_1a41000f175dc0115080e2a682cc06dbe9" kindref="member">params</ref>])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="61" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a7130b1618285588513fd1ff97884b9d9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>temp.position</qualifiedname>
+        <initializer>=  item.get(&quot;position&quot;, {&quot;x&quot; : 0, &quot;y&quot; : 0 })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="102" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a8158a2d869c53eb8f38c869b380a1209" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>return_type</definition>
+        <argsstring></argsstring>
+        <name>return_type</name>
+        <qualifiedname>temp.return_type</qualifiedname>
+        <initializer>=  func_def.get(&quot;return_type&quot;, &quot;void&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="57" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1aa3d6656320f1a7278c0c2c7fdf07617c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>temp.size</qualifiedname>
+        <initializer>=  item.get(&quot;size&quot;, {&quot;width&quot; : 50, &quot;height&quot; : 20 })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="103" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d23/namespacetemp_1a9257ca32069b62ded8cdb4e194828c02" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>subtype</definition>
+        <argsstring></argsstring>
+        <name>subtype</name>
+        <qualifiedname>temp.subtype</qualifiedname>
+        <initializer>=  item.get(&quot;subtype&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="101" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d5/d23/namespacetemp_1a35f6472636944b16d9e446f41999e5ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def generate_menu_header</definition>
+        <argsstring>(json_file_arg, header_file_arg)</argsstring>
+        <name>generate_menu_header</name>
+        <qualifiedname>temp.generate_menu_header</qualifiedname>
+        <param>
+          <type>json_file_arg</type>
+          <defname>json_file_arg</defname>
+        </param>
+        <param>
+          <type>header_file_arg</type>
+          <defname>header_file_arg</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/temp.py" line="7" column="1" bodyfile="components/Esp_menu/temp.py" bodystart="7" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="components/Esp_menu/temp.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

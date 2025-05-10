@@ -1,0 +1,161 @@
+# Esp_menu/generate_menu_header.py
+
+import os
+import sys
+import json
+
+def generate_menu_header(json_file_arg, header_file):
+    """
+    Generates a C header file from a JSON configuration file for an LVGL-based menu system.
+
+    Args:
+        json_file_arg (str): The relative path to the JSON file from the script's directory,
+                             or an absolute path provided via command line.
+        header_file (str): The full path of the output C header file to be generated.
+
+    The function performs the following steps:
+    1. Determines the absolute path to the JSON file based on the script location or argument.
+    2. Validates the existence of the JSON file and loads its content.
+    3. Parses the JSON data to generate LVGL object creation and data structure code.
+    4. Writes the generated code to the specified header file.
+
+    The generated header file includes:
+    - Definitions for menu-related LVGL objects and styles.
+    - A data structure (`menu_item_t`) for menu items.
+    - An array (`menu_items_data`) to hold menu item data.
+
+    Notes:
+        - The JSON file must follow a specific structure, including "type" and "items" fields.
+        - If the JSON file is invalid or cannot be decoded, the function will print an error and exit.
+
+    Example:
+        generate_menu_header("menu_config.json", "/path/to/output/menu_data.h")
+    """
+    # Determine the absolute path of the JSON file
+    # If the provided path is absolute, use it directly.
+    # Otherwise, assume it's relative to the script's directory.
+    if os.path.isabs(json_file_arg):
+        json_path = json_file_arg
+    else:
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+        json_path = os.path.join(script_dir, json_file_arg)
+
+    print(f"Looking for JSON file at: {json_path}")
+    if not os.path.exists(json_path):
+        print(f"Error: JSON file not found at {json_path}!")
+        sys.exit(1) # Exit if JSON not found
+
+    # Use the second argument (header_file) as the full output path
+    print(f"Writing header file to: {header_file}")
+
+    # Ensure the output directory exists
+    output_dir = os.path.dirname(header_file)
+    if output_dir: # Check if dirname returned something (not empty for relative paths in cwd)
+                os.makedirs(output_dir, exist_ok=True)
+                            
+                try:
+                    with open(json_file_arg, 'r') as f:
+                        data = json.load(f)
+                        print("JSON data loaded successfully.")
+                except (json.JSONDecodeError, FileNotFoundError) as e:
+                    print(f"Error loading JSON: {e}")
+                    sys.exit(1)
+
+#-- - Generate Header Files -- -
+headers_data = data.get("headers", [])
+for header_def in headers_data:
+    header_name = header_def.get("name")
+    if header_name:
+        header_path = os.path.join(output_dir, header_name)
+        with open(header_path, 'w') as hf:
+            hf.write(f'// Auto-generated header: {header_name}\n')
+            hf.write(f'#ifndef {header_name.upper().replace(".", "_")}\n')
+            hf.write(f'#define {header_name.upper().replace(".", "_")}\n\n')
+            for include in header_def.get("includes", []):
+                hf.write(f'#include "{include}"\n')
+            hf.write('\n')
+            for declaration in header_def.get("declarations", []):
+                hf.write(f'{declaration}\n')
+            hf.write('\n')
+            hf.write(f'#ifndef {header_name.upper().replace(".", "_")}\n')
+print(f"Generated header file: {header_path}")
+
+#-- - Generate Function Implementations -- -
+functions_data = data.get("functions", [])
+if functions_data:
+    functions_source_name = "generated_functions.c" #You might want to make this configurable 
+    functions_source_path = os.path.join(output_dir, functions_source_name)
+    with open(functions_source_path, 'w') as sf:
+        sf.write(f'// Auto-generated functions\n')
+        #Include the generated headers
+        for header_def in headers_data:
+            sf.write(f'#include "{header_def.get("name")}"\n')
+        sf.write('\n') 
+        for func_def in functions_data:
+            name = func_def.get("name")
+            return_type = func_def.get("return_type", "void")
+            params = func_def.get("parameters", [])
+            body = func_def.get("body", [])
+
+        params_str = ", ".join([f '{p["type"]} {p["name"]}' for p in params])
+        sf.write(f'{return_type} {name}({params_str}) {{\n')
+        for line in body:
+                sf.write(f'    {line}\n')
+        sf.write('}\n\n')
+print(f"Generated functions source file: {functions_source_path}")
+
+#-- - Generate Menu Data Header -- -
+menu_header_file = os.path.join(output_dir, "menu_data.h") #Ensure it goes to the same output dir
+with open(menu_header_file, 'w') as h_menu_data:
+    h_menu_data.write('// Auto-generated by generate_menu_header.py. DO NOT EDIT.\n\n')
+    h_menu_data.write('#ifndef MENU_DATA_H\n')
+    h_menu_data.write('#define MENU_DATA_H\n\n')
+    h_menu_data.write('#include <stdint.h>\n')
+#...(rest of your menu data generation logic, writing to h_menu_data)...
+    h_menu_data.write('#endif // MENU_DATA_H\n')
+print(f"Header file '{menu_header_file}' generated successfully.")
+
+#-- - Generate Graphics Drawing Function Call Header -- -
+graphics_header_file = os.path.join(output_dir, "menu_graphics.h")
+with open(graphics_header_file, 'w') as h_graphics:
+    h_graphics.write('// Auto-generated graphics function calls\n')
+    h_graphics.write('#ifndef MENU_GRAPHICS_H\n')
+    h_graphics.write('#define MENU_GRAPHICS_H\n\n')
+    h_graphics.write('#include "generated_graphics.h"\n\n') #Include the header with declarations 
+    h_graphics.write('void draw_menu_graphics(lv_obj_t *parent);\n\n')
+    h_graphics.write('#endif // MENU_GRAPHICS_H\n')
+print(f"Generated graphics header file: {graphics_header_file}")
+
+#-- - Generate Graphics Drawing Function Call Source -- -
+graphics_source_file = os.path.join(output_dir, "menu_graphics.c")
+with open(graphics_source_file, 'w') as s_graphics:
+    s_graphics.write('// Auto-generated graphics function calls\n')
+    s_graphics.write('#include "menu_graphics.h"\n')
+    s_graphics.write('#include "generated_graphics.h"\n\n')
+    s_graphics.write('#include "lvgl.h"\n') #Make sure LVGL is included
+
+    s_graphics.write('void draw_menu_graphics(lv_obj_t *parent) {\n')
+    graphics_data = data.get("graphics", [])
+    for item in graphics_data:
+        subtype = item.get("subtype")
+        position = item.get("position", {"x" : 0, "y" : 0 })
+        size = item.get("size", {"width" : 50, "height" : 20 }) #Default size
+
+        if subtype == "sine" :
+            s_graphics.write(f'    draw_sine_wave_custom(parent, {position.get("x")}, {position.get("y")}, {size.get("width")}, {size.get("height")});\n')
+        elif subtype == "saw" :
+            s_graphics.write(f'    draw_saw_wave_custom(parent, {position.get("x")}, {position.get("y")}, {size.get("width")}, {size.get("height")});\n')
+    #Add cases for other waveforms
+    s_graphics.write('}\n')
+print(f"Generated graphics source file: {graphics_source_file}")
+
+if __name__ == '__main__':
+    # Use command-line arguments for flexibility
+    if len(sys.argv) != 3:
+        print("Usage: python generate_menu_header.py <input_json> <output_directory>") #Changed to output directory
+        print("  <input_json>: Path to the menu definition JSON file.")
+        print("  <output_directory>: Full path for the output directory to generate files.")
+        sys.exit(1)
+
+    # Pass arguments directly to the function
+    generate_menu_header(sys.argv[1], sys.argv[2])
