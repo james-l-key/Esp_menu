@@ -308,3 +308,5 @@ managed_components
 ceedling_build
 build
 .vscode
+docs/**
+docs
