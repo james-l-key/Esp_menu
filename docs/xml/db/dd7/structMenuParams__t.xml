@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="db/dd7/structMenuParams__t" kind="struct" language="C++" prot="public">
+    <compoundname>MenuParams_t</compoundname>
+    <includes refid="d7/ddf/user__actions_8h" local="no">user_actions.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t amp_mod_slot</definition>
+        <argsstring></argsstring>
+        <name>amp_mod_slot</name>
+        <qualifiedname>MenuParams_t::amp_mod_slot</qualifiedname>
+        <briefdescription>
+<para>Amplitude modulation slot (0–15 or 0xFF) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="35" column="13" bodyfile="main/user_menu/user_actions.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1a2d5f4c8f05f6a507a3cd7525cd76729c" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t freq_mod_slot</definition>
+        <argsstring></argsstring>
+        <name>freq_mod_slot</name>
+        <qualifiedname>MenuParams_t::freq_mod_slot</qualifiedname>
+        <briefdescription>
+<para>Frequency modulation slot (0–15 or 0xFF) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="36" column="13" bodyfile="main/user_menu/user_actions.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t frequency_fine</definition>
+        <argsstring></argsstring>
+        <name>frequency_fine</name>
+        <qualifiedname>MenuParams_t::frequency_fine</qualifiedname>
+        <briefdescription>
+<para>Fine frequency adjustment in cents (-100 to 100) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="31" column="13" bodyfile="main/user_menu/user_actions.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t frequency_pitch</definition>
+        <argsstring></argsstring>
+        <name>frequency_pitch</name>
+        <qualifiedname>MenuParams_t::frequency_pitch</qualifiedname>
+        <briefdescription>
+<para>MIDI note number (0–127) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="30" column="13" bodyfile="main/user_menu/user_actions.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t level</definition>
+        <argsstring></argsstring>
+        <name>level</name>
+        <qualifiedname>MenuParams_t::level</qualifiedname>
+        <briefdescription>
+<para>Output level (0–65535) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="33" column="14" bodyfile="main/user_menu/user_actions.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t pulse_width</definition>
+        <argsstring></argsstring>
+        <name>pulse_width</name>
+        <qualifiedname>MenuParams_t::pulse_width</qualifiedname>
+        <briefdescription>
+<para>Pulse width for pulse wave (0–65535) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="34" column="14" bodyfile="main/user_menu/user_actions.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1a106a57b186bf3252a4fbaf80f71a35c3" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t sync_source_slot</definition>
+        <argsstring></argsstring>
+        <name>sync_source_slot</name>
+        <qualifiedname>MenuParams_t::sync_source_slot</qualifiedname>
+        <briefdescription>
+<para>Sync source slot (0–15 or 0xFF) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="37" column="13" bodyfile="main/user_menu/user_actions.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" prot="public" static="no" mutable="no">
+        <type>OscWaveform_t</type>
+        <definition>OscWaveform_t waveform</definition>
+        <argsstring></argsstring>
+        <name>waveform</name>
+        <qualifiedname>MenuParams_t::waveform</qualifiedname>
+        <briefdescription>
+<para>Waveform type (sine, triangle, saw, square, pulse) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main/user_menu/user_actions.h" line="32" column="19" bodyfile="main/user_menu/user_actions.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for oscillator module parameters. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This structure holds all modifiable parameters for the oscillator module, including frequency, waveform type, and modulation settings. </para>
+    </detaileddescription>
+    <location file="main/user_menu/user_actions.h" line="28" column="1" bodyfile="main/user_menu/user_actions.h" bodystart="29" bodyend="38"/>
+    <listofallmembers>
+      <member refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>amp_mod_slot</name></member>
+      <member refid="db/dd7/structMenuParams__t_1a2d5f4c8f05f6a507a3cd7525cd76729c" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>freq_mod_slot</name></member>
+      <member refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>frequency_fine</name></member>
+      <member refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>frequency_pitch</name></member>
+      <member refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>level</name></member>
+      <member refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>pulse_width</name></member>
+      <member refid="db/dd7/structMenuParams__t_1a106a57b186bf3252a4fbaf80f71a35c3" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>sync_source_slot</name></member>
+      <member refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" prot="public" virt="non-virtual"><scope>MenuParams_t</scope><name>waveform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

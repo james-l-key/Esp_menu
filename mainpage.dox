@@ -1,0 +1,61 @@
+/**
+ * @mainpage ESP Menu Documentation
+ * 
+ * @section intro Introduction
+ * ESP Menu is a customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input.
+ * It provides a flexible and extensible menu creation framework for ESP32-based projects using a JSON-based configuration system.
+ * 
+ * @section features Key Features
+ * - SSD1306 OLED Display Support
+ * - Rotary Encoder Input (up to 4 encoders)
+ * - LVGL Integration
+ * - JSON-based Menu Definition
+ * - Template-based Code Generation
+ * - NVS Support for storing parameters
+ * - Component-based Architecture
+ * 
+ * @section modules Modules
+ * 
+ * @subsection core Core Components
+ * - @ref ESP_menu "ESP Menu Core" - Core menu system functionality
+ * - @ref code_gen "Code Generation" - Code generation from templates
+ * 
+ * @subsection ui User Interface
+ * - @ref display "Display Module" - SSD1306 display handling
+ * - @ref input "Input Module" - Rotary encoder handling
+ * 
+ * @section usage Usage Example
+ * @include main.c
+ */
+
+/**
+ * @defgroup ESP_menu ESP Menu Core
+ * @brief Core menu system functionality
+ * 
+ * This module contains the core functionality of the ESP Menu system,
+ * including initialization, display management, and input handling.
+ */
+
+/**
+ * @defgroup code_gen Code Generation
+ * @brief Code generation from JSON templates
+ * 
+ * This module handles generating C code from JSON menu definitions
+ * using Jinja2 templates.
+ */
+
+/**
+ * @defgroup display Display Module
+ * @brief Display handling for SSD1306 OLED displays
+ * 
+ * This module contains functionality related to the SSD1306 OLED display,
+ * including initialization, drawing, and updating.
+ */
+
+/**
+ * @defgroup input Input Module
+ * @brief Input handling for rotary encoders
+ * 
+ * This module contains functionality for handling input from rotary encoders,
+ * including initialization, reading, and event handling.
+ */

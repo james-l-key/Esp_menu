@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="dir_84fc5dba3506812825191c0c043e3c97" kind="dir">
+    <compoundname>generated</compoundname>
+    <innerfile refid="df/dd8/generated_2menu_8c">menu.c</innerfile>
+    <innerfile refid="da/d0f/generated_2menu__data_8h">menu_data.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="generated/"/>
+  </compounddef>
+</doxygen>

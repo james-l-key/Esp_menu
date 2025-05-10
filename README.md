@@ -1,93 +1,199 @@
-# esp_menu
+# ESP Menu
 
-39 sda
-38 clk
-## Getting started
+A customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+![ESP Menu System](https://via.placeholder.com/640x320.png?text=ESP+Menu+System)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Overview
 
-## Add your files
+ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use SSD1306 OLED displays and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+### Features
 
-```
-cd existing_repo
-git remote add origin http://127.0.0.1/james-l-key/esp_menu.git
-git branch -M main
-git push -uf origin main
-```
+- **SSD1306 OLED Display Support**: Built-in support for I2C-connected SSD1306 OLED displays
+- **Rotary Encoder Input**: Support for up to 4 rotary encoders with push buttons
+- **LVGL Integration**: High-quality graphics using the LVGL library
+- **JSON-based Menu Definition**: Define menus using simple JSON structures
+- **Template-based Code Generation**: Automatically generates menu code from templates
+- **NVS Support**: Optional save/load of menu parameters to/from non-volatile storage
+- **Component-based Architecture**: Designed as an ESP-IDF component for easy integration
 
-## Integrate with your tools
+## Hardware Requirements
 
-- [ ] [Set up project integrations](http://127.0.0.1/james-l-key/esp_menu/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- ESP32 microcontroller
+- SSD1306 OLED display (128x64 or 128x32)
+- Rotary encoder(s) with push button
+- I2C connections for the display (default: SDA=21, SCL=22)
+- GPIO pins for rotary encoders (configurable)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+### As a Component in Your ESP-IDF Project
+
+1. Create a `components` directory in your ESP-IDF project if it doesn't exist:
+
+   ```bash
+   mkdir -p components
+   ```
+
+2. Clone this repository into your components directory:
+
+   ```bash
+   cd components
+   git clone https://github.com/yourusername/esp_menu.git
+   ```
+
+3. Include the component in your project's `CMakeLists.txt`:
+
+   ```cmake
+   set(EXTRA_COMPONENT_DIRS ${CMAKE_CURRENT_LIST_DIR}/components/esp_menu)
+   ```
+
+4. Configure the menu system via `menuconfig`:
+
+   ```bash
+   idf.py menuconfig
+   ```
+
+   Navigate to "Esp_Menu Configuration" to set your display and encoder settings.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Basic Setup
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. Initialize the menu system in your main application:
+
+   ```c
+   #include "Esp_menu.h"
+
+   void app_main(void)
+   {
+       // Initialize the menu system
+       esp_err_t result = esp_menu_init();
+       if (result != ESP_OK) {
+           ESP_LOGE(TAG, "Failed to initialize menu system");
+           return;
+       }
+       
+       // Your application code here
+   }
+   ```
+
+### Defining a Menu
+
+Create a `menu.json` file in your project's `main/user_menu/` directory:
+
+```json
+{
+    "display": {
+        "type": "ssd1306",
+        "width": 128,
+        "height": 64,
+        "interface": "i2c",
+        "i2c_address": "0x3C",
+        "sda_pin": 21,
+        "scl_pin": 22
+    },
+    "encoders": [
+        {
+            "name": "encoder1",
+            "pins": {
+                "A": 12,
+                "B": 13,
+                "switch": 14
+            },
+            "role": "navigate_main"
+        }
+    ],
+    "menu": {
+        "screens": [
+            {
+                "name": "main",
+                "widgets": [
+                    {
+                        "type": "list",
+                        "items": [
+                            {
+                                "text": "Option 1",
+                                "action": "option1_action"
+                            },
+                            {
+                                "text": "Settings",
+                                "screen": "settings"
+                            }
+                        ],
+                        "controlled_by": "encoder1"
+                    }
+                ]
+            },
+            {
+                "name": "settings",
+                "widgets": []
+            }
+        ]
+    }
+}
+```
+
+### Implementing Menu Actions
+
+1. Define action callbacks in your code:
+
+```c
+// In your_app.c
+void option1_action(void) {
+    // Handle option 1 selection
+    printf("Option 1 selected!\n");
+}
+```
+
+2. Automatically generated header includes:
+
+```c
+#include "menu_data.h"  // Contains prototypes for your menu actions
+```
+
+## Code Generation
+
+The menu system uses Python scripts to generate the C code needed for your menu based on your `menu.json` configuration:
+
+```bash
+# Run from your project root to generate menu files
+python3 components/esp_menu/generate_menu.py
+```
+
+This will:
+
+1. Read your `menu.json` definition
+2. Validate it against the schema
+3. Generate the necessary C code for your menu
+4. Place the files in the appropriate build folders
+
+## Configuration Options
+
+The ESP Menu system is configurable through ESP-IDF's `menuconfig` system. Key options include:
+
+- Display type and resolution (SSD1306 in 64 or 32 pixel heights)
+- I2C addressing and pin configuration
+- Number of rotary encoders (1-4)
+- GPIO pin assignments for each encoder
+- Optional NVS (Non-Volatile Storage) support
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Contributions to the ESP Menu project are welcome! Please feel free to submit a Pull Request.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+
+- [ESP-IDF](https://github.com/espressif/esp-idf) - Espressif IoT Development Framework
+- [LVGL](https://lvgl.io/) - Light and Versatile Graphics Library

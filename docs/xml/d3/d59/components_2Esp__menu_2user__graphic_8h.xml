@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d3/d59/components_2Esp__menu_2user__graphic_8h" kind="file" language="C++">
+    <compoundname>user_graphic.h</compoundname>
+    <includes local="yes">lvgl.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>components/Esp_menu/user_graphic.h</label>
+        <link refid="d3/d59/components_2Esp__menu_2user__graphic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lvgl.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="d3/d59/components_2Esp__menu_2user__graphic_8h_1aa737e40b70e689c8edf1591ddb856da3" prot="public" static="no" mutable="no">
+        <type>const lv_image_dsc_t</type>
+        <definition>const lv_image_dsc_t user_icon_data</definition>
+        <argsstring></argsstring>
+        <name>user_icon_data</name>
+        <initializer>= {
+    .header = {.magic = LV_IMAGE_HEADER_MAGIC, .w = 8, .h = 8, .cf = LV_COLOR_FORMAT_MONO1},
+    .data = <ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kindref="member">user_icon_data_array</ref>,
+    .data_size = sizeof(<ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kindref="member">user_icon_data_array</ref>)
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/user_graphic.h" line="5" column="22" bodyfile="components/Esp_menu/user_graphic.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t user_icon_data_array[]</definition>
+        <argsstring>[]</argsstring>
+        <name>user_icon_data_array</name>
+        <initializer>= {0xFF, 0x00, 0xFF, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="components/Esp_menu/user_graphic.h" line="4" column="22" bodyfile="components/Esp_menu/user_graphic.h" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>USER_GRAPHICS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>USER_GRAPHICS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lvgl.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kindref="member">user_icon_data_array</ref>[]<sp/>=<sp/>{0xFF,<sp/>0x00,<sp/>0xFF,<sp/>0x00};</highlight></codeline>
+<codeline lineno="5" refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1aa737e40b70e689c8edf1591ddb856da3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lv_image_dsc_t<sp/><ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1aa737e40b70e689c8edf1591ddb856da3" kindref="member">user_icon_data</ref><sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{.magic<sp/>=<sp/>LV_IMAGE_HEADER_MAGIC,<sp/>.w<sp/>=<sp/>8,<sp/>.h<sp/>=<sp/>8,<sp/>.cf<sp/>=<sp/>LV_COLOR_FORMAT_MONO1},</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>.data<sp/>=<sp/><ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kindref="member">user_icon_data_array</ref>,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>.data_size<sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kindref="member">user_icon_data_array</ref>)</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="components/Esp_menu/user_graphic.h"/>
+  </compounddef>
+</doxygen>

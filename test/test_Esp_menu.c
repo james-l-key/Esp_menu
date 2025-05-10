@@ -1,3 +1,7 @@
+#ifndef SOC_CPU_INTR_NUM
+#define SOC_CPU_INTR_NUM 32
+#endif
+
 #include "unity.h"
 #include "Esp_menu.h"
 #include "freertos/FreeRTOS.h"
@@ -18,7 +22,7 @@
 #include "mock_esp_lcd_panel_vendor.h"
 #include "mock_esp_lcd_panel_ops.h"
 #include "mock_gpio.h"
-#include "esp_lcd/esp_lcd_panel_ssd1306.h"
+#include "esp_lcd_panel_ssd1306.h"
 
 // Mock the TAG for ESP_LOGI
 #define TAG "Esp_menu_test"
@@ -48,6 +52,12 @@
 #define I2C_HOST 0
 #endif
 
+#ifndef I2C_CLK_SRC_DEFAULT
+#define I2C_CLK_SRC_DEFAULT 0 // Replace 0 with the appropriate value if known
+#endif
+
+#define CAST_TO_PTR(x) ((void *)(uintptr_t)(x))
+
 esp_lcd_panel_handle_t lcd_handle; // Global variable for your tests
 
 // Mock i2c_communication_init
@@ -63,23 +73,23 @@ esp_err_t esp_lcd_new_panel_ssd1306(esp_lcd_panel_io_handle_t io, const esp_lcd_
     return ESP_OK;
 }
 
-// Mock esp_lcd_panel_reset
-esp_err_t esp_lcd_panel_reset(esp_lcd_panel_handle_t panel)
+// Mock esp_lcd_new_panel_io_i2c_custom
+esp_err_t esp_lcd_new_panel_io_i2c_custom(void *bus, const esp_lcd_panel_io_i2c_config_t *io_config, esp_lcd_panel_io_handle_t *ret_io)
 {
+    *ret_io = (esp_lcd_panel_io_handle_t)CAST_TO_PTR(0x87654321); // Dummy handle
     return ESP_OK;
 }
 
-// Mock esp_lcd_panel_init
-esp_err_t esp_lcd_panel_init(esp_lcd_panel_handle_t panel)
+// Placeholder implementation for missing function
+void Esp_menu_draw(void)
 {
-    return ESP_OK;
+    // Implementation for testing
 }
 
-// Mock esp_lcd_new_panel_io_i2c
-esp_err_t esp_lcd_new_panel_io_i2c(const esp_lcd_panel_io_i2c_config_t *io_config, esp_lcd_panel_io_handle_t *ret_io)
+// Updated implementation for encoder_isr_handler
+void encoder_isr_handler(void *arg)
 {
-    *ret_io = (esp_lcd_panel_io_handle_t)0x87654321; // Dummy handle
-    return ESP_OK;
+    // Implementation for testing
 }
 
 // Test fixture setup and teardown
@@ -133,10 +143,10 @@ void test_menu_init(void)
 
     // Expect
     i2c_new_master_bus_ExpectAndReturn(&bus_config, NULL, ESP_OK);
-    gpio_config_Expect(&io_conf);
+    gpio_config_ExpectAndReturn(&io_conf, ESP_OK);
 
     // Act
-    Esp_menu_init();
+    menu_init();
 
     // Assert
     TEST_ASSERT_NOT_NULL(lcd_handle);

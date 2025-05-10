@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.4" xml:lang="en-US">
+  <compound refid="db/dd7/structMenuParams__t" kind="struct"><name>MenuParams_t</name>
+    <member refid="db/dd7/structMenuParams__t_1a108eec2d3fecaefe773913629e7e01f1" kind="variable"><name>amp_mod_slot</name></member>
+    <member refid="db/dd7/structMenuParams__t_1a2d5f4c8f05f6a507a3cd7525cd76729c" kind="variable"><name>freq_mod_slot</name></member>
+    <member refid="db/dd7/structMenuParams__t_1ac7772b0707e14f3d575d05fac2bc490d" kind="variable"><name>frequency_fine</name></member>
+    <member refid="db/dd7/structMenuParams__t_1aceb306dc674eb6f2c743496a312f00cb" kind="variable"><name>frequency_pitch</name></member>
+    <member refid="db/dd7/structMenuParams__t_1a864fde14aaec72616f08a10c4a3a07ad" kind="variable"><name>level</name></member>
+    <member refid="db/dd7/structMenuParams__t_1a0ba2e8db178d974c138fdbec7ddc10d5" kind="variable"><name>pulse_width</name></member>
+    <member refid="db/dd7/structMenuParams__t_1a106a57b186bf3252a4fbaf80f71a35c3" kind="variable"><name>sync_source_slot</name></member>
+    <member refid="db/dd7/structMenuParams__t_1ab92763fd025cb462d7a260d51ef64cd1" kind="variable"><name>waveform</name></member>
+  </compound>
+  <compound refid="dc/dc7/namespacegenerate__menu" kind="namespace"><name>generate_menu</name>
+    <member refid="dc/dc7/namespacegenerate__menu_1aa7f6fb63f0834dd7d1ed9f7c3e3e395f" kind="variable"><name>schema</name></member>
+    <member refid="dc/dc7/namespacegenerate__menu_1a133b061e272f7ece605286a358a28bcd" kind="function"><name>generate_action_prototypes</name></member>
+    <member refid="dc/dc7/namespacegenerate__menu_1acc223ca32c4db36de8c89ad077cc4b62" kind="function"><name>generate_graphics_code</name></member>
+    <member refid="dc/dc7/namespacegenerate__menu_1a11f2cf0f924dc0be833d06d4571f87c9" kind="function"><name>load_and_validate_config</name></member>
+    <member refid="dc/dc7/namespacegenerate__menu_1a19a7b3cd609ad62e14a361b54bbad262" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="d5/d23/namespacetemp" kind="namespace"><name>temp</name>
+    <member refid="d5/d23/namespacetemp_1a14d48c2e9f05d0b03044eb45f308fcb0" kind="variable"><name>body</name></member>
+    <member refid="d5/d23/namespacetemp_1ae13053695c90ec7dcb51feef32a25e70" kind="variable"><name>functions_data</name></member>
+    <member refid="d5/d23/namespacetemp_1a49de80dbaccde629a43daf7c1190cff9" kind="variable"><name>functions_source_name</name></member>
+    <member refid="d5/d23/namespacetemp_1a79c488e3b3ec6777372274a75ceb95d8" kind="variable"><name>functions_source_path</name></member>
+    <member refid="d5/d23/namespacetemp_1ad0cd52cb2735524d50ec1ce313c4277f" kind="variable"><name>graphics_data</name></member>
+    <member refid="d5/d23/namespacetemp_1a5f7dc55649be2f3aa3d1353e41a0c32e" kind="variable"><name>graphics_header_file</name></member>
+    <member refid="d5/d23/namespacetemp_1a423cfff5c018bfe4b8227f3bc68eac4e" kind="variable"><name>graphics_source_file</name></member>
+    <member refid="d5/d23/namespacetemp_1ac8c68026b72a7e1a6c131b77c2449b31" kind="variable"><name>header_name</name></member>
+    <member refid="d5/d23/namespacetemp_1adfac52421fcf4a9254c80b116108ecca" kind="variable"><name>header_path</name></member>
+    <member refid="d5/d23/namespacetemp_1afe520a74dd76d9b7f47c4d523b0988c5" kind="variable"><name>headers_data</name></member>
+    <member refid="d5/d23/namespacetemp_1ad62df22ac2eb113804ebbe75efb19232" kind="variable"><name>menu_header_file</name></member>
+    <member refid="d5/d23/namespacetemp_1ab74e6bf80237ddc4109968cedc58c151" kind="variable"><name>name</name></member>
+    <member refid="d5/d23/namespacetemp_1a41000f175dc0115080e2a682cc06dbe9" kind="variable"><name>params</name></member>
+    <member refid="d5/d23/namespacetemp_1ae2975c08d38d715e6471d3254520e593" kind="variable"><name>params_str</name></member>
+    <member refid="d5/d23/namespacetemp_1a7130b1618285588513fd1ff97884b9d9" kind="variable"><name>position</name></member>
+    <member refid="d5/d23/namespacetemp_1a8158a2d869c53eb8f38c869b380a1209" kind="variable"><name>return_type</name></member>
+    <member refid="d5/d23/namespacetemp_1aa3d6656320f1a7278c0c2c7fdf07617c" kind="variable"><name>size</name></member>
+    <member refid="d5/d23/namespacetemp_1a9257ca32069b62ded8cdb4e194828c02" kind="variable"><name>subtype</name></member>
+    <member refid="d5/d23/namespacetemp_1a35f6472636944b16d9e446f41999e5ef" kind="function"><name>generate_menu_header</name></member>
+  </compound>
+  <compound refid="d4/d33/generate__menu_8py" kind="file"><name>generate_menu.py</name>
+  </compound>
+  <compound refid="d1/d13/components_2Esp__menu_2generated_2menu_8c" kind="file"><name>menu.c</name>
+    <member refid="d1/d13/components_2Esp__menu_2generated_2menu_8c_1a65b3e7c9b1929bf24eaee462b4817acb" kind="function"><name>event_handler</name></member>
+    <member refid="d1/d13/components_2Esp__menu_2generated_2menu_8c_1a06928afa5c7f6b2572306f21cd7d2d31" kind="function"><name>menu_init</name></member>
+  </compound>
+  <compound refid="df/dd8/generated_2menu_8c" kind="file"><name>menu.c</name>
+    <member refid="df/dd8/generated_2menu_8c_1a65b3e7c9b1929bf24eaee462b4817acb" kind="function"><name>event_handler</name></member>
+    <member refid="df/dd8/generated_2menu_8c_1a06928afa5c7f6b2572306f21cd7d2d31" kind="function"><name>menu_init</name></member>
+  </compound>
+  <compound refid="db/d55/components_2Esp__menu_2generated_2menu__data_8h" kind="file"><name>menu_data.h</name>
+    <member refid="db/d55/components_2Esp__menu_2generated_2menu__data_8h_1a06928afa5c7f6b2572306f21cd7d2d31" kind="function"><name>menu_init</name></member>
+    <member refid="db/d55/components_2Esp__menu_2generated_2menu__data_8h_1a4b7f0367ca40c19a090559f03aface52" kind="function"><name>option1_action</name></member>
+  </compound>
+  <compound refid="da/d0f/generated_2menu__data_8h" kind="file"><name>menu_data.h</name>
+    <member refid="da/d0f/generated_2menu__data_8h_1a06928afa5c7f6b2572306f21cd7d2d31" kind="function"><name>menu_init</name></member>
+    <member refid="da/d0f/generated_2menu__data_8h_1a4b7f0367ca40c19a090559f03aface52" kind="function"><name>option1_action</name></member>
+  </compound>
+  <compound refid="db/df3/components_2Esp__menu_2include_2Esp__menu_8h" kind="file"><name>Esp_menu.h</name>
+    <member refid="db/df3/components_2Esp__menu_2include_2Esp__menu_8h_1a630544a7f0a2cc40d8a7fefab7e2fe70" kind="function"><name>app_main</name></member>
+    <member refid="db/df3/components_2Esp__menu_2include_2Esp__menu_8h_1a4b7f0367ca40c19a090559f03aface52" kind="function"><name>option1_action</name></member>
+  </compound>
+  <compound refid="d2/df5/include_2Esp__menu_8h" kind="file"><name>Esp_menu.h</name>
+    <member refid="d2/df5/include_2Esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" kind="function"><name>esp_menu_init</name></member>
+  </compound>
+  <compound refid="d1/dbe/temp_8py" kind="file"><name>temp.py</name>
+  </compound>
+  <compound refid="da/d86/test__config_8h" kind="file"><name>test_config.h</name>
+    <member refid="da/d86/test__config_8h_1a4fedaf77b401771b43ebe1661bc6f77f" kind="define"><name>CONFIG_ENCODER_A_PIN</name></member>
+    <member refid="da/d86/test__config_8h_1aabf222a30f3a4e72bf7cb4f3e894fd61" kind="define"><name>CONFIG_ENCODER_B_PIN</name></member>
+    <member refid="da/d86/test__config_8h_1a805204986cdf7ea37f976fb0608d8e5d" kind="define"><name>CONFIG_ENCODER_BUTTON_PIN</name></member>
+    <member refid="da/d86/test__config_8h_1a7d1b7992aa421f10dc473db899dcff8b" kind="define"><name>ESP_ERROR_CHECK</name></member>
+    <member refid="da/d86/test__config_8h_1a63f73d129de3fe803e42fb37b1c3783f" kind="define"><name>EXAMPLE_PIN_NUM_SCL</name></member>
+    <member refid="da/d86/test__config_8h_1a521afe5ab3e5c4acb82b817d8a62126d" kind="define"><name>EXAMPLE_PIN_NUM_SDA</name></member>
+    <member refid="da/d86/test__config_8h_1accde446367d770e5b537232c989c618d" kind="define"><name>I2C_HOST</name></member>
+    <member refid="da/d86/test__config_8h_1afc3d101f633a076cc1ca84b85b6224b2" kind="define"><name>TAG</name></member>
+  </compound>
+  <compound refid="da/d9c/components_2Esp__menu_2user__actions_8c" kind="file"><name>user_actions.c</name>
+    <member refid="da/d9c/components_2Esp__menu_2user__actions_8c_1a5a85b9c772bbeb480b209a3e6ea92b4c" kind="variable"><name>TAG</name></member>
+    <member refid="da/d9c/components_2Esp__menu_2user__actions_8c_1a4b7f0367ca40c19a090559f03aface52" kind="function"><name>option1_action</name></member>
+  </compound>
+  <compound refid="d4/d34/main_2user__menu_2user__actions_8c" kind="file"><name>user_actions.c</name>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a63cf99dbf81ac4fc5b470f2703a2d8ef" kind="define"><name>NUM_FAVORITE_SLOTS</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a4881d84a10c7209f2de8f6699f307606" kind="variable"><name>current_slot</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a76acf34fe5c70ae746bb85e24479eb1a" kind="variable"><name>menu_params</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a6adc42f453e87add2e671660a4fcef08" kind="variable"><name>param_label</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a65132ad4f6ad73c9d3525ff85b6e24cd" kind="function"><name>amp_mod_slot_next</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a24381152d2a1938ed421b18def4436fb" kind="function"><name>amp_mod_slot_prev</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1aed41ee30d70cc48c3ed316937db3a7c1" kind="function"><name>clear_favorite</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a8bd8bae6ed156c1a2cd5f750351a5a97" kind="function"><name>clear_favorite_action</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1aa1b99af2979100c14dd614cf57335ca1" kind="function"><name>fine_tune_down</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a34f853ccd6e7361a5dfc5f64f78daace" kind="function"><name>fine_tune_up</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a7c050927e53d5700d5b9df748456b66c" kind="function"><name>level_down</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1aafc87d89594136350fa8fbd7635eddbd" kind="function"><name>level_up</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1ae2843f46936a01ca43e62643aa567333" kind="function"><name>load_favorite</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a18ae8957bff677c89b1e9c9c806321a2" kind="function"><name>load_favorite_action</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" kind="function"><name>load_from_nvs</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a43b2d3a37debccdea0d3151a5d0ac4f6" kind="function"><name>pitch_down</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a74cbf8e3a7874e42b34190b245f8b5fa" kind="function"><name>pitch_up</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1ac05788b1a20ff0303fd692d9fc134d92" kind="function"><name>pulse_width_down</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a34b1d6b3c21cdb6999a551d5eef449c7" kind="function"><name>pulse_width_up</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a7bde8fb3f28d402b43c191c563a10856" kind="function"><name>save_favorite</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a8a0c07733299e9ac88c43934db343b24" kind="function"><name>save_favorite_action</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" kind="function"><name>save_to_nvs</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1ab9ec9f41ba66a066a71e91025b7ff50c" kind="function"><name>select_favorite_slot_next</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a4dd84d0ca00989df8bbb7fa87710c6fd" kind="function"><name>select_favorite_slot_prev</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1aa8253cd89ed4b268472ed62f4f2074ae" kind="function"><name>user_init</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a355a50ece756a43a6360dace6b1c117c" kind="function"><name>user_update_display</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a4dff26804ab35793764238efea0abe1a" kind="function"><name>waveform_next</name></member>
+    <member refid="d4/d34/main_2user__menu_2user__actions_8c_1a7074c46297d58a8e3c476073c988c527" kind="function"><name>waveform_prev</name></member>
+  </compound>
+  <compound refid="d3/d59/components_2Esp__menu_2user__graphic_8h" kind="file"><name>user_graphic.h</name>
+    <member refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1aa737e40b70e689c8edf1591ddb856da3" kind="variable"><name>user_icon_data</name></member>
+    <member refid="d3/d59/components_2Esp__menu_2user__graphic_8h_1a8384b7472d0408bb21f4aa8ba6b6f556" kind="variable"><name>user_icon_data_array</name></member>
+  </compound>
+  <compound refid="d8/dce/main_2user__menu_2user__graphic_8h" kind="file"><name>user_graphic.h</name>
+    <member refid="d8/dce/main_2user__menu_2user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" kind="function"><name>user_graphic_init</name></member>
+  </compound>
+  <compound refid="dd/d3a/components_2Esp__menu_2Esp__menu_8c" kind="file"><name>Esp_menu.c</name>
+    <member refid="dd/d3a/components_2Esp__menu_2Esp__menu_8c_1ae1234d6b90fa48eec75a6d7e0c57fda7" kind="define"><name>BSP_ERROR_CHECK_RETURN_NULL</name></member>
+    <member refid="dd/d3a/components_2Esp__menu_2Esp__menu_8c_1afc3d101f633a076cc1ca84b85b6224b2" kind="define"><name>TAG</name></member>
+    <member refid="dd/d3a/components_2Esp__menu_2Esp__menu_8c_1aec6f6a99cec316639057c04e78c15e64" kind="variable"><name>lcd_handle</name></member>
+    <member refid="dd/d3a/components_2Esp__menu_2Esp__menu_8c_1a630544a7f0a2cc40d8a7fefab7e2fe70" kind="function"><name>app_main</name></member>
+  </compound>
+  <compound refid="d1/d3e/Esp__menu_8c" kind="file"><name>Esp_menu.c</name>
+    <member refid="d1/d3e/Esp__menu_8c_1a61088fe7ad2d295829742a6ec0e19b1a" kind="define"><name>BSP_ERROR_CHECK_RETURN_ERR</name></member>
+    <member refid="d1/d3e/Esp__menu_8c_1afc3d101f633a076cc1ca84b85b6224b2" kind="define"><name>TAG</name></member>
+    <member refid="d1/d3e/Esp__menu_8c_1aec6f6a99cec316639057c04e78c15e64" kind="variable"><name>lcd_handle</name></member>
+    <member refid="d1/d3e/Esp__menu_8c_1a0dd6048fa7183b9c8b034e530abe7bf6" kind="function"><name>esp_menu_init</name></member>
+  </compound>
+  <compound refid="d0/d29/main_8c" kind="file"><name>main.c</name>
+    <member refid="d0/d29/main_8c_1a5a85b9c772bbeb480b209a3e6ea92b4c" kind="variable"><name>TAG</name></member>
+    <member refid="d0/d29/main_8c_1a630544a7f0a2cc40d8a7fefab7e2fe70" kind="function"><name>app_main</name></member>
+  </compound>
+  <compound refid="d7/ddf/user__actions_8h" kind="file"><name>user_actions.h</name>
+    <member refid="d7/ddf/user__actions_8h_1a76acf34fe5c70ae746bb85e24479eb1a" kind="variable"><name>menu_params</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a65132ad4f6ad73c9d3525ff85b6e24cd" kind="function"><name>amp_mod_slot_next</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a24381152d2a1938ed421b18def4436fb" kind="function"><name>amp_mod_slot_prev</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a8bd8bae6ed156c1a2cd5f750351a5a97" kind="function"><name>clear_favorite_action</name></member>
+    <member refid="d7/ddf/user__actions_8h_1aa1b99af2979100c14dd614cf57335ca1" kind="function"><name>fine_tune_down</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a34f853ccd6e7361a5dfc5f64f78daace" kind="function"><name>fine_tune_up</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a7c050927e53d5700d5b9df748456b66c" kind="function"><name>level_down</name></member>
+    <member refid="d7/ddf/user__actions_8h_1aafc87d89594136350fa8fbd7635eddbd" kind="function"><name>level_up</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a18ae8957bff677c89b1e9c9c806321a2" kind="function"><name>load_favorite_action</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a43b2d3a37debccdea0d3151a5d0ac4f6" kind="function"><name>pitch_down</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a74cbf8e3a7874e42b34190b245f8b5fa" kind="function"><name>pitch_up</name></member>
+    <member refid="d7/ddf/user__actions_8h_1ac05788b1a20ff0303fd692d9fc134d92" kind="function"><name>pulse_width_down</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a34b1d6b3c21cdb6999a551d5eef449c7" kind="function"><name>pulse_width_up</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a8a0c07733299e9ac88c43934db343b24" kind="function"><name>save_favorite_action</name></member>
+    <member refid="d7/ddf/user__actions_8h_1ab9ec9f41ba66a066a71e91025b7ff50c" kind="function"><name>select_favorite_slot_next</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a4dd84d0ca00989df8bbb7fa87710c6fd" kind="function"><name>select_favorite_slot_prev</name></member>
+    <member refid="d7/ddf/user__actions_8h_1aa8253cd89ed4b268472ed62f4f2074ae" kind="function"><name>user_init</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a355a50ece756a43a6360dace6b1c117c" kind="function"><name>user_update_display</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a4dff26804ab35793764238efea0abe1a" kind="function"><name>waveform_next</name></member>
+    <member refid="d7/ddf/user__actions_8h_1a7074c46297d58a8e3c476073c988c527" kind="function"><name>waveform_prev</name></member>
+  </compound>
+  <compound refid="d5/d4d/mainpage_8dox" kind="file"><name>mainpage.dox</name>
+  </compound>
+  <compound refid="d0/dd3/group__code__gen" kind="group"><name>code_gen</name>
+  </compound>
+  <compound refid="da/de1/group__display" kind="group"><name>display</name>
+  </compound>
+  <compound refid="d6/d5d/group__ESP__menu" kind="group"><name>ESP_menu</name>
+  </compound>
+  <compound refid="dc/df1/group__input" kind="group"><name>input</name>
+  </compound>
+  <compound refid="dir_409f97388efe006bc3438b95e9edef48" kind="dir"><name>components</name>
+  </compound>
+  <compound refid="dir_9ec0ad20d1e8348ec2e8113f3b6c125c" kind="dir"><name>components/Esp_menu</name>
+  </compound>
+  <compound refid="dir_f4241d3abb8552b7f92376eebf43313d" kind="dir"><name>components/Esp_menu/generated</name>
+  </compound>
+  <compound refid="dir_84fc5dba3506812825191c0c043e3c97" kind="dir"><name>generated</name>
+  </compound>
+  <compound refid="dir_23556223790033a781c5965ffe6e6dc9" kind="dir"><name>components/Esp_menu/include</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_5c982d53a68cdbcd421152b4020263a9" kind="dir"><name>main</name>
+  </compound>
+  <compound refid="dir_30e49091f61039451e154db78e2e4dd9" kind="dir"><name>main/user_menu</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

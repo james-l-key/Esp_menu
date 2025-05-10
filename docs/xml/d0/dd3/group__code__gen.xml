@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d0/dd3/group__code__gen" kind="group">
+    <compoundname>code_gen</compoundname>
+    <title>Code Generation</title>
+    <innerfile refid="da/d0f/generated_2menu__data_8h">menu_data.h</innerfile>
+    <briefdescription>
+<para>Code generation from JSON templates. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module handles generating C code from JSON menu definitions using Jinja2 templates. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

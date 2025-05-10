@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d2/df5/include_2Esp__menu_8h" kind="file" language="C++">
+    <compoundname>Esp_menu.h</compoundname>
+    <includes local="yes">esp_err.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/Esp_menu.h</label>
+        <link refid="d2/df5/include_2Esp__menu_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>esp_err.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d2/df5/include_2Esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>esp_err_t</type>
+        <definition>esp_err_t esp_menu_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>esp_menu_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes the ESP Menu system, including SSD1306 display and rotary encoders. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>esp_err_t ESP_OK on success, or an error code on failure.</para>
+</simplesect>
+Initializes the ESP Menu system, including SSD1306 display and rotary encoders.</para>
+<para><simplesect kind="return"><para>esp_err_t ESP_OK on success, or an error code on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/Esp_menu.h" line="15" column="11" bodyfile="Esp_menu.c" bodystart="45" bodyend="220" declfile="include/Esp_menu.h" declline="15" declcolumn="11"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header file for the ESP Menu component, providing menu system initialization and NVS functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ESP_MENU_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ESP_MENU_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_err.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">esp_err_t<sp/><ref refid="d2/df5/include_2Esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" kindref="member">esp_menu_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CONFIG_ESPMENU_ENABLE_NVS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1aa88a41800f2d882ca58dfb9d002e5e92" kindref="member">save_to_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d34/main_2user__menu_2user__actions_8c_1a2a3330b21522d15b92be29b9ccb8bb3c" kindref="member">load_from_nvs</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="include/Esp_menu.h"/>
+  </compounddef>
+</doxygen>
