@@ -307,3 +307,4 @@ pyrightconfig.json
 managed_components
 ceedling_build
 build
+.vscode
