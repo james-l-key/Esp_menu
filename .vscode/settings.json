@@ -1,6 +1,0 @@
-{
-    "cmake.sourceDirectory": "/home/phi/Programming/Esp32/Esp_menu/managed_components/espressif__button",
-    "idf.espIdfPath": "/home/phi/esp/v5.4.1/esp-idf",
-    "idf.toolsPath": "/home/phi/.espressif",
-    "idf.pythonInstallPath": "/usr/bin/python"
-}
