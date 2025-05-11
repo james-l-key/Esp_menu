@@ -1,0 +1,12 @@
+#ifndef MENU_DATA_H
+#define MENU_DATA_H
+
+#include "lvgl.h"
+
+{% for prototype in action_prototypes %}
+{{ prototype }}
+{% endfor %}
+
+void menu_init(void);
+
+#endif
