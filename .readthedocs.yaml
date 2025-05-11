@@ -1,7 +1,12 @@
 version: 2
 build:
   os: ubuntu-22.04
-  commands:
-    - conda env create -f docs/environment.yaml
-    - conda activate docs
-    - sphinx-build -b html docs/ _build/html
+  tools:
+    python: "3.11"
+    conda: "latest"
+python:
+  install:
+    - method: conda
+      path: docs/.environment.yaml
+sphinx:
+  builder: html
