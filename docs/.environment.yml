@@ -1,0 +1,5 @@
+name: docs
+channels:
+  - conda-forge
+dependencies:
+  - doxygen>=1.9.8

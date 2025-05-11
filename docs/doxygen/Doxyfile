@@ -1,0 +1,94 @@
+PROJECT_NAME           = "ESP Menu"
+PROJECT_BRIEF          = "A customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input."
+PROJECT_NUMBER         = 0.1.0
+OUTPUT_DIRECTORY       = ../docs/doxygen
+CREATE_SUBDIRS         = YES
+ALLOW_UNICODE_NAMES    = YES
+OUTPUT_LANGUAGE        = English
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+ALWAYS_DETAILED_SEC    = YES
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = ./
+STRIP_FROM_INC_PATH    = 
+JAVADOC_AUTOBRIEF      = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+TYPEDEF_HIDES_STRUCT   = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+HIDE_SCOPE_NAMES       = YES
+SHOW_INCLUDE_FILES     = YES
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+SORT_MEMBERS_CTORS_1ST = YES
+SORT_GROUP_NAMES       = YES
+
+# Input directories
+INPUT                  = ../components/Esp_menu/Esp_menu.c \
+                         ../components/Esp_menu \
+                         ../components/Esp_menu/templates \
+                         ../components/Esp_menu/include/Esp_menu.h \
+                         ../components/Esp_menu/generated \
+                         ../main \
+                         ../main/user_menu \
+                         ../mainpage.dox
+FILE_PATTERNS          = *.c \
+                         *.h \
+                         *.cpp \
+                         *.hpp \
+                         *.md \
+                         *.py \
+                         *.dox
+RECURSIVE              = YES
+EXCLUDE                = build \
+                         managed_components
+EXCLUDE_PATTERNS       = */build/* \
+# Graphics configuration
+HAVE_DOT               = YES
+CLASS_DIAGRAMS         = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+TEMPLATE_RELATIONS     = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DOT_IMAGE_FORMAT       = png
+INTERACTIVE_SVG        = YES
+
+# Output formats
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_TIMESTAMP         = YES
+HTML_DYNAMIC_SECTIONS  = YES
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO
+XML_OUTPUT             = xml
+
+# Preprocessor settings
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+SEARCH_INCLUDES        = YES
+PREDEFINED             = __cplusplus \
+                         ESP_OK=0 \
+                         ESP_FAIL=1
+
+# External references
+TAGFILES               = 
+ALLEXTERNALS           = NO
+EXTERNAL_GROUPS        = YES
+
+# Other settings
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_NO_PARAMDOC       = YES
+
+# Set README as the main page
+USE_MDFILE_AS_MAINPAGE = ./README.md

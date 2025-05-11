@@ -1,0 +1,4 @@
+sphinx==8.2.3
+doxysphinx==3.3.8
+sphinx-rtd-theme
+sphinx-json-schema
