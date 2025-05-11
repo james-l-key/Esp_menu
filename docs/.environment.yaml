@@ -3,3 +3,6 @@ channels:
   - conda-forge
 dependencies:
   - doxygen>=1.9.8
+  - python>=3.11
+  - sphinx>=4.0
+  - sphinx_rtd_theme  # Add this if you're using the Read the Docs theme
