@@ -2,10 +2,10 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    python: "3.11"  # Specify Python version here
+    python: "3.11"
 python:
   install:
     - method: conda
-      path: docs/environment.yaml  # Path to your Conda environment YAML file
+      path: docs/environment.yaml
 sphinx:
   builder: html
