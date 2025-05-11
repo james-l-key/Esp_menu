@@ -1,8 +1,8 @@
 PROJECT_NAME           = "ESP Menu"
 PROJECT_BRIEF          = "A customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input."
 PROJECT_NUMBER         = 0.1.0
-OUTPUT_DIRECTORY       = ../docs/doxygen
-CREATE_SUBDIRS         = YES
+OUTPUT_DIRECTORY       = docs/doxygen/html
+CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = YES
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -25,14 +25,14 @@ SORT_MEMBERS_CTORS_1ST = YES
 SORT_GROUP_NAMES       = YES
 
 # Input directories
-INPUT                  = ../components/Esp_menu/Esp_menu.c \
-                         ../components/Esp_menu \
-                         ../components/Esp_menu/templates \
-                         ../components/Esp_menu/include/Esp_menu.h \
-                         ../components/Esp_menu/generated \
-                         ../main \
-                         ../main/user_menu \
-                         ../mainpage.dox
+INPUT                  = .//../components/Esp_menu/Esp_menu.c \
+                         ../../components/Esp_menu \
+                         ../../components/Esp_menu/templates \
+                         ../../components/Esp_menu/include/Esp_menu.h \
+                         ../../components/Esp_menu/generated \
+                         ../../main \
+                         ../../main/user_menu \
+                         ../../mainpage.dox
 FILE_PATTERNS          = *.c \
                          *.h \
                          *.cpp \
@@ -44,9 +44,10 @@ RECURSIVE              = YES
 EXCLUDE                = build \
                          managed_components
 EXCLUDE_PATTERNS       = */build/* \
+                         */.git/*
+EXAMPLE_PATH           = ../../main
 # Graphics configuration
 HAVE_DOT               = YES
-CLASS_DIAGRAMS         = YES
 CLASS_GRAPH            = YES
 COLLABORATION_GRAPH    = YES
 TEMPLATE_RELATIONS     = YES
