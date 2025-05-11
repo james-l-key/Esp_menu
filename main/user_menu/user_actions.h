@@ -135,4 +135,10 @@ void load_favorite_action(void);
  */
 void clear_favorite_action(void);
 
+/**
+ * @brief Current favorite slot index (0–3).
+ * This is exposed for NVS save/load functionality.
+ */
+extern uint8_t current_slot;
+
 #endif

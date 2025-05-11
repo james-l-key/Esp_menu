@@ -4,8 +4,6 @@
 #include "lvgl.h"
 
 
-void option1_action(void);
-
 
 void menu_init(void);
 

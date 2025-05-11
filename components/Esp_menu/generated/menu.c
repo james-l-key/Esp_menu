@@ -1,9 +1,13 @@
 #include "menu_data.h"
 #include "lvgl.h"
-#include "espressif__lvgl_port.h"
-#include "espressif__knob.h"
-#include "espressif__button.h"
+#include "esp_lvgl_port.h"
+#include "iot_knob.h"
+#include "iot_button.h"
+#include "button_types.h"
+#include "button_gpio.h"
 #include "string.h"
+
+#include "user_graphic.h"
 
 
 
@@ -11,29 +15,8 @@ static void event_handler(lv_event_t *e) {
     lv_obj_t *obj = lv_event_get_target(e);
     lv_event_code_t code = lv_event_get_code(e);
     if (code == LV_EVENT_CLICKED) {
-        const char *text = lv_list_get_btn_text(obj);
-        
-        
-        /* DEBUG: Widget type=list, items=[{'text': 'Option 1', 'action': 'option1_action'}, {'text': 'Settings', 'screen': 'settings'}] */
-        
-        /* DEBUG: Processing list widget with 2 items */
-        
-        /* DEBUG: Adding item Option 1 */
-        if (strcmp(text, "Option 1") == 0) {
-            
-            option1_action();
-            
-        }
-        
-        /* DEBUG: Adding item Settings */
-        if (strcmp(text, "Settings") == 0) {
-            
-            lv_scr_load(scr_settings);
-            
-        }
-        
-        
-        
+        // Updated to use correct LVGL API with item parameter
+        const char *text = lv_list_get_btn_text(lv_obj_get_parent(obj), obj);
         
         
         
@@ -41,52 +24,78 @@ static void event_handler(lv_event_t *e) {
 }
 
 void menu_init(void) {
-    // Display setup
-    lvgl_port_cfg_t lvgl_cfg = {
-        .disp_cfg = {
-            .type = LVGL_PORT_DISP_TYPE_I2C,
-            .width = 128,
-            .height = 64,
-            .i2c = {
-                .sda = 21,
-                .scl = 22,
-                .addr = 0x3C
-            }
-        }
-    };
+    // Initialize LVGL port with default configuration
+    const lvgl_port_cfg_t lvgl_cfg = ESP_LVGL_PORT_INIT_CONFIG();
     lvgl_port_init(&lvgl_cfg);
-    lv_disp_t *disp = lvgl_port_add_disp(&lvgl_cfg.disp_cfg);
+    
+    // Configure the display
+    const lvgl_port_display_cfg_t disp_cfg = {
+        .hres = 128,
+        .vres = 64,
+        .flags = {
+            .buff_dma = true,              // Use DMA for rendering (if applicable)
+            .buff_spiram = false,          // Use SPI RAM buffer if available
+            .sw_rotate = false,            // Use software rotation
+            .swap_bytes = false,           // Swap RGB565 bytes
+        },
+    };
+    
+    // Add display
+    lv_disp_t *disp = lvgl_port_add_disp(&disp_cfg);
+    
+    // Create and register the main screen
+    lv_obj_t *scr_main = NULL;
+    
+    
+    scr_main = lv_obj_create(NULL);
+    
+    
+    
+    if (!scr_main) {
+        scr_main = lv_obj_create(NULL);
+    }
 
     // Encoder setup
     
-    knob_handle_t encoder1 = knob_create(12, 13);
-    button_handle_t encoder1_btn = button_create(14);
-    lv_indev_t *indev_encoder1 = lvgl_port_add_indev(encoder1, encoder1_btn);
+    // Create knob with updated API
+    knob_config_t knob_cfg = {
+        .default_direction = 0,
+        .gpio_encoder_a = 5,
+        .gpio_encoder_b = 6
+    };
+    knob_handle_t encoder1 = iot_knob_create(&knob_cfg);
+    
+    // Create button with updated API for button component v4.x
+    button_config_t btn_cfg = {
+        .long_press_time = 0,
+        .short_press_time = 0,
+    };
+    
+    // Configure GPIO button properties
+    button_gpio_config_t gpio_btn_cfg = {
+        .gpio_num = 7,
+        .active_level = 0,
+        .enable_power_save = false,
+        .disable_pull = false,
+    };
+    
+    // Create button using required parameters for v4.x API
+    button_handle_t encoder1_btn = NULL;
+    iot_button_new_gpio_device(&btn_cfg, &gpio_btn_cfg, &encoder1_btn);
+    
+    // Create encoder input device using updated API
+    lvgl_port_encoder_cfg_t encoder_cfg = {
+        .disp = disp,
+        .encoder_a_b = encoder1,
+        .encoder_enter = encoder1_btn
+    };
+    lv_indev_t *indev_encoder1 = lvgl_port_add_encoder(&encoder_cfg);
     lv_group_t *group_encoder1 = lv_group_create();
     
 
     // Menu setup
     
-    lv_obj_t *scr_main = lv_obj_create(NULL);
     
-    /* DEBUG: Widget type=list, items=[{'text': 'Option 1', 'action': 'option1_action'}, {'text': 'Settings', 'screen': 'settings'}] */
-    
-    /* DEBUG: Processing list widget with 2 items */
-    lv_obj_t *list_main_1 = lv_list_create(scr_main);
-    
-    /* DEBUG: Adding item Option 1 */
-    lv_list_add_btn(list_main_1, NULL, "Option 1");
-    
-    /* DEBUG: Adding item Settings */
-    lv_list_add_btn(list_main_2, NULL, "Settings");
-    
-    lv_obj_add_event_cb(list_main_1, event_handler, LV_EVENT_CLICKED, NULL);
-    lv_group_add_obj(group_encoder1, list_main_1);
-    lv_indev_set_group(indev_encoder1, group_encoder1);
-    
-    
-    
-    lv_obj_t *scr_settings = lv_obj_create(NULL);
     
     
 

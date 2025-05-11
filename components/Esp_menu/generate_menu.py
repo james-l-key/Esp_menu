@@ -1,260 +1,395 @@
 #!/usr/bin/env python3
 """
-@file generate_menu.py
-@brief Component-specific menu code generator 
-@ingroup code_gen
-
-This script handles the component-specific aspects of menu code generation.
-It reads a menu.json configuration file, validates it against a schema,
-and uses Jinja2 templates to generate C code that implements the specified menu structure.
-
-Usage:
-    python3 generate_menu.py [path_to_menu_json] [output_directory]
-
-If no arguments are provided, default paths are used.
-
-@author ESP Menu Team
-@date May 10, 2025
+Script to generate menu framework files and menu data header for the ESP Menu component.
+Updated to look for menu.json in main/user_menu/ and output menu_data.h to components/Esp_menu/generated/.
 """
 
 import os
 import sys
 import json
+import jinja2
 import jsonschema
-from jinja2 import Environment, FileSystemLoader
+from datetime import datetime
 
-# JSON Schema for validation
-schema = {
+MENU_JSON_SCHEMA = {
     "type": "object",
-    "required": ["display", "encoders", "menu"],
     "properties": {
-        "display": {
-            "type": "object",
-            "required": ["type", "width", "height", "interface", "i2c_address", "sda_pin", "scl_pin"],
-            "properties": {
-                "type": {"type": "string", "enum": ["ssd1306"]},
-                "width": {"type": "integer"},
-                "height": {"type": "integer"},
-                "interface": {"type": "string", "enum": ["i2c"]},
-                "i2c_address": {"type": "string"},
-                "sda_pin": {"type": "integer"},
-                "scl_pin": {"type": "integer"}
-            }
-        },
-        "encoders": {
+        "screens": {
             "type": "array",
             "items": {
                 "type": "object",
-                "required": ["name", "pins", "role"],
                 "properties": {
                     "name": {"type": "string"},
-                    "pins": {
-                        "type": "object",
-                        "required": ["A", "B", "switch"],
-                        "properties": {
-                            "A": {"type": "integer"},
-                            "B": {"type": "integer"},
-                            "switch": {"type": "integer"}
-                        }
-                    },
-                    "role": {"type": "string"}
-                }
-            }
-        },
-        "graphics": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "required": ["id", "type"],
-                "properties": {
-                    "id": {"type": "string"},
-                    "type": {"type": "string", "enum": ["static", "procedural", "external"]},
-                    "data": {"type": "string"},
-                    "width": {"type": "integer"},
-                    "height": {"type": "integer"},
-                    "generator": {"type": "string", "enum": ["checkerboard"]},
-                    "params": {
-                        "type": "object",
-                        "properties": {
-                            "width": {"type": "integer"},
-                            "height": {"type": "integer"},
-                            "tile_size": {"type": "integer"}
-                        }
-                    },
-                    "header": {"type": "string"},
-                    "symbol": {"type": "string"}
-                },
-                "if": {"properties": {"type": {"const": "static"}}},
-                "then": {"required": ["data", "width", "height"]},
-                "if:1": {"properties": {"type": {"const": "procedural"}}},
-                "then:1": {"required": ["generator", "params"]},
-                "if:2": {"properties": {"type": {"const": "external"}}},
-                "then:2": {"required": ["header", "symbol"]}
-            }
-        },
-        "menu": {
-            "type": "object",
-            "required": ["screens"],
-            "properties": {
-                "screens": {
-                    "type": "array",
+                    "type": {"type": "string", "enum": ["menu", "action", "submenu"]},
                     "items": {
-                        "type": "object",
-                        "required": ["name", "widgets"],
-                        "properties": {
-                            "name": {"type": "string"},
-                            "widgets": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "required": ["type"],
-                                    "properties": {
-                                        "type": {"type": "string", "enum": ["list", "image", "canvas"]},
-                                        "items": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "required": ["text"],
-                                                "properties": {
-                                                    "text": {"type": "string"},
-                                                    "action": {"type": "string"},
-                                                    "screen": {"type": "string"}
-                                                }
-                                            }
-                                        },
-                                        "graphic_id": {"type": "string"},
-                                        "x": {"type": "integer"},
-                                        "y": {"type": "integer"},
-                                        "width": {"type": "integer"},
-                                        "height": {"type": "integer"},
-                                        "controlled_by": {"type": "string"}
-                                    },
-                                    "if": {"properties": {"type": {"const": "list"}}},
-                                    "then": {"required": ["items", "controlled_by"]},
-                                    "else": {"not": {"required": ["items"]}}
-                                }
-                            }
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {"type": "string"},
+                                "type": {"type": "string", "enum": ["action", "submenu"]},
+                                "callback": {"type": "string"}
+                            },
+                            "required": ["name", "type"],
+                            "additionalProperties": False
                         }
                     }
-                }
+                },
+                "required": ["name", "type"],
+                "additionalProperties": False
             }
         }
-    }
+    },
+    "required": ["screens"],
+    "additionalProperties": False
 }
 
 
-def load_and_validate_config(config_path):
-    """Load and validate the JSON configuration file."""
-    if not os.path.exists(config_path):
-        raise Exception(f"Config file not found: {config_path}")
+def load_json_file(json_path):
+    """
+    Loads and validates the menu JSON file.
+
+    Args:
+        json_path (str): Path to the JSON file.
+
+    Returns:
+        dict: Parsed JSON data.
+
+    Raises:
+        SystemExit: If file is not found, JSON is invalid, or schema validation fails.
+    """
     try:
-        with open(config_path, 'r') as f:
-            config = json.load(f)
-        jsonschema.validate(config, schema)
-        print("DEBUG: Config loaded:", json.dumps(config, indent=2))
-        return config
+        # Make sure we're dealing with an absolute path
+        abs_json_path = os.path.abspath(json_path)
+        print(f"DEBUG: Attempting to load JSON file from: {abs_json_path}")
+        
+        # Check if file exists
+        if not os.path.isfile(abs_json_path):
+            print(f"DEBUG: File not found at {abs_json_path}")
+            # Create directory if it doesn't exist
+            try:
+                os.makedirs(os.path.dirname(abs_json_path), exist_ok=True)
+                # Create empty JSON file with valid schema
+                with open(abs_json_path, 'w') as f:
+                    json.dump({"screens": []}, f, indent=2)
+                print(f"DEBUG: Created empty JSON file at {abs_json_path}")
+            except PermissionError:
+                print(f"ERROR: Permission denied while creating directory: {os.path.dirname(abs_json_path)}")
+                # Try a fallback to the current directory
+                fallback_path = os.path.join(os.getcwd(), 'menu.json')
+                print(f"DEBUG: Falling back to {fallback_path}")
+                with open(fallback_path, 'w') as f:
+                    json.dump({"screens": []}, f, indent=2)
+                return {"screens": []}
+        
+        # Now try to read the file
+        with open(abs_json_path, 'r') as f:
+            data = json.load(f)
+        jsonschema.validate(data, MENU_JSON_SCHEMA)
+        return data
+    except FileNotFoundError:
+        print(f"Error: JSON file {abs_json_path} not found")
+        # Return a minimal valid JSON structure
+        return {"screens": []}
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in {abs_json_path}: {e}")
+        sys.exit(1)
     except jsonschema.ValidationError as e:
-        raise Exception(f"JSON validation error: {e.message}")
+        print(f"Error: JSON schema validation failed: {e}")
+        sys.exit(1)
     except Exception as e:
-        raise Exception(f"Error loading config: {str(e)}")
+        print(f"Error: Unexpected error loading JSON file: {e}")
+        # Return a minimal valid JSON structure
+        return {"screens": []}
 
 
-def generate_graphics_code(graphics):
-    """Generate C code for graphics (static, procedural, external)."""
-    code = []
-    for graphic in graphics:
-        graphic_id = graphic['id']
-        if graphic['type'] == 'static':
-            array_data = ', '.join(graphic['data'].split(','))
-            code.append(f"""
-static const uint8_t {graphic_id}_data[] = {{{array_data}}};
-static const lv_image_dsc_t {graphic_id}_dsc = {{
-    .header = {{.magic = LV_IMAGE_HEADER_MAGIC, .w = {graphic['width']}, .h = {graphic['height']}, .cf = LV_COLOR_FORMAT_MONO1}},
-    .data = {graphic_id}_data,
-    .data_size = sizeof({graphic_id}_data)
-}};
-""")
-        elif graphic['type'] == 'procedural' and graphic['generator'] == 'checkerboard':
-            params = graphic['params']
-            code.append(f"""
-static void draw_{graphic_id}(lv_obj_t *canvas, uint16_t w, uint16_t h, uint8_t tile_size) {{
-    lv_canvas_set_buffer(canvas, lv_canvas_get_img_data(canvas), w, h, LV_COLOR_FORMAT_MONO1);
-    for (uint16_t y = 0; y < h; y++) {{
-        for (uint16_t x = 0; x < w; x++) {{
-            bool color = ((x / tile_size) + (y / tile_size)) % 2;
-            lv_canvas_set_px(canvas, x, y, color ? LV_COLOR_WHITE : LV_COLOR_BLACK);
-        }}
-    }}
-}}
-""")
-        elif graphic['type'] == 'external':
-            code.append(f"#include \"{graphic['header']}\"")
-    return code
+def generate_menu_data_h(output_path, screens):
+    """
+    Generates the menu_data.h header file.
+
+    Args:
+        output_path (str): Path to output the generated header.
+        screens (list): List of screen definitions from the JSON.
+    """
+    env = jinja2.Environment(loader=jinja2.BaseLoader())
+    template = """
+    // Auto-generated menu data
+    #ifndef MENU_DATA_H
+    #define MENU_DATA_H
+    void menu_init(void);
+    #endif
+    """
+    with open(output_path, 'w') as f:
+        f.write(env.from_string(template).render(screens=screens))
 
 
-def generate_action_prototypes(screens):
-    """Generate function prototypes for menu actions."""
-    actions = set()
+def generate_user_framework(user_menu_dir, screens):
+    """
+    Generates framework files (user_actions.h, user_actions.c, user_graphic.h) in main/user_menu/ if they don't exist.
+
+    Args:
+        user_menu_dir (str): Directory to generate framework files (main/user_menu/).
+        screens (list): List of screen definitions from the JSON.
+    """
+    os.makedirs(user_menu_dir, exist_ok=True)
+
+    # Extract callback names from JSON
+    callbacks = set()
     for screen in screens:
-        for widget in screen.get('widgets', []):
-            if widget['type'] == 'list':
-                for item in widget.get('items', []):
-                    if 'action' in item:
-                        actions.add(item['action'])
-    return [f"void {action}(void);" for action in actions]
+        if 'items' in screen:
+            for item in screen['items']:
+                if 'callback' in item:
+                    callbacks.add(item['callback'])
+
+    # Define MenuParams_t for oscillator module
+    menu_params_fields = [
+        {"name": "frequency_pitch", "type": "uint8_t"},
+        {"name": "frequency_fine", "type": "int16_t"},
+        {"name": "waveform", "type": "OscWaveform_t"},
+        {"name": "level", "type": "uint16_t"},
+        {"name": "pulse_width", "type": "uint16_t"},
+        {"name": "amp_mod_slot", "type": "uint8_t"},
+        {"name": "freq_mod_slot", "type": "uint8_t"},
+        {"name": "sync_source_slot", "type": "uint8_t"}
+    ]
+
+    # Generate user_actions.h
+    user_actions_h_path = os.path.join(user_menu_dir, 'user_actions.h')
+    if not os.path.exists(user_actions_h_path):
+        env = jinja2.Environment(loader=jinja2.BaseLoader())
+        template = """
+        /**
+         * @file user_actions.h
+         * @brief Header file for user-defined menu actions and parameters for the oscillator module.
+         */
+        #ifndef USER_ACTIONS_H
+        #define USER_ACTIONS_H
+        #include "lvgl.h"
+        #include "waveform_gen.h"
+
+        /**
+         * @brief Structure for oscillator module parameters.
+         */
+        typedef struct {
+            {% for field in fields %}
+            {{ field.type }} {{ field.name }}; ///< {{ field.name }} parameter
+            {% endfor %}
+        } MenuParams_t;
+
+        /** @brief Global oscillator parameters. */
+        extern MenuParams_t menu_params;
+
+        /**
+         * @brief Initializes project-specific state, including loading from NVS if enabled.
+         */
+        void user_init(void);
+
+        /**
+         * @brief Updates the LVGL display with current parameters.
+         */
+        void user_update_display(void);
+
+        // Menu action callbacks
+        {% for callback in callbacks %}
+        /**
+         * @brief {{ callback }} action callback.
+         */
+        void {{ callback }}(void);
+        {% endfor %}
+
+        #endif
+        """
+        with open(user_actions_h_path, 'w') as f:
+            f.write(env.from_string(template).render(
+                fields=menu_params_fields, callbacks=callbacks))
+        print(f"Generated framework: {user_actions_h_path}")
+
+    # Generate user_actions.c
+    user_actions_c_path = os.path.join(user_menu_dir, 'user_actions.c')
+    if not os.path.exists(user_actions_c_path):
+        env = jinja2.Environment(loader=jinja2.BaseLoader())
+        template = """
+        /**
+         * @file user_actions.c
+         * @brief Implementation of user-defined menu actions for the oscillator module.
+         */
+        #include "user_actions.h"
+        #include "Esp_menu.h"
+        #ifdef CONFIG_ESPMENU_ENABLE_NVS
+        #include "nvs_flash.h"
+        #endif
+        #include <string.h>
+        #include "lvgl.h"
+
+        /** @brief Global oscillator parameters. */
+        MenuParams_t menu_params = {
+            .frequency_pitch = 69,
+            .frequency_fine = 0,
+            .waveform = OSC_WAVE_SINE,
+            .level = 65535,
+            .pulse_width = 32768,
+            .amp_mod_slot = 0xFF,
+            .freq_mod_slot = 0xFF,
+            .sync_source_slot = 0xFF
+        };
+
+        /**
+         * @brief Initializes project-specific state, including loading from NVS if enabled.
+         */
+        void user_init(void) {
+            #ifdef CONFIG_ESPMENU_ENABLE_NVS
+            load_from_nvs();
+            #endif
+        }
+
+        /**
+         * @brief Updates the LVGL display with current parameters.
+         */
+        void user_update_display(void) {
+            static lv_obj_t *param_label = NULL;
+            if (!param_label) {
+                param_label = lv_label_create(lv_scr_act());
+                lv_obj_set_pos(param_label, 0, 0);
+            }
+            char buf[32];
+            const char *wave_names[] = {"Sine", "Triangle", "Saw", "Square", "Pulse"};
+            snprintf(buf, sizeof(buf), "P:%d W:%s", menu_params.frequency_pitch, wave_names[menu_params.waveform]);
+            lv_label_set_text(param_label, buf);
+        }
+
+        #ifdef CONFIG_ESPMENU_ENABLE_NVS
+        /**
+         * @brief Saves current parameters to Non-Volatile Storage (NVS).
+         */
+        void save_to_nvs(void) {
+            nvs_handle_t nvs;
+            esp_err_t err = nvs_open("project", NVS_READWRITE, &nvs);
+            if (err != ESP_OK) return;
+            nvs_commit(nvs);
+            nvs_close(nvs);
+        }
+
+        /**
+         * @brief Loads parameters from Non-Volatile Storage (NVS).
+         */
+        void load_from_nvs(void) {
+            nvs_handle_t nvs;
+            esp_err_t err = nvs_open("project", NVS_READONLY, &nvs);
+            if (err != ESP_OK) return;
+            nvs_close(nvs);
+            user_update_display();
+        }
+        #else
+        /**
+         * @brief Stub for saving to NVS when disabled.
+         */
+        void save_to_nvs(void) {}
+
+        /**
+         * @brief Stub for loading from NVS when disabled.
+         */
+        void load_from_nvs(void) {}
+        #endif
+
+        // Menu action callbacks
+        {% for callback in callbacks %}
+        /**
+         * @brief {{ callback }} action callback.
+         */
+        void {{ callback }}(void) {
+            // TODO: Implement {{ callback }} functionality
+        }
+        {% endfor %}
+        """
+        with open(user_actions_c_path, 'w') as f:
+            f.write(env.from_string(template).render(callbacks=callbacks))
+        print(f"Generated framework: {user_actions_c_path}")
+
+    # Generate user_graphic.h
+    user_graphic_h_path = os.path.join(user_menu_dir, 'user_graphic.h')
+    if not os.path.exists(user_graphic_h_path):
+        env = jinja2.Environment(loader=jinja2.BaseLoader())
+        template = """
+        /**
+         * @file user_graphic.h
+         * @brief Header file for user-defined LVGL graphics for the oscillator module.
+         */
+        #ifndef USER_GRAPHIC_H
+        #define USER_GRAPHIC_H
+        #include "lvgl.h"
+
+        /**
+         * @brief Initializes custom LVGL graphics for the project.
+         * @param parent The parent LVGL object for the graphics.
+         */
+        void user_graphic_init(lv_obj_t *parent);
+
+        #endif
+        """
+        with open(user_graphic_h_path, 'w') as f:
+            f.write(env.from_string(template).render())
+        print(f"Generated framework: {user_graphic_h_path}")
 
 
 def main():
+    """
+    Main function to generate menu framework and menu_data.h.
+
+    Args:
+        sys.argv[1] (str): Path to menu.json (in main/user_menu/).
+        sys.argv[2] (str): Path to output menu_data.h (in components/Esp_menu/generated/).
+    """
     if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <config_json> <output_header>")
+        print("Usage: generate_menu.py <json_path> <output_h_path>")
         sys.exit(1)
 
-    config_path = sys.argv[1]
-    output_header = sys.argv[2]
+    # Print debug information about paths
+    print(f"DEBUG: Script directory: {os.path.dirname(os.path.abspath(__file__))}")
+    print(f"DEBUG: Current working directory: {os.getcwd()}")
+    print(f"DEBUG: JSON path argument: {sys.argv[1]}")
+    
+    # Fix problematic path that starts with /main/
+    json_path = sys.argv[1]
+    if json_path.startswith('/main/'):
+        # This is a common error pattern - it should be relative to the project root
+        json_path = os.path.join(os.getcwd(), json_path.lstrip('/'))
+        print(f"DEBUG: Fixed path starting with /main/: {json_path}")
+    
+    # Ensure paths are absolute
+    json_path = os.path.abspath(json_path)
+    print(f"DEBUG: Resolved JSON path: {json_path}")
+    
+    output_h_path = os.path.abspath(sys.argv[2])
+    print(f"DEBUG: Output header path: {output_h_path}")
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    template_dir = os.path.join(script_dir, 'templates')
-    output_dir = os.path.join(script_dir, 'generated')
-
-    if not os.path.exists(template_dir):
-        print(f"Error: Template directory not found: {template_dir}")
-        sys.exit(1)
-
-    os.makedirs(output_dir, exist_ok=True)
-
-    config = load_and_validate_config(config_path)
-    print("DEBUG: Widgets in main screen:", [
-          w['type'] for w in config['menu']['screens'][0]['widgets']])
-    for widget in config['menu']['screens'][0]['widgets']:
-        print(
-            f"DEBUG: Widget details: type={widget['type']}, items={widget.get('items', None)}")
-
+    # Load and validate JSON
+    menu_data = load_json_file(json_path)
+    
+    # Create user_menu directory if needed
+    user_menu_dir = os.path.dirname(json_path)
+    print(f"DEBUG: User menu directory: {user_menu_dir}")
     try:
-        env = Environment(loader=FileSystemLoader(template_dir))
-        env.get_template('menu.c.j2')
-        env.get_template('menu.h.j2')
-    except Exception as e:
-        print(f"Error loading templates: {str(e)}")
+        os.makedirs(user_menu_dir, exist_ok=True)
+    except PermissionError:
+        print(f"WARNING: Permission denied when creating directory: {user_menu_dir}")
+        # Continue anyway as we'll use fallback data
+
+    # Generate user framework files if needed
+    try:
+        generate_user_framework(user_menu_dir, menu_data.get('screens', []))
+    except PermissionError:
+        print(f"WARNING: Permission denied when generating framework files in: {user_menu_dir}")
+    
+    # Generate menu_data.h
+    output_dir = os.path.dirname(output_h_path)
+    print(f"DEBUG: Creating output directory: {output_dir}")
+    try:
+        os.makedirs(output_dir, exist_ok=True)
+        generate_menu_data_h(output_h_path, menu_data.get('screens', []))
+        print(f"DEBUG: Successfully generated menu data header at: {output_h_path}")
+    except PermissionError:
+        print(f"ERROR: Permission denied when writing to: {output_h_path}")
         sys.exit(1)
-
-    graphics_code = generate_graphics_code(config.get('graphics', []))
-    action_prototypes = generate_action_prototypes(config['menu']['screens'])
-
-    header_template = env.get_template('menu.h.j2')
-    with open(output_header, 'w') as f:
-        f.write(header_template.render(
-            action_prototypes=action_prototypes
-        ))
-
-    source_template = env.get_template('menu.c.j2')
-    with open(os.path.join(output_dir, 'menu.c'), 'w') as f:
-        f.write(source_template.render(
-            config=config,
-            graphics_code=graphics_code
-        ))
-
-    print(
-        f"Generated {output_header} and {os.path.join(output_dir, 'menu.c')}")
 
 
 if __name__ == "__main__":

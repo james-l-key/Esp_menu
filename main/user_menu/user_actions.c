@@ -21,7 +21,7 @@
 MenuParams_t menu_params = {69, 0, OSC_WAVE_SINE, 65535, 32768, 0xFF, 0xFF, 0xFF};
 
 /** @brief Current favorite slot index (0–3). */
-static uint8_t current_slot = 0;
+uint8_t current_slot = 0;
 
 /** @brief LVGL label for displaying parameters. */
 static lv_obj_t *param_label = NULL;
