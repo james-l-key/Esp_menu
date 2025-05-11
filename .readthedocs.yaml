@@ -2,6 +2,6 @@ version: 2
 build:
   os: ubuntu-22.04
   commands:
-    - conda env create -f docs/.environment.yaml
+    - conda env create -f docs/environment.yaml
     - conda activate docs
     - sphinx-build -b html docs/ _build/html
