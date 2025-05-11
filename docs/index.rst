@@ -1,5 +1,5 @@
 Welcome to Esp_menu Documentation
-=================================
+================================
 
 Esp_menu is an ESP-IDF-based menu system for embedded devices.
 
@@ -8,7 +8,13 @@ Esp_menu is an ESP-IDF-based menu system for embedded devices.
 
    python
    json
-   doxygen/html/index
+
+Doxygen Documentation
+====================
+
+.. raw:: html
+
+   <a href="doxygen/html/index.html">C API Documentation</a>
 
 Code Generation
 ===============
