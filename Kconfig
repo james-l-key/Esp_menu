@@ -1,13 +1,18 @@
-menu "Esp_Menu Configuration"
+menu "ESP Menu Configuration"
+    config ESP_MENU_JSON_PATH
+        string "Path to menu JSON file"
+        default "assets/menu.json"
+        help
+            Path to the JSON file defining the menu structure, relative to the component directory.
 
     config ESPMENU_ENABLE
-        bool "Enable Esp_Menu"
+        bool "Enable ESP Menu"
         default y
         help
-            Enable Esp_Menu component
+            Enable ESP Menu component
 
     config ESPMENU_ENABLE_NVS
-        bool "Enable NVS support for Esp_menu"
+        bool "Enable NVS support for ESP Menu"
         default y
         help
             Enable NVS for saving menu parameters and favorite slots.

@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Esp_menu'
+project = 'esp_menu'
 copyright = '2025, James L. Key (james-l-key)'
 author = 'James L. Key (james-l-key)'
 release = '0.1.0'

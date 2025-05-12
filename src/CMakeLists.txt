@@ -1,59 +1,36 @@
-set(srcs
-    "Esp_menu.c"
-    "generated/menu.c"
-)
-set(requires
-    lvgl
-    esp_lvgl_port
-    espressif__knob
-    espressif__button
-)
-if(CONFIG_ESPMENU_ENABLE_NVS)
-    list(APPEND requires nvs_flash)
-endif()
-
-# Create the generated directory if it doesn't exist
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/generated")
-
-# Create an empty menu_data.h if it doesn't exist
-if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/generated/menu_data.h")
-    file(WRITE "${CMAKE_CURRENT_LIST_DIR}/generated/menu_data.h" "
-    // Auto-generated menu data
-    #ifndef MENU_DATA_H
-    #define MENU_DATA_H
-    void menu_init(void);
-    #endif
-    ")
-endif()
-
 idf_component_register(
-    SRCS "${srcs}"
-    INCLUDE_DIRS "." "include" "generated" "../../main" "../../main/user_menu"
-    REQUIRES "${requires}"
+    SRCS
+        "esp_menu.c"
+        "../generated/menu.c"
+        "../assets/user_actions.c"
+    INCLUDE_DIRS
+        "../include"
+        "../generated"
+        "../assets"
+    REQUIRES
+        driver
+        lvgl
+        button
+        esp_lvgl_port
 )
 
-# After component registration, run the setup script if Python is available
-find_program(PYTHON "python3")
-if(PYTHON)
-    # First run the original script to generate framework files
-    add_custom_target(menu_data_generation ALL
-        COMMAND ${PYTHON} ${CMAKE_CURRENT_SOURCE_DIR}/generate_menu.py 
-                ${PROJECT_SOURCE_DIR}/main/user_menu/menu.json
-                ${CMAKE_CURRENT_SOURCE_DIR}/generated/menu_data.h
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMENT "Generating menu data from JSON"
-        VERBATIM
-    )
-    
-    # Then run the new template-based menu generation script
-    add_custom_target(menu_template_generation ALL
-        COMMAND ${PYTHON} ${CMAKE_CURRENT_SOURCE_DIR}/generate_menu_from_templates.py
-                ${PROJECT_SOURCE_DIR}/main/user_menu/menu.json
-                ${CMAKE_CURRENT_SOURCE_DIR}/generated
-                ${CMAKE_CURRENT_SOURCE_DIR}/templates
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMENT "Generating menu files from templates"
-        VERBATIM
-        DEPENDS menu_data_generation
-    )
-endif()
+# Define paths
+set(JSON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../${CONFIG_ESP_MENU_JSON_PATH}")
+set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../generated")
+set(TEMPLATES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../assets/templates")
+set(GENERATED_C "${OUTPUT_DIR}/menu.c")
+set(GENERATED_H "${OUTPUT_DIR}/menu_data.h")
+set(PYTHON_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/generate_menu_from_templates.py")
+
+# Custom command to run Python script
+add_custom_command(
+    OUTPUT ${GENERATED_C} ${GENERATED_H}
+    COMMAND python3 ${PYTHON_SCRIPT} ${JSON_FILE} ${OUTPUT_DIR} ${TEMPLATES_DIR}
+    DEPENDS ${JSON_FILE} ${PYTHON_SCRIPT} ${TEMPLATES_DIR}/menu.c.j2 ${TEMPLATES_DIR}/menu.h.j2
+    COMMENT "Generating menu code from JSON"
+    VERBATIM
+)
+
+# Ensure generated files are built
+add_custom_target(generate_menu DEPENDS ${GENERATED_C} ${GENERATED_H})
+add_dependencies(${COMPONENT_LIB} generate_menu)

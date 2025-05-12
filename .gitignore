@@ -305,6 +305,10 @@ pyrightconfig.json
 
 
 managed_components
-ceedling_build
-build
-.vscode
+build/
+generated/*
+!generated/.gitkeep
+*.o
+*.bin
+sdkconfig*
+dependencies.lock

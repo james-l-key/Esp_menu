@@ -1,3 +1,5 @@
-idf_component_register(SRCS "main.c"
-                       INCLUDE_DIRS "."
-                       REQUIRES Esp_menu esp_lcd nvs_flash)
+idf_project(
+    EXECUTABLE_NAME basic_menu
+    SRCS "main/main.c"
+    COMPONENTS esp_menu
+)

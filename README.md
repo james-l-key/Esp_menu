@@ -55,7 +55,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
    idf.py menuconfig
    ```
 
-   Navigate to "Esp_Menu Configuration" to set your display and encoder settings.
+   Navigate to "ESP Menu Configuration" to set your display and encoder settings.
 
 ## Usage
 
@@ -64,7 +64,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
 1. Initialize the menu system in your main application:
 
    ```c
-   #include "Esp_menu.h"
+   #include "esp_menu.h"
 
    void app_main(void)
    {
@@ -79,61 +79,65 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
    }
    ```
 
-### Defining a Menu
+## Configuration
 
-Create a `menu.json` file in your project's `main/user_menu/` directory:
+- Edit `assets/menu.json` or set a custom path via `idf.py menuconfig`.
+- Example JSON:
 
-```json
-{
-    "display": {
-        "type": "ssd1306",
-        "width": 128,
-        "height": 64,
-        "interface": "i2c",
-        "i2c_address": "0x3C",
-        "sda_pin": 21,
-        "scl_pin": 22
-    },
-    "encoders": [
-        {
-            "name": "encoder1",
-            "pins": {
-                "A": 12,
-                "B": 13,
-                "switch": 14
-            },
-            "role": "navigate_main"
-        }
-    ],
-    "menu": {
-        "screens": [
-            {
-                "name": "main",
-                "widgets": [
-                    {
-                        "type": "list",
-                        "items": [
-                            {
-                                "text": "Option 1",
-                                "action": "option1_action"
-                            },
-                            {
-                                "text": "Settings",
-                                "screen": "settings"
-                            }
-                        ],
-                        "controlled_by": "encoder1"
-                    }
-                ]
-            },
-            {
-                "name": "settings",
-                "widgets": []
-            }
-        ]
-    }
-}
-```
+  ```json
+  {
+      "display": {
+          "width": 128,
+          "height": 64,
+          "sda_pin": 21,
+          "scl_pin": 22,
+          "i2c_address": "0x3C"
+      },
+      "encoders": [
+          {
+              "name": "encoder1",
+              "pins": {
+                  "A": 5,
+                  "B": 6,
+                  "switch": 7
+              }
+          }
+      ],
+      "menu": {
+          "screens": [
+              {
+                  "name": "main",
+                  "widgets": [
+                      {
+                          "type": "list",
+                          "controlled_by": "encoder1",
+                          "items": [
+                              {"id": 1, "text": "Option 1", "action": "action1"},
+                              {"id": 2, "text": "Option 2", "screen": "screen2"}
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "name": "screen2",
+                  "widgets": [
+                      {
+                          "type": "image",
+                          "graphic_id": "waveform",
+                          "x": 10,
+                          "y": 10
+                      }
+                  ]
+              }
+          ]
+      },
+      "graphics": [
+          {
+              "id": "waveform",
+              "type": "waveform"
+          }
+      ]
+  }'''
 
 ### Implementing Menu Actions
 

@@ -1,5 +1,5 @@
 /**
- * @file Esp_menu.h
+ * @file esp_menu.h
  * @brief Header file for the ESP Menu component, providing menu system initialization and NVS functions.
  */
 
