@@ -87,7 +87,6 @@ void menu_init(void) {
         printf("Failed to initialize encoder button\n");
         return;
     }
-    iot_button_new_gpio_device(&btn_cfg, &gpio_btn_cfg, &encoder1_btn);
 
     // Create encoder input device using updated API
     lvgl_port_encoder_cfg_t encoder_cfg = {
