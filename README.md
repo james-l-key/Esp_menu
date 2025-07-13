@@ -1,16 +1,16 @@
 # ESP Menu
 
-A customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input.
+A customizable menu system for ESP32 microcontrollers with OLED displays (SSD1306/SH1107) and rotary encoder input.
 
 ![ESP Menu System](https://via.placeholder.com/640x320.png?text=ESP+Menu+System)
 
 ## Overview
 
-ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use SSD1306 OLED displays and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
+ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use OLED displays (SSD1306/SH1107) and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
 
 ### Features
 
-- **SSD1306 OLED Display Support**: Built-in support for I2C-connected SSD1306 OLED displays
+- **OLED Display Support**: Built-in support for I2C-connected OLED displays (SSD1306/SH1107)
 - **Rotary Encoder Input**: Support for up to 4 rotary encoders with push buttons
 - **LVGL Integration**: High-quality graphics using the LVGL library
 - **JSON-based Menu Definition**: Define menus using simple JSON structures
@@ -21,7 +21,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
 ## Hardware Requirements
 
 - ESP32 microcontroller
-- SSD1306 OLED display (128x64 or 128x32)
+- OLED display (SSD1306 or SH1107, 128x64 or 128x32)
 - Rotary encoder(s) with push button
 - I2C connections for the display (default: SDA=21, SCL=22)
 - GPIO pins for rotary encoders (configurable)
@@ -55,7 +55,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
    idf.py menuconfig
    ```
 
-   Navigate to "Esp_Menu Configuration" to set your display and encoder settings.
+   Navigate to "ESP Menu Configuration" to set your display and encoder settings.
 
 ## Usage
 
@@ -64,7 +64,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
 1. Initialize the menu system in your main application:
 
    ```c
-   #include "Esp_menu.h"
+   #include "esp_menu.h"
 
    void app_main(void)
    {
@@ -79,61 +79,65 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
    }
    ```
 
-### Defining a Menu
+## Configuration
 
-Create a `menu.json` file in your project's `main/user_menu/` directory:
+- Edit `assets/menu.json` or set a custom path via `idf.py menuconfig`.
+- Example JSON:
 
-```json
-{
-    "display": {
-        "type": "ssd1306",
-        "width": 128,
-        "height": 64,
-        "interface": "i2c",
-        "i2c_address": "0x3C",
-        "sda_pin": 21,
-        "scl_pin": 22
-    },
-    "encoders": [
-        {
-            "name": "encoder1",
-            "pins": {
-                "A": 12,
-                "B": 13,
-                "switch": 14
-            },
-            "role": "navigate_main"
-        }
-    ],
-    "menu": {
-        "screens": [
-            {
-                "name": "main",
-                "widgets": [
-                    {
-                        "type": "list",
-                        "items": [
-                            {
-                                "text": "Option 1",
-                                "action": "option1_action"
-                            },
-                            {
-                                "text": "Settings",
-                                "screen": "settings"
-                            }
-                        ],
-                        "controlled_by": "encoder1"
-                    }
-                ]
-            },
-            {
-                "name": "settings",
-                "widgets": []
-            }
-        ]
-    }
-}
-```
+  ```json
+  {
+      "display": {
+          "width": 128,
+          "height": 64,
+          "sda_pin": 21,
+          "scl_pin": 22,
+          "i2c_address": "0x3C"
+      },
+      "encoders": [
+          {
+              "name": "encoder1",
+              "pins": {
+                  "A": 5,
+                  "B": 6,
+                  "switch": 7
+              }
+          }
+      ],
+      "menu": {
+          "screens": [
+              {
+                  "name": "main",
+                  "widgets": [
+                      {
+                          "type": "list",
+                          "controlled_by": "encoder1",
+                          "items": [
+                              {"id": 1, "text": "Option 1", "action": "action1"},
+                              {"id": 2, "text": "Option 2", "screen": "screen2"}
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "name": "screen2",
+                  "widgets": [
+                      {
+                          "type": "image",
+                          "graphic_id": "waveform",
+                          "x": 10,
+                          "y": 10
+                      }
+                  ]
+              }
+          ]
+      },
+      "graphics": [
+          {
+              "id": "waveform",
+              "type": "waveform"
+          }
+      ]
+  }'''
 
 ### Implementing Menu Actions
 
@@ -173,7 +177,7 @@ This will:
 
 The ESP Menu system is configurable through ESP-IDF's `menuconfig` system. Key options include:
 
-- Display type and resolution (SSD1306 in 64 or 32 pixel heights)
+- Display type and resolution (SSD1306/SH1107 in 64 or 32 pixel heights)
 - I2C addressing and pin configuration
 - Number of rotary encoders (1-4)
 - GPIO pin assignments for each encoder

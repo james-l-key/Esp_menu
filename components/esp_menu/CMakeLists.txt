@@ -14,12 +14,11 @@ set(requires
     "esp_lcd"
     "button"
     "knob"
+    "nvs_flash"
 )
 
 # Add NVS support if enabled
-if(CONFIG_ESPMENU_ENABLE_NVS)
-    list(APPEND requires "nvs_flash")
-endif()
+# (Now included directly in the requires list)
 
 idf_component_register(
     SRCS ${srcs}

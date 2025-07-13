@@ -1,0 +1,59 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/home/phi/esp/v5.4.2/esp-idf",
+    "idf.toolsPath": "/home/phi/.espressif",
+    "idf.pythonInstallPath": "/usr/bin/python",
+    "terminal.integrated.shell.linux": "bash",
+    "terminal.integrated.automationShell.linux": "bash",
+    "terminal.integrated.defaultProfile.linux": "esp-idf-bash",
+    "terminal.integrated.defaultProfile.osx": "esp-idf-bash",
+    "terminal.integrated.defaultProfile.windows": "esp-idf-bash",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "idf.customExtraVars": {
+        "IDF_TARGET": "esp32s3"
+    },
+    "idf.flashType": "UART",
+    "idf.port": "/dev/ttyACM0",
+    "terminal.integrated.profiles.linux": {
+        "esp-idf-bash": {
+            "path": "bash",
+            "args": [
+                "-c",
+                "unset IDF_PATH && source $HOME/esp/v5.4.2/esp-idf/export.sh && exec bash"
+            ],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.profiles.osx": {
+        "esp-idf-bash": {
+            "path": "bash",
+            "args": [
+                "-l",
+                "-c",
+                "unset IDF_PATH && source $HOME/esp/v5.4.2/esp-idf/export.sh && exec bash"
+            ],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.profiles.windows": {
+        "esp-idf-bash": {
+            "path": "${env:windir}\\System32\\bash.exe",
+            "args": [
+                "-c",
+                "source ~/esp/v5.4.2/esp-idf/export.sh && exec bash"
+            ],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.env.linux": {
+        "IDF_PATH": "/home/phi/esp/v5.4.2/esp-idf"
+    },
+    "terminal.integrated.env.osx": {
+        "IDF_PATH": "$HOME/esp/v5.4.2/esp-idf"
+    },
+    "terminal.integrated.env.windows": {
+        "IDF_PATH": "%USERPROFILE%\\esp\\v5.4.2\\esp-idf"
+    }
+}
