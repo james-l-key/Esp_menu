@@ -142,3 +142,7 @@ Update both:
 
 ### Runtime Errors
 - **"CONFLICT! driver_ng is not allowed to be used with this old driver"**: I2C driver conflict between old `driver/i2c.h` and new `esp_driver_i2c`. Component uses new driver, ensure dependencies don't pull in old driver
+- **ESP-IDF version mismatch**: If runtime shows different ESP-IDF version than expected, check shell profile exports vs VS Code settings
+
+### Runtime Errors
+- **"CONFLICT! driver_ng is not allowed to be used with this old driver"**: I2C driver conflict between old `driver/i2c.h` and new `esp_driver_i2c`. Component uses new driver, ensure dependencies don't pull in old driver
