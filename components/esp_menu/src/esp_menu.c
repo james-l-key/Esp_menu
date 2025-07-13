@@ -1,6 +1,6 @@
 /**
  * @file esp_menu.c
- * @brief Implementation of the ESP Menu component for initializing the menu system with SSD1306 display and rotary encoders.
+ * @brief Implementation of the ESP Menu component for initializing the menu system with OLED display and rotary encoders.
  */
 
 #include "esp_menu.h"
@@ -45,15 +45,8 @@
 /** @brief Handle for the LCD panel. */
 static esp_lcd_panel_handle_t lcd_handle = NULL;
 
-// Define NVS namespaces and keys
-#ifdef CONFIG_ESPMENU_ENABLE_NVS
-#define NVS_NAMESPACE "esp_menu"
-#define NVS_KEY_PARAMS "menu_params"
-#define NVS_KEY_SLOT "curr_slot"
-#endif
-
 /**
- * @brief Initializes the ESP Menu system, including I2C, SSD1306 display, rotary encoders, and LVGL.
+ * @brief Initializes the ESP Menu system, including I2C, OLED display, rotary encoders, and LVGL.
  * @return esp_err_t ESP_OK on success, or an error code on failure.
  */
 esp_err_t esp_menu_init(void)
@@ -74,18 +67,18 @@ esp_err_t esp_menu_init(void)
     ESP_ERROR_CHECK(ret);
     ESP_LOGI(TAG, "NVS initialized successfully");
 
-    // Load menu parameters from NVS
-    load_from_nvs();
+    // Initialize menu parameters
+    init_menu_params();
 #endif
 
-    // Initialize I2C master bus for SSD1306
+    // Initialize I2C master bus for OLED display
     i2c_master_bus_handle_t i2c_bus = NULL;
     i2c_master_bus_config_t bus_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
         .i2c_port = I2C_NUM_1,
-        .sda_io_num = CONFIG_ESPMENU_SSD1306_I2C_SDA,
-        .scl_io_num = CONFIG_ESPMENU_SSD1306_I2C_SCL,
+        .sda_io_num = CONFIG_ESPMENU_DISPLAY_I2C_SDA,
+        .scl_io_num = CONFIG_ESPMENU_DISPLAY_I2C_SCL,
         .flags.enable_internal_pullup = true,
     };
     BSP_ERROR_CHECK_RETURN_ERR(i2c_new_master_bus(&bus_config, &i2c_bus));
@@ -93,19 +86,28 @@ esp_err_t esp_menu_init(void)
     // Initialize LCD panel I/O
     esp_lcd_panel_io_handle_t io_handle = NULL;
     esp_lcd_panel_io_i2c_config_t io_config = {
-        .dev_addr = 0x3C,
+        .dev_addr = CONFIG_ESPMENU_DISPLAY_I2C_ADDRESS,
         .control_phase_bytes = 1,
         .lcd_cmd_bits = 8,
         .lcd_param_bits = 8,
         .dc_bit_offset = 6};
     BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_io_i2c((esp_lcd_i2c_bus_handle_t)i2c_bus, &io_config, &io_handle));
 
-    // Initialize SSD1306 panel
+    // Initialize OLED panel
     esp_lcd_panel_handle_t panel_handle = NULL;
     esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = -1,
         .bits_per_pixel = 1};
+    
+#ifdef CONFIG_ESPMENU_DISPLAY_SSD1306
     BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
+#elif defined(CONFIG_ESPMENU_DISPLAY_SH1107)
+    // Note: SH1107 support would require external component or custom implementation
+    ESP_LOGW(TAG, "SH1107 display not yet supported in ESP-IDF. Using SSD1306 compatibility mode.");
+    BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
+#else
+    #error "No display type selected in menuconfig"
+#endif
     BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_panel_reset(panel_handle));
     BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_panel_init(panel_handle));
     lcd_handle = panel_handle;
@@ -210,10 +212,10 @@ esp_err_t esp_menu_init(void)
     lvgl_port_display_cfg_t disp_cfg = {
         .io_handle = io_handle,
         .panel_handle = panel_handle,
-        .buffer_size = 128 * 64,
+        .buffer_size = 128 * CONFIG_ESPMENU_DISPLAY_HEIGHT,
         .double_buffer = true,
         .hres = 128,
-        .vres = 64,
+        .vres = CONFIG_ESPMENU_DISPLAY_HEIGHT,
         .monochrome = true,
         .rotation = {
             .swap_xy = false,
@@ -256,96 +258,3 @@ esp_err_t esp_menu_init(void)
     ESP_LOGI(TAG, "Menu system fully initialized");
     return ESP_OK;
 }
-
-#ifdef CONFIG_ESPMENU_ENABLE_NVS
-/**
- * @brief Saves menu parameters to Non-Volatile Storage (NVS).
- *
- * This function saves the current menu parameters and the current favorite slot
- * to NVS for persistence across reboots.
- */
-void save_to_nvs(void)
-{
-    ESP_LOGI(TAG, "Saving menu parameters to NVS");
-
-    nvs_handle_t nvs_handle;
-    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &nvs_handle);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Error opening NVS handle: %s", esp_err_to_name(err));
-        return;
-    }
-
-    // Save menu parameters as a blob
-    err = nvs_set_blob(nvs_handle, NVS_KEY_PARAMS, &menu_params, sizeof(MenuParams_t));
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Error saving parameters to NVS: %s", esp_err_to_name(err));
-    }
-
-    // Save current slot
-    err = nvs_set_u8(nvs_handle, NVS_KEY_SLOT, current_slot);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Error saving current slot to NVS: %s", esp_err_to_name(err));
-    }
-
-    // Commit changes
-    err = nvs_commit(nvs_handle);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Error committing NVS changes: %s", esp_err_to_name(err));
-    }
-    else
-    {
-        ESP_LOGI(TAG, "Menu parameters saved successfully to NVS");
-    }
-
-    nvs_close(nvs_handle);
-}
-
-/**
- * @brief Loads menu parameters from Non-Volatile Storage (NVS).
- *
- * This function loads saved menu parameters and the current favorite slot
- * from NVS if they exist.
- */
-void load_from_nvs(void)
-{
-    ESP_LOGI(TAG, "Loading menu parameters from NVS");
-
-    nvs_handle_t nvs_handle;
-    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &nvs_handle);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI(TAG, "NVS namespace not found, using default parameters");
-        return;
-    }
-
-    // Load menu parameters
-    size_t required_size = sizeof(MenuParams_t);
-    err = nvs_get_blob(nvs_handle, NVS_KEY_PARAMS, &menu_params, &required_size);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI(TAG, "No saved parameters found in NVS, using defaults");
-    }
-    else
-    {
-        ESP_LOGI(TAG, "Menu parameters loaded successfully from NVS");
-    }
-
-    // Load current slot
-    err = nvs_get_u8(nvs_handle, NVS_KEY_SLOT, &current_slot);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI(TAG, "No saved slot found in NVS, using default slot 0");
-        current_slot = 0;
-    }
-    else
-    {
-        ESP_LOGI(TAG, "Current slot loaded successfully from NVS: %d", current_slot);
-    }
-
-    nvs_close(nvs_handle);
-}
-#endif

@@ -312,3 +312,5 @@ generated/*
 *.bin
 sdkconfig*
 dependencies.lock
+
+sdkconfig.old

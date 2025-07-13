@@ -12,6 +12,7 @@
 #include "esp_err.h"
 #include "esp_menu.h"
 #include "menu_data.h" // Contains prototypes for menu actions
+#include "user_actions.h" // Contains prototypes for user actions
 #include "sdkconfig.h"
 
 /** @brief Logging tag for main application */
@@ -49,7 +50,7 @@ void app_main(void)
 
 #ifdef CONFIG_ESPMENU_ENABLE_NVS
         // Optional: Save menu state periodically
-        save_to_nvs();
+        user_save_params_to_nvs();
 #endif
     }
 }

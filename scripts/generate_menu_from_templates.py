@@ -16,15 +16,6 @@ logger = logging.getLogger(__name__)
 
 
 def load_json_file(json_path):
-    """
-    Load and parse the JSON configuration file.
-
-    Args:
-        json_path (str): Path to the JSON configuration file
-
-    Returns:
-        dict: The parsed JSON data
-    """
     logger.debug(f"Loading JSON from: {json_path}")
     abs_path = os.path.abspath(json_path)
     try:
@@ -44,9 +35,6 @@ def load_json_file(json_path):
 
 
 def adapt_json_structure(config):
-    """
-    Adapts the JSON structure to match what the template expects.
-    """
     result = config.copy()
 
     if 'display' not in result:
@@ -90,13 +78,14 @@ def adapt_json_structure(config):
             "Invalid or missing screens. Creating empty screens list.")
         result['menu']['screens'] = []
 
+    if 'graphics' not in result:
+        logger.info("No graphics defined. Creating empty graphics list.")
+        result['graphics'] = []
+
     return result
 
 
 def render_template(template_path, output_path, context):
-    """
-    Render a Jinja2 template and write to a file.
-    """
     try:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         template_dir = os.path.dirname(template_path)
@@ -117,25 +106,19 @@ def render_template(template_path, output_path, context):
 
 
 def process_graphics_code(config):
-    """
-    Process graphics from the configuration.
-    """
     graphics_code = []
     if 'graphics' in config:
         for graphic in config['graphics']:
-            if graphic['type'] == 'waveform':
+            if graphic.get('type') == 'image':
                 code = f"""
-// Waveform graphic: {graphic['id']}
-LV_IMG_DECLARE(waveform_icon_dsc);
+// Image graphic: {graphic['id']}
+LV_IMG_DECLARE({graphic['id']}_dsc);
 """
                 graphics_code.append(code)
     return graphics_code
 
 
 def extract_action_prototypes(config):
-    """
-    Extract action function prototypes.
-    """
     actions = set()
     if 'menu' in config and 'screens' in config['menu']:
         for screen in config['menu']['screens']:
@@ -151,14 +134,6 @@ def extract_action_prototypes(config):
 
 
 def main():
-    """
-    Main function to generate menu files.
-
-    Args:
-        sys.argv[1]: JSON configuration file path (e.g., assets/menu.json)
-        sys.argv[2]: Output directory (e.g., generated/)
-        sys.argv[3]: Templates directory (e.g., assets/templates/)
-    """
     if len(sys.argv) != 4:
         logger.error(
             "Usage: generate_menu_from_templates.py <json_config_path> <output_dir> <templates_dir>")

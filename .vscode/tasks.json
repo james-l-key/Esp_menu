@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Example",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}/examples/basic_menu"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Clean Example",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "Monitor Example",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py monitor",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash Example",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py flash",
+            "problemMatcher": []
+        },
+        {
+            "label": "Menuconfig",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py menuconfig",
+            "problemMatcher": []
+        }
+    ]
+}

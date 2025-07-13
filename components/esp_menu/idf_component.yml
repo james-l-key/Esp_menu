@@ -1,6 +1,6 @@
 ## IDF Component Manager Manifest File
 version: "1.0.0"
-description: "ESP Menu System Component for ESP32 with OLED display (SSD1306/SH1107) and rotary encoder input"
+description: "ESP Menu System Component for ESP32 with SSD1306 OLED display and rotary encoder input"
 url: "https://github.com/your-username/esp_menu"
 documentation: "https://github.com/your-username/esp_menu/blob/main/README.md"
 

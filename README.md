@@ -1,16 +1,16 @@
 # ESP Menu
 
-A customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input.
+A customizable menu system for ESP32 microcontrollers with OLED displays (SSD1306/SH1107) and rotary encoder input.
 
 ![ESP Menu System](https://via.placeholder.com/640x320.png?text=ESP+Menu+System)
 
 ## Overview
 
-ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use SSD1306 OLED displays and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
+ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use OLED displays (SSD1306/SH1107) and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
 
 ### Features
 
-- **SSD1306 OLED Display Support**: Built-in support for I2C-connected SSD1306 OLED displays
+- **OLED Display Support**: Built-in support for I2C-connected OLED displays (SSD1306/SH1107)
 - **Rotary Encoder Input**: Support for up to 4 rotary encoders with push buttons
 - **LVGL Integration**: High-quality graphics using the LVGL library
 - **JSON-based Menu Definition**: Define menus using simple JSON structures
@@ -21,7 +21,7 @@ ESP Menu is a flexible and extensible menu creation framework for ESP32-based pr
 ## Hardware Requirements
 
 - ESP32 microcontroller
-- SSD1306 OLED display (128x64 or 128x32)
+- OLED display (SSD1306 or SH1107, 128x64 or 128x32)
 - Rotary encoder(s) with push button
 - I2C connections for the display (default: SDA=21, SCL=22)
 - GPIO pins for rotary encoders (configurable)
@@ -177,7 +177,7 @@ This will:
 
 The ESP Menu system is configurable through ESP-IDF's `menuconfig` system. Key options include:
 
-- Display type and resolution (SSD1306 in 64 or 32 pixel heights)
+- Display type and resolution (SSD1306/SH1107 in 64 or 32 pixel heights)
 - I2C addressing and pin configuration
 - Number of rotary encoders (1-4)
 - GPIO pin assignments for each encoder
