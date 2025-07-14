@@ -89,23 +89,21 @@ esp_err_t esp_menu_init(void)
             .control_phase_bytes = 1,
             .lcd_cmd_bits = 8,
             .lcd_param_bits = 8,
-            .dc_bit_offset = 6
-        };
+            .dc_bit_offset = 6};
         BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_io_i2c((esp_lcd_i2c_bus_handle_t)i2c_bus, &io_config, &io_handle));
 
         // Initialize OLED panel
         esp_lcd_panel_handle_t panel_handle = NULL;
         esp_lcd_panel_dev_config_t panel_config = {
             .reset_gpio_num = -1,
-            .bits_per_pixel = 1
-        };
+            .bits_per_pixel = 1};
 
 #ifdef CONFIG_ESPMENU_DISPLAY_SSD1306
         BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
 #elif defined(CONFIG_ESPMENU_DISPLAY_SH1107)
-        // Note: SH1107 support would require external component or custom implementation
-        ESP_LOGW(TAG, "SH1107 display not yet supported in ESP-IDF. Using SSD1306 compatibility mode.");
-        BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
+    // Note: SH1107 support would require external component or custom implementation
+    ESP_LOGW(TAG, "SH1107 display not yet supported in ESP-IDF. Using SSD1306 compatibility mode.");
+    BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_new_panel_ssd1306(io_handle, &panel_config, &panel_handle));
 #else
 #error "No display type selected in menuconfig"
 #endif
@@ -118,22 +116,21 @@ esp_err_t esp_menu_init(void)
             .intr_type = GPIO_INTR_ANYEDGE,
             .mode = GPIO_MODE_INPUT,
             .pin_bit_mask =
-            (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_A) |
-            (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_B) |
-            (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_BUTTON)
+                (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_A) |
+                (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_B) |
+                (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_1_BUTTON)
 #ifdef CONFIG_ESPMENU_ROTARY_ENCODER_CNT_2
-            | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_BUTTON)
+                | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_2_BUTTON)
 #endif
 #ifdef CONFIG_ESPMENU_ROTARY_ENCODER_CNT_3
-            | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_BUTTON)
+                | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_3_BUTTON)
 #endif
 #ifdef CONFIG_ESPMENU_ROTARY_ENCODER_CNT_4
-            | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_BUTTON)
+                | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_A) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_B) | (1ULL << CONFIG_ESPMENU_ROTARY_ENCODER_4_BUTTON)
 #endif
-            ,
+                ,
             .pull_down_en = GPIO_PULLDOWN_DISABLE,
-            .pull_up_en = GPIO_PULLUP_ENABLE
-        };
+            .pull_up_en = GPIO_PULLUP_ENABLE};
         BSP_ERROR_CHECK_RETURN_ERR(gpio_config(&io_conf));
 
         // Initialize rotary encoders and buttons
@@ -144,11 +141,11 @@ esp_err_t esp_menu_init(void)
 #if defined(CONFIG_ESPMENU_ROTARY_ENCODER_CNT_4)
         const int encoder_count = 4;
 #elif defined(CONFIG_ESPMENU_ROTARY_ENCODER_CNT_3)
-        const int encoder_count = 3;
+    const int encoder_count = 3;
 #elif defined(CONFIG_ESPMENU_ROTARY_ENCODER_CNT_2)
-        const int encoder_count = 2;
+    const int encoder_count = 2;
 #else
-        const int encoder_count = 1;
+    const int encoder_count = 1;
 #endif
 
         // Define available encoder pins
@@ -207,8 +204,7 @@ esp_err_t esp_menu_init(void)
             .task_stack = 4096,
             .task_affinity = -1,
             .task_max_sleep_ms = 500,
-            .timer_period_ms = 5
-        };
+            .timer_period_ms = 5};
         BSP_ERROR_CHECK_RETURN_ERR(lvgl_port_init(&lvgl_cfg));
 
         // Add display to LVGL
@@ -223,9 +219,7 @@ esp_err_t esp_menu_init(void)
             .rotation = {
                 .swap_xy = false,
                 .mirror_x = false,
-                .mirror_y = false
-            }
-        };
+                .mirror_y = false}};
         lv_disp_t *disp = lvgl_port_add_disp(&disp_cfg);
         if (!disp)
         {
@@ -240,8 +234,7 @@ esp_err_t esp_menu_init(void)
             lvgl_port_encoder_cfg_t encoder_cfg = {
                 .disp = disp,
                 .encoder_a_b = encoder_knob_handles[i],
-                .encoder_enter = encoder_btn_handles[i]
-            };
+                .encoder_enter = encoder_btn_handles[i]};
             lv_indev_t *indev = lvgl_port_add_encoder(&encoder_cfg);
             if (!indev)
             {
@@ -255,6 +248,16 @@ esp_err_t esp_menu_init(void)
             // Don't call lv_obj_set_user_data on the indev directly as it's not an lv_obj_t
             // Store the name in the driver data instead if needed
             lv_indev_set_user_data(indev, (void *)encoder_names[i]);
+        }
+
+        // Initialize menu widgets
+        ESP_LOGI(TAG, "Initializing LVGL menu widgets");
+        menu_init();
+
+        ESP_LOGI(TAG, "Menu system fully initialized");
+        return ESP_OK;
+    }
+}
         }
 
         // Initialize menu widgets
