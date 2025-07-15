@@ -4,13 +4,16 @@
         {
             "label": "Build Example",
             "type": "shell",
-            "command": "${workspaceFolder}/build_clang.fish",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && source /home/phi/esp/v5.4.2/esp-idf/export.fish && idf.py build",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}"
+                "shell": {
+                    "executable": "fish",
+                    "args": ["-c"]
+                }
             },
             "problemMatcher": {
                 "owner": "cpp",
