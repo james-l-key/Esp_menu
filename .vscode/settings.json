@@ -1,65 +1,67 @@
 {
-  "C_Cpp.intelliSenseEngine": "default",
-  "idf.espIdfPath": "/home/phi/esp/v5.4.2/esp-idf",
-  "idf.toolsPath": "/home/phi/.espressif",
-  "idf.pythonInstallPath": "/usr/bin/python",
-  "terminal.integrated.shell.linux": "fish",
-  "terminal.integrated.automationShell.linux": "fish",
-  "terminal.integrated.defaultProfile.linux": "esp-idf-fish",
-  "terminal.integrated.defaultProfile.osx": "esp-idf-fish",
-  "terminal.integrated.defaultProfile.windows": "esp-idf-bash",
-  "idf.openOcdConfigs": [
-    "board/esp32s3-builtin.cfg"
-  ],
-  "idf.customExtraVars": {
-    "IDF_TARGET": "esp32s3"
-  },
-  "idf.flashType": "UART",
-  "idf.port": "/dev/ttyACM0",
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/home/phi/esp/v5.4.2/esp-idf",
+    "idf.toolsPath": "/home/phi/.espressif",
+    "idf.pythonInstallPath": "/usr/bin/python",
+    "terminal.integrated.shell.linux": "fish",
+    "terminal.integrated.automationShell.linux": "fish",
+    "terminal.integrated.defaultProfile.linux": "esp-idf-fish",
+    "terminal.integrated.defaultProfile.osx": "esp-idf-fish",
+    "terminal.integrated.defaultProfile.windows": "esp-idf-bash",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "idf.customExtraVars": {
+        "IDF_TARGET": "esp32s3"
+    },
+    "idf.flashType": "UART",
+    "idf.port": "/dev/ttyACM0",
   "terminal.integrated.profiles.linux": {
     "esp-idf-fish": {
       "path": "fish",
       "args": [
         "-c",
-        "set -e IDF_PATH; and source $HOME/esp/v5.4.2/esp-idf/export.fish; and exec fish"
+        "set -e IDF_PATH; and source $HOME/esp/v5.4.2/esp-idf/export.fish; and set -x CC /home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang; and set -x CXX /home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang++; and exec fish"
       ],
       "icon": "terminal"
     }
   },
-  "terminal.integrated.profiles.osx": {
-    "esp-idf-fish": {
-      "path": "fish",
-      "args": [
-        "-l",
-        "-c",
-        "set -e IDF_PATH; and source $HOME/esp/v5.4.2/esp-idf/export.fish; and exec fish"
-      ],
-      "icon": "terminal"
-    }
-  },
-  "terminal.integrated.profiles.windows": {
-    "esp-idf-bash": {
-      "path": "${env:windir}\\System32\\bash.exe",
-      "args": [
-        "-c",
-        "source ~/esp/v5.4.2/esp-idf/export.sh && exec bash"
-      ],
-      "icon": "terminal-bash"
-    }
-  },
-  "terminal.integrated.env.linux": {
-    "IDF_PATH": "/home/phi/esp/v5.4.2/esp-idf"
-  },
-  "terminal.integrated.env.osx": {
-    "IDF_PATH": "$HOME/esp/v5.4.2/esp-idf"
-  },
-  "terminal.integrated.env.windows": {
-    "IDF_PATH": "%USERPROFILE%\\esp\\v5.4.2\\esp-idf"
-  },
-  "clangd.path": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clangd",
-  "clangd.arguments": [
-    "--background-index",
-    "--query-driver=/home/phi/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc",
-    "--compile-commands-dir=/home/phi/Programming/GitHub/Esp_menu/build"
-  ]
+    "terminal.integrated.profiles.osx": {
+        "esp-idf-fish": {
+            "path": "fish",
+            "args": [
+                "-l",
+                "-c",
+                "set -e IDF_PATH; and source $HOME/esp/v5.4.2/esp-idf/export.fish; and exec fish"
+            ],
+            "icon": "terminal"
+        }
+    },
+    "terminal.integrated.profiles.windows": {
+        "esp-idf-bash": {
+            "path": "${env:windir}\\System32\\bash.exe",
+            "args": [
+                "-c",
+                "source ~/esp/v5.4.2/esp-idf/export.sh && exec bash"
+            ],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.env.linux": {
+        "IDF_PATH": "/home/phi/esp/v5.4.2/esp-idf"
+    },
+    "terminal.integrated.env.osx": {
+        "IDF_PATH": "$HOME/esp/v5.4.2/esp-idf"
+    },
+    "terminal.integrated.env.windows": {
+        "IDF_PATH": "%USERPROFILE%\\esp\\v5.4.2\\esp-idf"
+    },
+    "clangd.path": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clangd",
+    "clangd.arguments": [
+        "--background-index",
+        "--query-driver=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang",
+        "--compile-commands-dir=/home/phi/Programming/GitHub/Esp_menu/examples/basic_menu/build"
+    ],
+    "C_Cpp.default.compilerPath": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/examples/basic_menu/build/compile_commands.json"
 }

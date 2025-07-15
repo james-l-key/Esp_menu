@@ -4,14 +4,48 @@
         {
             "label": "Build Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py build",
+            "command": "${workspaceFolder}/build_clang.fish",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": {
                 "owner": "cpp",
-                "fileLocation": ["relative", "${workspaceFolder}/examples/basic_menu"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/examples/basic_menu"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Build Example (Clang with relaxed warnings)",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/examples/basic_menu && export IDF_TOOLCHAIN=clang && export CC=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang && export CXX=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang++ && export EXTRA_CFLAGS=\"-Wno-logical-not-parentheses\" && idf.py build",
+            "options": {
+                "shell": {
+                    "executable": "fish",
+                    "args": [
+                        "-c"
+                    ]
+                }
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/examples/basic_menu"
+                ],
                 "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
                     "file": 1,
@@ -25,7 +59,10 @@
         {
             "label": "Clean Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py clean",
+            "command": "${workspaceFolder}/clean.fish",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         },
         {
@@ -45,6 +82,29 @@
             "type": "shell",
             "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py menuconfig",
             "problemMatcher": []
+        },
+        {
+            "label": "Build Example (Direct)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build_direct.fish",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/examples/basic_menu"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
         }
     ]
 }
