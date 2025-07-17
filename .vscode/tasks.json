@@ -4,16 +4,14 @@
         {
             "label": "Build Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && source /home/phi/esp/v5.4.2/esp-idf/export.fish && idf.py build -DCMAKE_C_FLAGS='-Wno-logical-not-parentheses' -DCMAKE_CXX_FLAGS='-Wno-logical-not-parentheses'",
+            "command": "bash",
+            "args": [
+                "-c",
+                "cd ${workspaceFolder}/examples/basic_menu && source /home/phi/esp/v5.4.2/esp-idf/export.sh && idf.py build -DCMAKE_C_FLAGS='-Wno-logical-not-parentheses' -DCMAKE_CXX_FLAGS='-Wno-logical-not-parentheses'"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "options": {
-                "shell": {
-                    "executable": "fish",
-                    "args": ["-c"]
-                }
             },
             "problemMatcher": {
                 "owner": "cpp",
