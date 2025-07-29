@@ -14,18 +14,18 @@
     "idf.customExtraVars": {
         "IDF_TARGET": "esp32s3"
     },
-    "idf.flashType": "UART",
+    "idf.flashType": "JTAG",
     "idf.port": "/dev/ttyACM0",
-  "terminal.integrated.profiles.linux": {
-    "esp-idf-fish": {
-      "path": "fish",
-      "args": [
-        "-c",
-        "set -e IDF_PATH; and source $HOME/esp/v5.4.2/esp-idf/export.fish; and exec fish"
-      ],
-      "icon": "terminal"
-    }
-  },
+    "terminal.integrated.profiles.linux": {
+        "esp-idf-fish": {
+            "path": "fish",
+            "args": [
+                "-c",
+                "set -e IDF_PATH; and exec fish"
+            ],
+            "icon": "terminal"
+        }
+    },
     "terminal.integrated.profiles.osx": {
         "esp-idf-fish": {
             "path": "fish",
@@ -63,5 +63,6 @@
         "--compile-commands-dir=/home/phi/Programming/GitHub/Esp_menu/examples/basic_menu/build"
     ],
     "C_Cpp.default.compilerPath": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang",
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/examples/basic_menu/build/compile_commands.json"
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/examples/basic_menu/build/compile_commands.json",
+    "taskviewer.showLaunches": true
 }

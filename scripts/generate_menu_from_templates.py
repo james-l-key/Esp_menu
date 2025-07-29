@@ -51,12 +51,7 @@ def adapt_json_structure(config):
         logger.info("Adding default encoder configuration")
         result['encoders'] = [
             {
-                'name': 'encoder1',
-                'pins': {
-                    'A': 5,
-                    'B': 6,
-                    'switch': 7
-                }
+                'name': 'encoder1'
             }
         ]
 
@@ -92,16 +87,26 @@ def render_template(template_path, output_path, context):
         template_file = os.path.basename(template_path)
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir))
         template = env.get_template(template_file)
+
+        # Debug context variables
+        logger.debug(f"Context keys: {list(context.keys())}")
+        for key, value in context.items():
+            logger.debug(f"Context[{key}]: type={type(value)}, value={value}")
+
         output = template.render(**context)
         with open(output_path, 'w') as f:
             f.write(output)
         logger.info(f"Rendered {template_path} to {output_path}")
         return True
     except jinja2.exceptions.TemplateError as e:
-        logger.error(f"Template error: {e}")
+        logger.error(f"Jinja2 Template error: {e}")
+        logger.error(
+            f"Template line info: {e.lineno if hasattr(e, 'lineno') else 'unknown'}")
         return False
     except Exception as e:
         logger.error(f"Error rendering template: {e}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
         return False
 
 
@@ -151,6 +156,10 @@ def main():
     config = adapt_json_structure(config)
     graphics_code = process_graphics_code(config)
     action_prototypes = extract_action_prototypes(config)
+
+    logger.debug(f"Graphics code type: {type(graphics_code)}")
+    logger.debug(f"Graphics code content: {graphics_code}")
+    logger.debug(f"Action prototypes type: {type(action_prototypes)}")
 
     context = {
         'config': config,

@@ -2,7 +2,7 @@
 # ESP Menu GCC Build Script
 
 # Source ESP-IDF environment directly (non-interactive)
-source /home/phi/esp/v5.4.2/esp-idf/export.fish
+# source /home/phi/esp/v5.4.2/esp-idf/export.fish
 
 echo "Setting up GCC environment..."
 # Use default GCC toolchain (remove any Clang settings)

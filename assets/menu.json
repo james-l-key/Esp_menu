@@ -123,21 +123,10 @@
             }
         ]
     },
-    "display": {
-        "width": 128,
-        "height": 64,
-        "sda_pin": 21,
-        "scl_pin": 22,
-        "i2c_address": "0x3C"
-    },
+    "display": {},
     "encoders": [
         {
-            "name": "encoder1",
-            "pins": {
-                "A": 5,
-                "B": 6,
-                "switch": 7
-            }
+            "name": "encoder1"
         }
     ],
     "graphics": [

@@ -247,3 +247,100 @@ void set_option(uint8_t option_index)
     menu_params.option = option_index;
     // Implement any action needed when this option changes
 }
+
+// Menu callback functions
+void pitch_up(void)
+{
+    ESP_LOGI(TAG, "Pitch Up action triggered");
+    // Implement pitch up functionality here
+}
+
+void pitch_down(void)
+{
+    ESP_LOGI(TAG, "Pitch Down action triggered");
+    // Implement pitch down functionality here
+}
+
+void waveform_next(void)
+{
+    ESP_LOGI(TAG, "Waveform Next action triggered");
+    // Implement waveform next functionality here
+}
+
+void waveform_prev(void)
+{
+    ESP_LOGI(TAG, "Waveform Previous action triggered");
+    // Implement waveform previous functionality here
+}
+
+void level_up(void)
+{
+    ESP_LOGI(TAG, "Level Up action triggered");
+    // Implement level up functionality here
+}
+
+void level_down(void)
+{
+    ESP_LOGI(TAG, "Level Down action triggered");
+    // Implement level down functionality here
+}
+
+void fine_tune_up(void)
+{
+    ESP_LOGI(TAG, "Fine Tune Up action triggered");
+    // Implement fine tune up functionality here
+}
+
+void fine_tune_down(void)
+{
+    ESP_LOGI(TAG, "Fine Tune Down action triggered");
+    // Implement fine tune down functionality here
+}
+
+void pulse_width_up(void)
+{
+    ESP_LOGI(TAG, "Pulse Width Up action triggered");
+    // Implement pulse width up functionality here
+}
+
+void pulse_width_down(void)
+{
+    ESP_LOGI(TAG, "Pulse Width Down action triggered");
+    // Implement pulse width down functionality here
+}
+
+void amp_mod_slot_next(void)
+{
+    ESP_LOGI(TAG, "Amp Mod Slot Next action triggered");
+    // Implement amp mod slot next functionality here
+}
+
+void amp_mod_slot_prev(void)
+{
+    ESP_LOGI(TAG, "Amp Mod Slot Previous action triggered");
+    // Implement amp mod slot previous functionality here
+}
+
+void select_next(void)
+{
+    ESP_LOGI(TAG, "Select Next action triggered");
+    // Implement select next functionality here
+}
+
+void select_prev(void)
+{
+    ESP_LOGI(TAG, "Select Previous action triggered");
+    // Implement select previous functionality here
+}
+
+void save_favorite(void)
+{
+    ESP_LOGI(TAG, "Save Favorite action triggered");
+    // Implement save favorite functionality here
+}
+
+void load_favorite(void)
+{
+    ESP_LOGI(TAG, "Load Favorite action triggered");
+    // Implement load favorite functionality here
+}

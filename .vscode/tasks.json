@@ -4,11 +4,10 @@
         {
             "label": "Build Example",
             "type": "shell",
-            "command": "bash",
-            "args": [
-                "-c",
-                "cd ${workspaceFolder}/examples/basic_menu && source /home/phi/esp/v5.4.2/esp-idf/export.sh && idf.py build -DCMAKE_C_FLAGS='-Wno-logical-not-parentheses' -DCMAKE_CXX_FLAGS='-Wno-logical-not-parentheses'"
-            ],
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py build'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -30,37 +29,18 @@
             }
         },
         {
-            "label": "Build Example (Clang with relaxed warnings)",
-            "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && export IDF_TOOLCHAIN=clang && export CC=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang && export CXX=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang++ && export EXTRA_CFLAGS=\"-Wno-logical-not-parentheses\" && idf.py build",
-            "options": {
-                "shell": {
-                    "executable": "fish",
-                    "args": [
-                        "-c"
-                    ]
-                }
-            },
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}/examples/basic_menu"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
-        },
-        {
             "label": "Clean Example",
             "type": "shell",
-            "command": "${workspaceFolder}/clean.fish",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py clean'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash Example",
+            "type": "shell",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py flash'",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -69,43 +49,29 @@
         {
             "label": "Monitor Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py monitor",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py monitor'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         },
         {
-            "label": "Flash Example",
+            "label": "Flash and Monitor",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py flash",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py flash monitor'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         },
         {
             "label": "Menuconfig",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py menuconfig",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build Example (Direct)",
-            "type": "shell",
-            "command": "${workspaceFolder}/build_direct.fish",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py menuconfig'",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}/examples/basic_menu"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
+            "problemMatcher": []
         }
     ]
 }
