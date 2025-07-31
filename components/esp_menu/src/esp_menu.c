@@ -1,10 +1,53 @@
+// Copyright 2025 james-l-key
+#include "esp_menu.h"
+#include "button_gpio.h"
+#include "button_types.h"
+#include "driver/gpio.h"
+#include "driver/i2c_master.h"
+#include "esp_err.h"
+#include "esp_lcd_panel_io.h"
+#include "esp_lcd_panel_ops.h"
+#include "esp_log.h"
+#include "esp_lvgl_port.h"
+#include "iot_button.h"
+#include "iot_knob.h"
+#include "menu_data.h"
+#include "sdkconfig.h"
+#include <stdint.h>
+#ifdef CONFIG_ESPMENU_ENABLE_NVS
+#include "nvs.h"
+#include "nvs_flash.h"
+#include "user_actions.h"
+#endif
+
+/** @brief Logging tag for ESP Menu component. */
+#define TAG "Esp_menu"
+
+// Event logging for encoder button presses (C-style callbacks)
+static void encoder_button_press_down_cb(void *btn, void *usr_data) {
+  ESP_LOGI(TAG, "Encoder button %d pressed", (int)(intptr_t)usr_data);
+}
+
+static void encoder_button_press_up_cb(void *btn, void *usr_data) {
+  ESP_LOGI(TAG, "Encoder button %d released", (int)(intptr_t)usr_data);
+}
+
+// Debug callbacks for rotary encoder rotation
+static void encoder_clockwise_cb(void *knob, void *usr_data) {
+  int idx = (int)(intptr_t)usr_data;
+  ESP_LOGI(TAG, "Encoder %d rotated CLOCKWISE", idx);
+}
+
+static void encoder_anticlockwise_cb(void *knob, void *usr_data) {
+  int idx = (int)(intptr_t)usr_data;
+  ESP_LOGI(TAG, "Encoder %d rotated ANTICLOCKWISE", idx);
+}
 /**
  * @file esp_menu.c
  * @brief Implementation of the ESP Menu component for initializing the menu
  * system with OLED display and rotary encoders.
  */
 
-#include "esp_menu.h"
 #include "button_gpio.h"
 #include "button_types.h"
 #include "driver/gpio.h"
@@ -15,6 +58,7 @@
 #include "esp_lcd_panel_vendor.h"
 #include "esp_log.h"
 #include "esp_lvgl_port.h"
+#include "esp_menu.h"
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -134,6 +178,19 @@ esp_err_t esp_menu_init(void) {
   BSP_ERROR_CHECK_RETURN_ERR(esp_lcd_panel_disp_on_off(panel_handle, true));
   ESP_LOGI(TAG, "Display turned on");
 
+  // Set display contrast to maximum (for SSD1306)
+#if defined(CONFIG_ESPMENU_DISPLAY_SSD1306)
+  // Set contrast to max (0xFF) using the public panel I/O API
+  uint8_t contrast_value = 0xFF;
+  esp_err_t err =
+      esp_lcd_panel_io_tx_param(io_handle, 0x81, &contrast_value, 1);
+  if (err != ESP_OK) {
+    ESP_LOGW(TAG, "Failed to set contrast: %s", esp_err_to_name(err));
+  } else {
+    ESP_LOGI(TAG, "Display contrast set to maximum");
+  }
+#endif
+
   lcd_handle = panel_handle;
 
   ESP_LOGI(TAG, "Display size: %dx%d", 128, CONFIG_ESPMENU_DISPLAY_HEIGHT);
@@ -229,30 +286,70 @@ esp_err_t esp_menu_init(void) {
     return ESP_FAIL;
   }
 
-  // Add encoders to LVGL
+  // Focus the screen object once
+  lv_group_focus_obj(lv_scr_act());
+
+  // Array to store knob handles for each encoder
+  knob_handle_t knob_handles[4] = {NULL};
+
   for (int i = 0; i < encoder_count; i++) {
-    ESP_LOGI(TAG, "Adding encoder %d to LVGL (A:%d B:%d)", i,
-             encoder_pins[i][0], encoder_pins[i][1]);
+    ESP_LOGI(TAG, "Creating knob %d (A:%d B:%d)", i, encoder_pins[i][0],
+             encoder_pins[i][1]);
 
     knob_config_t knob_cfg = {
         .default_direction = 0,
         .gpio_encoder_a = encoder_pins[i][0],
         .gpio_encoder_b = encoder_pins[i][1],
+        .enable_power_save = false,
     };
 
-    lvgl_port_encoder_cfg_t encoder_cfg = {
-        .disp = disp, // Use the display handle from lvgl_port_add_disp()
-        .encoder_a_b = &knob_cfg,
-        .encoder_enter = encoder_btn_handles[i]};
+    knob_handle_t knob = iot_knob_create(&knob_cfg);
+    knob_handles[i] = knob;
 
-    lv_indev_t *indev = lvgl_port_add_encoder(&encoder_cfg);
-    if (!indev) {
-      ESP_LOGE(TAG, "Failed to add encoder %d to LVGL", i + 1);
+    if (!knob) {
+      ESP_LOGE(TAG, "Failed to create knob %d", i);
       return ESP_FAIL;
     }
-    lv_group_t *group = lv_group_create();
-    lv_indev_set_group(indev, group);
+    ESP_LOGI(TAG, "Knob %d handle: %p", i, (void *)knob);
   }
+
+  // Resume knob polling (required for event detection)
+  iot_knob_resume();
+
+  // Register rotation callbacks for each encoder knob
+  for (int i = 0; i < encoder_count; i++) {
+    knob_handle_t knob = knob_handles[i];
+    if (knob) {
+      iot_knob_register_cb(knob, KNOB_RIGHT, encoder_clockwise_cb,
+                           (void *)(intptr_t)i);
+      iot_knob_register_cb(knob, KNOB_LEFT, encoder_anticlockwise_cb,
+                           (void *)(intptr_t)i);
+    }
+  }
+
+  for (int i = 0; i < encoder_count; i++) {
+    button_handle_t btn = encoder_btn_handles[i];
+    if (btn) {
+      iot_button_register_cb(btn, BUTTON_PRESS_DOWN, NULL,
+                             encoder_button_press_down_cb, (void *)(intptr_t)i);
+      iot_button_register_cb(btn, BUTTON_PRESS_UP, NULL,
+                             encoder_button_press_up_cb, (void *)(intptr_t)i);
+    }
+  }
+
+  // Register rotation callbacks for each encoder knob (debug)
+  // If you have knob handles, register the callbacks:
+  // TODO: Replace with actual knob handle retrieval if available
+  // Example:
+  // for (int i = 0; i < encoder_count; i++) {
+  //   knob_handle_t knob = ...; // get knob handle for encoder i
+  //   if (knob) {
+  //     iot_knob_register_cb(knob, KNOB_EVENT_CLOCKWISE, encoder_clockwise_cb,
+  //     (void *)(intptr_t)i); iot_knob_register_cb(knob,
+  //     KNOB_EVENT_ANTICLOCKWISE, encoder_anticlockwise_cb, (void
+  //     *)(intptr_t)i);
+  //   }
+  // }
 
   // Initialize menu widgets
   ESP_LOGI(TAG, "Initializing LVGL menu widgets");

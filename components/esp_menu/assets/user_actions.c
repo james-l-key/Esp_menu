@@ -1,3 +1,59 @@
+// Track menu selection index
+#include "lvgl.h"
+#include <stddef.h>
+#include <string.h>
+#include "lvgl.h"
+#include <string.h>
+static int menu_selection_index = 0;
+static lv_obj_t *main_menu_list = NULL;
+
+void set_main_menu_list(lv_obj_t *list) {
+    main_menu_list = list;
+}
+
+void menu_knob_move(int direction) {
+    if (!main_menu_list) return;
+    int btn_count = lv_obj_get_child_cnt(main_menu_list);
+    menu_selection_index += direction;
+    if (menu_selection_index < 0) menu_selection_index = 0;
+    if (menu_selection_index >= btn_count) menu_selection_index = btn_count - 1;
+    // Find the class pointer for the first button
+    const void *btn_class = NULL;
+    for (int i = 0; i < btn_count; i++) {
+        lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+        if (!btn_class && lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE)) {
+            btn_class = lv_obj_get_class(child);
+            break;
+        }
+    }
+    if (!btn_class) return; // No buttons found
+    int btn_idx = 0;
+    lv_obj_t *target_btn = NULL;
+    for (int i = 0; i < btn_count; i++) {
+        lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+        if (lv_obj_get_class(child) == btn_class) {
+            if (btn_idx == menu_selection_index) {
+                target_btn = child;
+                break;
+            }
+            btn_idx++;
+        }
+    }
+    if (!target_btn) {
+        // fallback: focus first button if none found
+        for (int i = 0; i < btn_count; i++) {
+            lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+            if (lv_obj_get_class(child) == btn_class) {
+                target_btn = child;
+                break;
+            }
+        }
+    }
+    if (target_btn) {
+        lv_group_t *group = lv_group_get_default();
+        if (group) lv_group_focus_obj(target_btn);
+    }
+}
 /**
  * @file user_actions.c
  * @brief Implementation of user-defined menu actions
