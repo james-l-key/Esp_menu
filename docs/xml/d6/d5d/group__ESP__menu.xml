@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d6/d5d/group__ESP__menu" kind="group">
+    <compoundname>ESP_menu</compoundname>
+    <title>ESP Menu Core</title>
+    <briefdescription>
+<para>Core menu system functionality. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the core functionality of the ESP Menu system, including initialization, display management, and input handling. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

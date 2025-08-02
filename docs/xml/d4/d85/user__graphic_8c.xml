@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d4/d85/user__graphic_8c" kind="file" language="C++">
+    <compoundname>user_graphic.c</compoundname>
+    <includes refid="d4/d81/user__graphic_8h" local="yes">user_graphic.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>assets/user_graphic.c</label>
+        <link refid="d4/d85/user__graphic_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>user_graphic.h</label>
+        <link refid="d4/d81/user__graphic_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>lvgl.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_graphic_init</definition>
+        <argsstring>(lv_obj_t *parent)</argsstring>
+        <name>user_graphic_init</name>
+        <param>
+          <type>lv_obj_t *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Initializes custom LVGL graphics for the project. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent LVGL object for the graphics. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="7" column="6" bodyfile="assets/user_graphic.c" bodystart="7" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of user-defined LVGL graphics for the oscillator module. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="d4/d81/user__graphic_8h" kindref="compound">user_graphic.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent)</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Optional:<sp/>Add<sp/>screen-level<sp/>graphics<sp/>(e.g.,<sp/>background<sp/>image)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Example:<sp/>lv_obj_t<sp/>*bg_img<sp/>=<sp/>lv_img_create(parent);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>lv_img_set_src(bg_img,<sp/>&amp;pitch_icon_dsc);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>lv_obj_align(bg_img,<sp/>LV_ALIGN_CENTER,<sp/>0,<sp/>0);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="assets/user_graphic.c"/>
+  </compounddef>
+</doxygen>

@@ -1,3 +1,59 @@
+// Track menu selection index
+#include "lvgl.h"
+#include <stddef.h>
+#include <string.h>
+#include "lvgl.h"
+#include <string.h>
+static int menu_selection_index = 0;
+static lv_obj_t *main_menu_list = NULL;
+
+void set_main_menu_list(lv_obj_t *list) {
+    main_menu_list = list;
+}
+
+void menu_knob_move(int direction) {
+    if (!main_menu_list) return;
+    int btn_count = lv_obj_get_child_cnt(main_menu_list);
+    menu_selection_index += direction;
+    if (menu_selection_index < 0) menu_selection_index = 0;
+    if (menu_selection_index >= btn_count) menu_selection_index = btn_count - 1;
+    // Find the class pointer for the first button
+    const void *btn_class = NULL;
+    for (int i = 0; i < btn_count; i++) {
+        lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+        if (!btn_class && lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE)) {
+            btn_class = lv_obj_get_class(child);
+            break;
+        }
+    }
+    if (!btn_class) return; // No buttons found
+    int btn_idx = 0;
+    lv_obj_t *target_btn = NULL;
+    for (int i = 0; i < btn_count; i++) {
+        lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+        if (lv_obj_get_class(child) == btn_class) {
+            if (btn_idx == menu_selection_index) {
+                target_btn = child;
+                break;
+            }
+            btn_idx++;
+        }
+    }
+    if (!target_btn) {
+        // fallback: focus first button if none found
+        for (int i = 0; i < btn_count; i++) {
+            lv_obj_t *child = lv_obj_get_child(main_menu_list, i);
+            if (lv_obj_get_class(child) == btn_class) {
+                target_btn = child;
+                break;
+            }
+        }
+    }
+    if (target_btn) {
+        lv_group_t *group = lv_group_get_default();
+        if (group) lv_group_focus_obj(target_btn);
+    }
+}
 /**
  * @file user_actions.c
  * @brief Implementation of user-defined menu actions
@@ -246,4 +302,101 @@ void set_option(uint8_t option_index)
     ESP_LOGI(TAG, "Option changed to %u", option_index);
     menu_params.option = option_index;
     // Implement any action needed when this option changes
+}
+
+// Menu callback functions
+void pitch_up(void)
+{
+    ESP_LOGI(TAG, "Pitch Up action triggered");
+    // Implement pitch up functionality here
+}
+
+void pitch_down(void)
+{
+    ESP_LOGI(TAG, "Pitch Down action triggered");
+    // Implement pitch down functionality here
+}
+
+void waveform_next(void)
+{
+    ESP_LOGI(TAG, "Waveform Next action triggered");
+    // Implement waveform next functionality here
+}
+
+void waveform_prev(void)
+{
+    ESP_LOGI(TAG, "Waveform Previous action triggered");
+    // Implement waveform previous functionality here
+}
+
+void level_up(void)
+{
+    ESP_LOGI(TAG, "Level Up action triggered");
+    // Implement level up functionality here
+}
+
+void level_down(void)
+{
+    ESP_LOGI(TAG, "Level Down action triggered");
+    // Implement level down functionality here
+}
+
+void fine_tune_up(void)
+{
+    ESP_LOGI(TAG, "Fine Tune Up action triggered");
+    // Implement fine tune up functionality here
+}
+
+void fine_tune_down(void)
+{
+    ESP_LOGI(TAG, "Fine Tune Down action triggered");
+    // Implement fine tune down functionality here
+}
+
+void pulse_width_up(void)
+{
+    ESP_LOGI(TAG, "Pulse Width Up action triggered");
+    // Implement pulse width up functionality here
+}
+
+void pulse_width_down(void)
+{
+    ESP_LOGI(TAG, "Pulse Width Down action triggered");
+    // Implement pulse width down functionality here
+}
+
+void amp_mod_slot_next(void)
+{
+    ESP_LOGI(TAG, "Amp Mod Slot Next action triggered");
+    // Implement amp mod slot next functionality here
+}
+
+void amp_mod_slot_prev(void)
+{
+    ESP_LOGI(TAG, "Amp Mod Slot Previous action triggered");
+    // Implement amp mod slot previous functionality here
+}
+
+void select_next(void)
+{
+    ESP_LOGI(TAG, "Select Next action triggered");
+    // Implement select next functionality here
+}
+
+void select_prev(void)
+{
+    ESP_LOGI(TAG, "Select Previous action triggered");
+    // Implement select previous functionality here
+}
+
+void save_favorite(void)
+{
+    ESP_LOGI(TAG, "Save Favorite action triggered");
+    // Implement save favorite functionality here
+}
+
+void load_favorite(void)
+{
+    ESP_LOGI(TAG, "Load Favorite action triggered");
+    // Implement load favorite functionality here
 }

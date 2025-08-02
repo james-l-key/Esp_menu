@@ -4,14 +4,20 @@
         {
             "label": "Build Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py build",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py build'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": {
                 "owner": "cpp",
-                "fileLocation": ["relative", "${workspaceFolder}/examples/basic_menu"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/examples/basic_menu"
+                ],
                 "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
                     "file": 1,
@@ -25,25 +31,46 @@
         {
             "label": "Clean Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py clean",
-            "problemMatcher": []
-        },
-        {
-            "label": "Monitor Example",
-            "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py monitor",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py clean'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         },
         {
             "label": "Flash Example",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py flash",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py flash'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Monitor Example",
+            "type": "shell",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py monitor'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash and Monitor",
+            "type": "shell",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py flash monitor'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         },
         {
             "label": "Menuconfig",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/examples/basic_menu && idf.py menuconfig",
+            "command": "bash -c 'export SHELL=/bin/bash && source /home/phi/esp/v5.4.2/esp-idf/export.sh && cd examples/basic_menu && idf.py menuconfig'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": []
         }
     ]

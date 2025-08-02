@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>ESP Menu Documentation</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="index_1intro">
+<title>Introduction</title>
+<para>ESP Menu is a customizable menu system for ESP32 microcontrollers with SSD1306 OLED displays and rotary encoder input. It provides a flexible and extensible menu creation framework for ESP32-based projects using a JSON-based configuration system.</para>
+</sect1>
+<sect1 id="index_1features">
+<title>Key Features</title>
+<para><itemizedlist>
+<listitem><para>SSD1306 OLED Display Support</para>
+</listitem><listitem><para>Rotary Encoder Input (up to 4 encoders)</para>
+</listitem><listitem><para>LVGL Integration</para>
+</listitem><listitem><para>JSON-based Menu Definition</para>
+</listitem><listitem><para>Template-based Code Generation</para>
+</listitem><listitem><para>NVS Support for storing parameters</para>
+</listitem><listitem><para>Component-based Architecture</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1modules">
+<title>Modules</title>
+<sect2 id="index_1core">
+<title>Core Components</title>
+<para><itemizedlist>
+<listitem><para><ref refid="d6/d5d/group__ESP__menu" kindref="compound">ESP Menu Core</ref> - Core menu system functionality</para>
+</listitem><listitem><para><ref refid="d0/dd3/group__code__gen" kindref="compound">Code Generation</ref> - Code generation from templates</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1ui">
+<title>User Interface</title>
+<para><itemizedlist>
+<listitem><para><ref refid="da/de1/group__display" kindref="compound">Display Module</ref> - SSD1306 display handling</para>
+</listitem><listitem><para><ref refid="dc/df1/group__input" kindref="compound">Input Module</ref> - Rotary encoder handling</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="index_1usage">
+<title>Usage Example</title>
+<para><programlisting filename="main.c"></programlisting> </para>
+</sect1>
+    </detaileddescription>
+    <location file="mainpage.dox"/>
+  </compounddef>
+</doxygen>
