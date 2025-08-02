@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 
+
+# List of generated files
+set(GENERATED_MENU_C "${CMAKE_CURRENT_LIST_DIR}/generated/menu.c")
+set(GENERATED_MENU_DATA_H "${CMAKE_CURRENT_LIST_DIR}/generated/menu_data.h")
+
+# List of sources
 set(srcs
     "src/esp_menu.c"
-    "generated/menu.c"
+    ${GENERATED_MENU_C}
     "assets/user_actions.c"
     "assets/user_graphic.c"
 )
@@ -21,25 +27,39 @@ set(requires
 # Add NVS support if enabled
 # (Now included directly in the requires list)
 
-# Create the generated directory if it doesn't exist
+
+# Ensure generated directory exists
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/generated")
 
-# Create an empty menu_data.h if it doesn't exist
-if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/generated/menu_data.h")
-    file(WRITE "${CMAKE_CURRENT_LIST_DIR}/generated/menu_data.h" "
-    // Auto-generated menu data
-    #ifndef MENU_DATA_H
-    #define MENU_DATA_H
-    void menu_init(void);
-    #endif
-    ")
+# Custom command to generate menu.c and menu_data.h from templates
+find_program(PYTHON "python3")
+if(PYTHON)
+    add_custom_command(
+        OUTPUT ${GENERATED_MENU_C} ${GENERATED_MENU_DATA_H}
+        COMMAND ${PYTHON} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/generate_menu_from_templates.py
+                ${CMAKE_CURRENT_SOURCE_DIR}/assets/menu.json
+                ${CMAKE_CURRENT_SOURCE_DIR}/generated
+                ${CMAKE_CURRENT_SOURCE_DIR}/assets/templates
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/assets/menu.json
+                ${CMAKE_CURRENT_SOURCE_DIR}/assets/templates/menu.c.j2
+                ${CMAKE_CURRENT_SOURCE_DIR}/assets/templates/menu.h.j2
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Generating menu files from templates"
+        VERBATIM
+    )
+    add_custom_target(menu_template_generation ALL
+        DEPENDS ${GENERATED_MENU_C} ${GENERATED_MENU_DATA_H}
+    )
 endif()
 
+
+# Register the component and make it depend on the generated files
 idf_component_register(
     SRCS ${srcs}
     INCLUDE_DIRS "include" "generated" "assets"
     REQUIRES ${requires}
 )
+add_dependencies(${COMPONENT_LIB} menu_template_generation)
 
 # After component registration, run the setup script if Python is available
 find_program(PYTHON "python3")
