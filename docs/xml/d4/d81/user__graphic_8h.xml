@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="d4/d81/user__graphic_8h" kind="file" language="C++">
+    <compoundname>user_graphic.h</compoundname>
+    <includes local="yes">lvgl.h</includes>
+    <includedby refid="d4/d85/user__graphic_8c" local="yes">assets/user_graphic.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>assets/user_graphic.h</label>
+        <link refid="d4/d81/user__graphic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lvgl.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>assets/user_graphic.c</label>
+        <link refid="d4/d85/user__graphic_8c"/>
+      </node>
+      <node id="1">
+        <label>assets/user_graphic.h</label>
+        <link refid="d4/d81/user__graphic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d4/d81/user__graphic_8h_1ab8011c2ae13b5d212a281c5e6c3399ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LV_IMG_DECLARE</definition>
+        <argsstring>(next_icon_dsc)</argsstring>
+        <name>LV_IMG_DECLARE</name>
+        <param>
+          <type>next_icon_dsc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.h" line="19" column="1" declfile="assets/user_graphic.h" declline="19" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LV_IMG_DECLARE</definition>
+        <argsstring>(pitch_icon_dsc)</argsstring>
+        <name>LV_IMG_DECLARE</name>
+        <param>
+          <type>pitch_icon_dsc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.h" line="17" column="1" declfile="assets/user_graphic.h" declline="17" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d81/user__graphic_8h_1ad146271fd191753dfa224f199449ab4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LV_IMG_DECLARE</definition>
+        <argsstring>(prev_icon_dsc)</argsstring>
+        <name>LV_IMG_DECLARE</name>
+        <param>
+          <type>prev_icon_dsc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.h" line="20" column="1" declfile="assets/user_graphic.h" declline="20" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d81/user__graphic_8h_1aa6d89d0e7b2bef89a51e08f2f9b0c9ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LV_IMG_DECLARE</definition>
+        <argsstring>(waveform_icon_dsc)</argsstring>
+        <name>LV_IMG_DECLARE</name>
+        <param>
+          <type>waveform_icon_dsc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.h" line="18" column="1" declfile="assets/user_graphic.h" declline="18" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d81/user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_graphic_init</definition>
+        <argsstring>(lv_obj_t *parent)</argsstring>
+        <name>user_graphic_init</name>
+        <param>
+          <type>lv_obj_t *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Initializes custom LVGL graphics for the project. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent LVGL object for the graphics. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.h" line="14" column="6" bodyfile="assets/user_graphic.c" bodystart="7" bodyend="13" declfile="assets/user_graphic.h" declline="14" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header file for user-defined LVGL graphics for the oscillator module. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>USER_GRAPHIC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>USER_GRAPHIC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lvgl.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d81/user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Image<sp/>declarations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(pitch_icon_dsc);</highlight></codeline>
+<codeline lineno="18" refid="d4/d81/user__graphic_8h_1aa6d89d0e7b2bef89a51e08f2f9b0c9ec" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(waveform_icon_dsc);</highlight></codeline>
+<codeline lineno="19" refid="d4/d81/user__graphic_8h_1ab8011c2ae13b5d212a281c5e6c3399ea" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(next_icon_dsc);</highlight></codeline>
+<codeline lineno="20" refid="d4/d81/user__graphic_8h_1ad146271fd191753dfa224f199449ab4f" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(prev_icon_dsc);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="assets/user_graphic.h"/>
+  </compounddef>
+</doxygen>

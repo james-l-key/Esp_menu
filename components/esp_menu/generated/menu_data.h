@@ -1,7 +1,11 @@
+
 #ifndef MENU_DATA_H
 #define MENU_DATA_H
 
 #include "lvgl.h"
+
+// Prototype for generated menu list setter
+void set_main_menu_list(lv_obj_t *list);
 
 
 void amp_mod_slot_next(void);

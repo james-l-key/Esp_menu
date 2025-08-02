@@ -144,6 +144,41 @@ void menu_init(void) {
     
     lv_obj_t *list_main = lv_list_create(scr_main);
     
+    lv_obj_set_size(list_main, 128, 64);
+    lv_obj_align(list_main, LV_ALIGN_TOP_LEFT, 0, 0);
+    // Enable vertical scrolling for the list and set max height
+    lv_obj_set_scroll_dir(list_main, LV_DIR_VER);
+    lv_obj_set_scroll_snap_y(list_main, LV_SCROLL_SNAP_CENTER);
+    lv_obj_set_style_max_height(list_main, 64, 0);
+    set_main_menu_list(list_main);
+    // --- Encoder and group setup ---
+    // Create a group for the encoder and assign it
+    lv_group_t *group_encoder = lv_group_create();
+    // Add the menu list to the group
+    lv_group_add_obj(group_encoder, list_main);
+    // Set focus to the menu list
+    lv_group_focus_obj(list_main);
+    // Find the encoder input device (assumes only one encoder)
+    lv_indev_t *indev = lv_indev_get_next(NULL);
+    while (indev) {
+        if (lv_indev_get_type(indev) == LV_INDEV_TYPE_ENCODER) {
+            lv_indev_set_group(indev, group_encoder);
+            break;
+        }
+        indev = lv_indev_get_next(indev);
+    }
+
+    // --- Style for focused menu item (SSD1306 highlight) ---
+    static lv_style_t style_focus;
+    lv_style_init(&style_focus);
+    lv_style_set_bg_opa(&style_focus, LV_OPA_COVER);
+    lv_style_set_bg_color(&style_focus, lv_color_white());
+    lv_style_set_text_color(&style_focus, lv_color_black());
+    lv_style_set_border_width(&style_focus, 1);
+    lv_style_set_border_color(&style_focus, lv_color_black());
+    lv_obj_add_style(list_main, &style_focus, LV_PART_ITEMS | LV_STATE_FOCUSED);
+    
+    
     
     
     lv_obj_t *img_1 = lv_img_create(list_main);
@@ -152,6 +187,10 @@ void menu_init(void) {
     lv_obj_t *btn_1 = lv_list_add_btn(list_main, NULL, "Pitch Up");
     lv_obj_align_to(btn_1, img_1, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
     lv_obj_add_event_cb(btn_1, event_handler, LV_EVENT_CLICKED, NULL);
+    
+    
+    // Do not force focus to first button; let group/encoder handle focus navigation
+    // lv_group_focus_obj(btn_1);
     
     
     
@@ -166,6 +205,7 @@ void menu_init(void) {
     
     
     
+    
     lv_obj_t *img_3 = lv_img_create(list_main);
     lv_img_set_src(img_3, &waveform_icon_dsc);
     lv_obj_align(img_3, LV_ALIGN_LEFT_MID, 0, 0);
@@ -176,8 +216,10 @@ void menu_init(void) {
     
     
     
+    
     lv_obj_t *btn_4 = lv_list_add_btn(list_main, NULL, "Level/Fine");
     lv_obj_add_event_cb(btn_4, event_handler, LV_EVENT_CLICKED, NULL);
+    
     
     
     
@@ -188,8 +230,10 @@ void menu_init(void) {
     
     
     
+    
     lv_obj_t *btn_6 = lv_list_add_btn(list_main, NULL, "Favorites");
     lv_obj_add_event_cb(btn_6, event_handler, LV_EVENT_CLICKED, NULL);
+    
     
     
     
@@ -318,6 +362,8 @@ void menu_init(void) {
     
     
 
+    // Update layout after populating the list
+    lv_obj_update_layout(list_main);
     // Load initial screen
     lv_scr_load(scr_main);
 }
