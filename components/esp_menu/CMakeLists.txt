@@ -1,3 +1,11 @@
+# Custom clean rule to remove generated files
+add_custom_target(menu_clean_generated_files
+    COMMAND ${CMAKE_COMMAND} -E rm -f "${GENERATED_MENU_C}" "${GENERATED_MENU_DATA_H}"
+    COMMENT "Removing generated menu files"
+)
+
+# Make the global clean depend on this custom clean
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${GENERATED_MENU_C};${GENERATED_MENU_DATA_H}")
 cmake_minimum_required(VERSION 3.16)
 
 
