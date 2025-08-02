@@ -15,7 +15,9 @@ ESP Menu is a **project-agnostic ESP-IDF v5.4.2 component** that provides a conf
 - **Template-based generation**: Uses Jinja2 templates in `assets/templates/` to generate menu code
 - **LVGL integration**: All UI rendering through LVGL with esp_lvgl_port
 
-## Critical Workflows
+### Critical Workflows
+- **All changes to menu.c and menu_data.h must be made in their respective Jinja2 template files (menu.c.j2, menu.h.j2) under templates.**
+- **Do not edit generated C files directly.** Always update the template so changes persist after code regeneration.
 
 ### Building & Development
 ```bash
