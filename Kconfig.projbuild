@@ -18,6 +18,23 @@ menu "ESP Menu Configuration"
         help
             Enable NVS for saving menu parameters and favorite slots.
 
+    config ESPMENU_AUTO_SAVE
+        bool "Auto-save parameters on change"
+        default n
+        depends on ESPMENU_ENABLE_NVS
+        help
+            Automatically save parameters to NVS when they are changed.
+            If disabled, parameters are only saved when manually triggered via menu.
+
+    config ESPMENU_AUTO_SAVE_DELAY_MS
+        int "Auto-save delay in milliseconds"
+        default 1000
+        range 100 10000
+        depends on ESPMENU_AUTO_SAVE
+        help
+            Delay before auto-saving to NVS after parameter change.
+            This prevents excessive NVS writes when rapidly changing values.
+
     config ESPMENU_I2C_HOST
         int "I2C Host"
         default 0
@@ -188,5 +205,22 @@ if ESPMENU_ROTARY_ENCODER_CNT_4
             GPIO pin for the fourth rotary encoder button. Default is GPIO 0.
             If you have a different encoder, check the datasheet for the correct pin.
 endif
+
+    choice ESPMENU_DISPLAY_WIDTH
+        prompt "Display Width in pixels"
+        default ESPMENU_DISPLAY_WIDTH_128
+        help
+            Width of the display in pixels. a.k.a horizontal resolution
+
+        config ESPMENU_DISPLAY_WIDTH_128
+            bool "128"
+        config ESPMENU_DISPLAY_WIDTH_64
+            bool "64"
+    endchoice
+
+    config ESPMENU_DISPLAY_WIDTH
+        int
+        default 128 if ESPMENU_DISPLAY_WIDTH_128
+        default 64 if ESPMENU_DISPLAY_WIDTH_64
 
 endmenu
