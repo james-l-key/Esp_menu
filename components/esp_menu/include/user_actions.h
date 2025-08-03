@@ -105,4 +105,18 @@ void set_toggle2(bool state);
  */
 void set_option(uint8_t option_index);
 
+/**
+ * @brief Handle rotary encoder movement for menu navigation
+ * 
+ * @param direction Direction of movement: 1 for clockwise, -1 for counter-clockwise
+ */
+void menu_knob_move(int direction);
+
+/**
+ * @brief Set the main menu list object for encoder navigation
+ * 
+ * @param list Pointer to the main menu list object
+ */
+void set_main_menu_list(lv_obj_t *list);
+
 #endif /* USER_ACTIONS_H */

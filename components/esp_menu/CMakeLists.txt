@@ -1,29 +1,35 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Simple source list without code generation for now
-set(srcs
-    "src/esp_menu.c"
+# ESP Menu Component
+set(COMPONENT_SRCS 
+    "src/esp_menu.c" 
     "assets/user_actions.c"
     "assets/user_graphic.c"
+    "generated/menu.c"
 )
 
-set(requires
-    "lvgl"
-    "esp_lvgl_port" 
-    "esp_driver_gpio"
-    "driver"
-    "esp_lcd"
-    "button"
-    "knob"
-    "nvs_flash"
+set(COMPONENT_ADD_INCLUDEDIRS 
+    "include" 
+    "generated"
 )
 
-# Add NVS support if enabled
-# (Now included directly in the requires list)
-
-# Simple component registration without code generation
+# Register the component with required dependencies
 idf_component_register(
-    SRCS ${srcs}
-    INCLUDE_DIRS "include" "assets"
-    REQUIRES ${requires}
+    SRCS 
+        "src/esp_menu.c"
+        "assets/user_actions.c"
+        "assets/user_graphic.c"
+        "generated/menu.c"
+    INCLUDE_DIRS 
+        "include"
+        "assets"
+        "generated"
+    REQUIRES 
+        esp_driver_i2c
+        esp_lcd
+        esp_lvgl_port
+        button
+        knob
+        nvs_flash
+        driver
 )
