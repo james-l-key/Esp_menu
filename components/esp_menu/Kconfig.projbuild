@@ -18,6 +18,23 @@ menu "ESP Menu Configuration"
         help
             Enable NVS for saving menu parameters and favorite slots.
 
+    config ESPMENU_AUTO_SAVE
+        bool "Auto-save parameters on change"
+        default n
+        depends on ESPMENU_ENABLE_NVS
+        help
+            Automatically save parameters to NVS when they are changed.
+            If disabled, parameters are only saved when manually triggered via menu.
+
+    config ESPMENU_AUTO_SAVE_DELAY_MS
+        int "Auto-save delay in milliseconds"
+        default 1000
+        range 100 10000
+        depends on ESPMENU_AUTO_SAVE
+        help
+            Delay before auto-saving to NVS after parameter change.
+            This prevents excessive NVS writes when rapidly changing values.
+
     config ESPMENU_I2C_HOST
         int "I2C Host"
         default 0

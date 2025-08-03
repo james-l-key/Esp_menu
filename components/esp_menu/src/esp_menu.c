@@ -2,55 +2,6 @@
 #include "esp_menu.h"
 #include "button_gpio.h"
 #include "button_types.h"
-#include "driver/gpio.h"
-#include "driver/i2c_master.h"
-#include "esp_err.h"
-#include "esp_lcd_panel_io.h"
-#include "esp_lcd_panel_ops.h"
-#include "esp_log.h"
-#include "esp_lvgl_port.h"
-#include "iot_button.h"
-#include "iot_knob.h"
-#include "menu_data.h"
-#include "sdkconfig.h"
-#include <stdint.h>
-#ifdef CONFIG_ESPMENU_ENABLE_NVS
-#include "nvs.h"
-#include "nvs_flash.h"
-#include "user_actions.h"
-#endif
-
-/** @brief Logging tag for ESP Menu component. */
-#define TAG "Esp_menu"
-
-// Event logging for encoder button presses (C-style callbacks)
-static void encoder_button_press_down_cb(void *btn, void *usr_data) {
-    ESP_LOGI(TAG, "Encoder button %d pressed", (int)(intptr_t)usr_data);
-}
-
-static void encoder_button_press_up_cb(void *btn, void *usr_data) {
-    ESP_LOGI(TAG, "Encoder button %d released", (int)(intptr_t)usr_data);
-}
-
-// Debug callbacks for rotary encoder rotation
-static void encoder_clockwise_cb(void *knob, void *usr_data) {
-    int idx = (int)(intptr_t)usr_data;
-    ESP_LOGI(TAG, "Encoder %d rotated CLOCKWISE", idx);
-}
-
-static void encoder_anticlockwise_cb(void *knob, void *usr_data) {
-    int idx = (int)(intptr_t)usr_data;
-    ESP_LOGI(TAG, "Encoder %d rotated ANTICLOCKWISE", idx);
-}
-/**
- * @file esp_menu.c
- * @brief Implementation of the ESP Menu component for initializing the menu
- * system with OLED display and rotary encoders.
- */
-
-#include "button_gpio.h"
-#include "button_types.h"
-#include "driver/gpio.h"
 #include "driver/i2c_master.h"
 #include "esp_err.h"
 #include "esp_lcd_panel_io.h"
@@ -58,22 +9,28 @@ static void encoder_anticlockwise_cb(void *knob, void *usr_data) {
 #include "esp_lcd_panel_vendor.h"
 #include "esp_log.h"
 #include "esp_lvgl_port.h"
-#include "esp_menu.h"
+#include "esp_lvgl_port_knob.h"
 #include "esp_timer.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "iot_button.h"
 #include "iot_knob.h"
-#include "menu_data.h"
-#include "sdkconfig.h"
-#ifdef CONFIG_ESPMENU_ENABLE_NVS
+#include "lvgl.h"
+#include "menu_data.h" // Generated menu system
 #include "nvs.h"
 #include "nvs_flash.h"
+#include "sdkconfig.h"
+#include <stdint.h>
+#include <string.h>
+#ifdef CONFIG_ESPMENU_ENABLE_NVS
 #include "user_actions.h"
 #endif
 
 /** @brief Logging tag for ESP Menu component. */
 #define TAG "Esp_menu"
+
+// Forward declarations for menu support
+
+// Note: Encoder callbacks removed - using esp_lvgl_port_knob for proper LVGL
+// integration
 
 /** @brief Macro to check ESP error codes and return on failure with logging. */
 #define BSP_ERROR_CHECK_RETURN_ERR(x)                                          \
@@ -296,13 +253,12 @@ esp_err_t esp_menu_init(void) {
     // Focus the screen object once
     lv_group_focus_obj(lv_scr_act());
 
-    // Array to store knob handles for each encoder
-    knob_handle_t knob_handles[4] = {NULL};
-
+    // Register encoder using LVGL port for proper integration
     for (int i = 0; i < encoder_count; i++) {
-        ESP_LOGI(TAG, "Creating knob %d (A:%d B:%d)", i, encoder_pins[i][0],
-                 encoder_pins[i][1]);
+        ESP_LOGI(TAG, "Setting up encoder %d (A:%d B:%d Button:%d)", i,
+                 encoder_pins[i][0], encoder_pins[i][1], encoder_pins[i][2]);
 
+        // Configure knob for LVGL port
         knob_config_t knob_cfg = {
             .default_direction = 0,
             .gpio_encoder_a = encoder_pins[i][0],
@@ -310,57 +266,104 @@ esp_err_t esp_menu_init(void) {
             .enable_power_save = false,
         };
 
-        knob_handle_t knob = iot_knob_create(&knob_cfg);
-        knob_handles[i] = knob;
+        // Configure LVGL port encoder
+        lvgl_port_encoder_cfg_t encoder_cfg = {
+            .disp = disp,
+            .encoder_a_b = &knob_cfg,
+            .encoder_enter =
+            encoder_btn_handles[i], // Use the button handle we created earlier
+        };
 
-        if (!knob) {
-            ESP_LOGE(TAG, "Failed to create knob %d", i);
+        lv_indev_t *encoder_indev = lvgl_port_add_encoder(&encoder_cfg);
+        if (encoder_indev) {
+            ESP_LOGI(TAG, "Encoder %d registered with LVGL successfully", i);
+        } else {
+            ESP_LOGE(TAG, "Failed to register encoder %d with LVGL", i);
             return ESP_FAIL;
         }
-        ESP_LOGI(TAG, "Knob %d handle: %p", i, (void *)knob);
-    }
 
-    // Resume knob polling (required for event detection)
-    iot_knob_resume();
-
-    // Register rotation callbacks for each encoder knob
-    for (int i = 0; i < encoder_count; i++) {
-        knob_handle_t knob = knob_handles[i];
-        if (knob) {
-            iot_knob_register_cb(knob, KNOB_RIGHT, encoder_clockwise_cb,
-                                 (void *)(intptr_t)i);
-            iot_knob_register_cb(knob, KNOB_LEFT, encoder_anticlockwise_cb,
-                                 (void *)(intptr_t)i);
+        // Only register the first encoder for now (most common case)
+        // Multiple encoders would need additional handling
+        if (i == 0) {
+            break;
         }
     }
-
-    for (int i = 0; i < encoder_count; i++) {
-        button_handle_t btn = encoder_btn_handles[i];
-        if (btn) {
-            iot_button_register_cb(btn, BUTTON_PRESS_DOWN, NULL,
-                                   encoder_button_press_down_cb, (void *)(intptr_t)i);
-            iot_button_register_cb(btn, BUTTON_PRESS_UP, NULL,
-                                   encoder_button_press_up_cb, (void *)(intptr_t)i);
-        }
-    }
-
-    // Register rotation callbacks for each encoder knob (debug)
-    // If you have knob handles, register the callbacks:
-    // TODO: Replace with actual knob handle retrieval if available
-    // Example:
-    // for (int i = 0; i < encoder_count; i++) {
-    //   knob_handle_t knob = ...; // get knob handle for encoder i
-    //   if (knob) {
-    //     iot_knob_register_cb(knob, KNOB_EVENT_CLOCKWISE, encoder_clockwise_cb,
-    //     (void *)(intptr_t)i); iot_knob_register_cb(knob,
-    //     KNOB_EVENT_ANTICLOCKWISE, encoder_anticlockwise_cb, (void
-    //     *)(intptr_t)i);
-    //   }
-    // }
 
     // Initialize menu widgets
-    ESP_LOGI(TAG, "Initializing LVGL menu widgets");
-    menu_init();
+    ESP_LOGI(TAG, "Initializing generated LVGL menu system");
+    menu_init(); // Use generated menu initialization
+
+    // Fix group focus and activation for encoder navigation
+    lvgl_port_lock(0);
+
+    // The generated menu creates a group but doesn't set it as default
+    // Find the encoder input device to get its group
+    lv_indev_t *encoder_indev = lv_indev_get_next(NULL);
+    lv_group_t *encoder_group = NULL;
+
+    while (encoder_indev) {
+        if (lv_indev_get_type(encoder_indev) == LV_INDEV_TYPE_ENCODER) {
+            encoder_group = lv_indev_get_group(encoder_indev);
+            break;
+        }
+        encoder_indev = lv_indev_get_next(encoder_indev);
+    }
+
+    if (encoder_group) {
+        ESP_LOGI(TAG, "Found encoder group, setting as default");
+        lv_group_set_default(encoder_group);
+
+        // Find the main list and add all its buttons to the group for proper
+        // navigation
+        lv_obj_t *main_screen = lv_scr_act();
+        lv_obj_t *list_main = lv_obj_get_child(main_screen, 0);
+
+        if (list_main) {
+            ESP_LOGI(TAG, "Adding list buttons to encoder group");
+            uint32_t child_count = lv_obj_get_child_cnt(list_main);
+            ESP_LOGI(TAG, "Found %d children in main list", (int)child_count);
+
+            // Add each child to the group (they should be clickable list items)
+            for (uint32_t i = 0; i < child_count; i++) {
+                lv_obj_t *child = lv_obj_get_child(list_main, i);
+                if (child) {
+                    // Check if the object can receive input events (is clickable)
+                    if (lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE)) {
+                        lv_group_add_obj(encoder_group, child);
+                        ESP_LOGI(TAG, "Added clickable item %d to encoder group", (int)i);
+                    }
+                }
+            }
+
+            // Focus the first clickable item if available
+            if (child_count > 0) {
+                lv_obj_t *first_item = lv_obj_get_child(list_main, 0);
+                if (first_item && lv_obj_has_flag(first_item, LV_OBJ_FLAG_CLICKABLE)) {
+                    lv_group_focus_obj(first_item);
+                    ESP_LOGI(TAG, "Set focus to first clickable item");
+                }
+            }
+        }
+
+        // Force layout update and redraw
+        lv_obj_update_layout(lv_scr_act());
+        lv_obj_invalidate(lv_scr_act());
+
+    } else {
+        ESP_LOGW(TAG, "No encoder group found - creating fallback group");
+        // Create a fallback group if none exists
+        lv_group_t *fallback_group = lv_group_create();
+        lv_group_set_default(fallback_group);
+
+        // Find the main screen list and add it to the group
+        lv_obj_t *list = lv_obj_get_child(lv_scr_act(), 0);
+        if (list) {
+            lv_group_add_obj(fallback_group, list);
+            lv_group_focus_obj(list);
+        }
+    }
+
+    lvgl_port_unlock();
 
     ESP_LOGI(TAG, "Menu system fully initialized");
     return ESP_OK;

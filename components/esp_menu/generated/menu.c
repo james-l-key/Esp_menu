@@ -174,9 +174,32 @@ void menu_init(void) {
     lv_style_set_bg_opa(&style_focus, LV_OPA_COVER);
     lv_style_set_bg_color(&style_focus, lv_color_white());
     lv_style_set_text_color(&style_focus, lv_color_black());
-    lv_style_set_border_width(&style_focus, 1);
+    lv_style_set_border_width(&style_focus, 2);  // Thicker border for better visibility
     lv_style_set_border_color(&style_focus, lv_color_black());
+    lv_style_set_outline_width(&style_focus, 1); // Add outline for extra emphasis
+    lv_style_set_outline_color(&style_focus, lv_color_black());
+    lv_style_set_outline_opa(&style_focus, LV_OPA_COVER);
+    
+    // Set smaller font for better spacing
+    lv_style_set_text_font(&style_focus, &lv_font_montserrat_14);
+    
+    // Add padding for better visual separation
+    lv_style_set_pad_top(&style_focus, 2);
+    lv_style_set_pad_bottom(&style_focus, 2);
+    lv_style_set_pad_left(&style_focus, 4);
+    lv_style_set_pad_right(&style_focus, 4);
+    
     lv_obj_add_style(list_main, &style_focus, LV_PART_ITEMS | LV_STATE_FOCUSED);
+    
+    // Apply general styling to improve spacing and readability
+    static lv_style_t style_normal;
+    lv_style_init(&style_normal);
+    lv_style_set_text_font(&style_normal, &lv_font_montserrat_14);
+    lv_style_set_pad_top(&style_normal, 1);
+    lv_style_set_pad_bottom(&style_normal, 1);
+    lv_style_set_pad_left(&style_normal, 4);
+    lv_style_set_pad_right(&style_normal, 4);
+    lv_obj_add_style(list_main, &style_normal, LV_PART_ITEMS);
     
     
     
