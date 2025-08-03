@@ -9,11 +9,13 @@
 #include "esp_lcd_panel_ops.h"
 #include "esp_log.h"
 #include "esp_lvgl_port.h"
+#include "esp_timer.h"
 #include "iot_button.h"
 #include "iot_knob.h"
-#include "menu_data.h"
+// #include "menu_data.h"  // Comment out for now
 #include "sdkconfig.h"
 #include <stdint.h>
+#include <string.h>
 #ifdef CONFIG_ESPMENU_ENABLE_NVS
 #include "nvs.h"
 #include "nvs_flash.h"
@@ -23,24 +25,46 @@
 /** @brief Logging tag for ESP Menu component. */
 #define TAG "Esp_menu"
 
+// Debouncing for encoder rotation
+#define ENCODER_DEBOUNCE_MS 150
+static uint32_t last_encoder_time = 0;
+
+// Forward declarations for simple menu functions
+static void simple_menu_init(void);
+static void simple_menu_navigate_up(void);
+static void simple_menu_navigate_down(void);
+static void simple_menu_select(void);
+static void update_menu_display(void);
+
 // Event logging for encoder button presses (C-style callbacks)
 static void encoder_button_press_down_cb(void *btn, void *usr_data) {
     ESP_LOGI(TAG, "Encoder button %d pressed", (int)(intptr_t)usr_data);
 }
 
 static void encoder_button_press_up_cb(void *btn, void *usr_data) {
-    ESP_LOGI(TAG, "Encoder button %d released", (int)(intptr_t)usr_data);
+    ESP_LOGI(TAG, "Encoder button %d released - selecting menu item", (int)(intptr_t)usr_data);
+    simple_menu_select();
 }
 
-// Debug callbacks for rotary encoder rotation
+// Menu navigation callbacks for rotary encoder rotation
 static void encoder_clockwise_cb(void *knob, void *usr_data) {
-    int idx = (int)(intptr_t)usr_data;
-    ESP_LOGI(TAG, "Encoder %d rotated CLOCKWISE", idx);
+    uint32_t current_time = esp_timer_get_time() / 1000; // Convert to milliseconds
+    if (current_time - last_encoder_time > ENCODER_DEBOUNCE_MS) {
+        int idx = (int)(intptr_t)usr_data;
+        ESP_LOGI(TAG, "Encoder %d rotated CLOCKWISE - menu down", idx);
+        simple_menu_navigate_down();
+        last_encoder_time = current_time;
+    }
 }
 
 static void encoder_anticlockwise_cb(void *knob, void *usr_data) {
-    int idx = (int)(intptr_t)usr_data;
-    ESP_LOGI(TAG, "Encoder %d rotated ANTICLOCKWISE", idx);
+    uint32_t current_time = esp_timer_get_time() / 1000; // Convert to milliseconds
+    if (current_time - last_encoder_time > ENCODER_DEBOUNCE_MS) {
+        int idx = (int)(intptr_t)usr_data;
+        ESP_LOGI(TAG, "Encoder %d rotated ANTICLOCKWISE - menu up", idx);
+        simple_menu_navigate_up();
+        last_encoder_time = current_time;
+    }
 }
 /**
  * @file esp_menu.c
@@ -64,7 +88,7 @@ static void encoder_anticlockwise_cb(void *knob, void *usr_data) {
 #include "freertos/task.h"
 #include "iot_button.h"
 #include "iot_knob.h"
-#include "menu_data.h"
+// #include "menu_data.h"  // Commented out - using simple menu instead
 #include "sdkconfig.h"
 #ifdef CONFIG_ESPMENU_ENABLE_NVS
 #include "nvs.h"
@@ -359,9 +383,425 @@ esp_err_t esp_menu_init(void) {
     // }
 
     // Initialize menu widgets
-    ESP_LOGI(TAG, "Initializing LVGL menu widgets");
-    menu_init();
+    ESP_LOGI(TAG, "Initializing simple LVGL menu");
+    simple_menu_init();
 
     ESP_LOGI(TAG, "Menu system fully initialized");
     return ESP_OK;
+}
+
+// Enhanced menu implementation
+static lv_obj_t *menu_list = NULL;
+static lv_group_t *menu_group = NULL;
+
+// Enhanced menu system with submenus and parameters
+typedef enum {
+    MENU_TYPE_SUBMENU,
+    MENU_TYPE_PARAMETER,
+    MENU_TYPE_ACTION,
+    MENU_TYPE_BACK
+} menu_item_type_t;
+
+typedef struct menu_item_s {
+    const char *title;
+    menu_item_type_t type;
+    union {
+        struct {
+            int *value;
+            int min_val;
+            int max_val;
+            int step;
+            const char *unit;
+        } parameter;
+        struct {
+            void (*action)(void);
+        } action;
+        struct {
+            struct menu_item_s *items;
+            int count;
+        } submenu;
+    };
+} menu_item_t;
+
+// Current menu state
+static menu_item_t *current_menu = NULL;
+static menu_item_t *menu_stack[5]; // Support 5 levels deep
+static int menu_stack_depth = 0;
+static int current_item = 0;
+static int menu_item_count = 0;
+static bool in_parameter_edit = false;
+
+// Parameter storage
+static int frequency_param = 100;
+static int amplitude_param = 50;
+static int offset_param = 0;
+static int mode_param = 1;
+
+// NVS storage keys
+#define NVS_NAMESPACE "esp_menu"
+#define NVS_KEY_FREQUENCY "frequency"
+#define NVS_KEY_AMPLITUDE "amplitude"
+#define NVS_KEY_OFFSET "offset"
+#define NVS_KEY_MODE "mode"
+
+// Save parameters to NVS
+static esp_err_t save_parameters_to_nvs(void) {
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &nvs_handle);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Error (%s) opening NVS handle!", esp_err_to_name(err));
+        return err;
+    }
+    
+    // Save all parameters
+    err = nvs_set_i32(nvs_handle, NVS_KEY_FREQUENCY, frequency_param);
+    if (err == ESP_OK) err = nvs_set_i32(nvs_handle, NVS_KEY_AMPLITUDE, amplitude_param);
+    if (err == ESP_OK) err = nvs_set_i32(nvs_handle, NVS_KEY_OFFSET, offset_param);
+    if (err == ESP_OK) err = nvs_set_i32(nvs_handle, NVS_KEY_MODE, mode_param);
+    
+    if (err == ESP_OK) {
+        err = nvs_commit(nvs_handle);
+    }
+    
+    nvs_close(nvs_handle);
+    
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Parameters saved: freq=%d, amp=%d, offset=%d, mode=%d", 
+                frequency_param, amplitude_param, offset_param, mode_param);
+    } else {
+        ESP_LOGE(TAG, "Error (%s) saving parameters!", esp_err_to_name(err));
+    }
+    
+    return err;
+}
+
+// Load parameters from NVS
+static esp_err_t load_parameters_from_nvs(void) {
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &nvs_handle);
+    if (err != ESP_OK) {
+        ESP_LOGI(TAG, "NVS not found, using default parameters");
+        return ESP_OK; // Not an error, just use defaults
+    }
+    
+    // Try to load each parameter, keep defaults if not found
+    int32_t value;
+    err = nvs_get_i32(nvs_handle, NVS_KEY_FREQUENCY, &value);
+    if (err == ESP_OK) frequency_param = value;
+    
+    err = nvs_get_i32(nvs_handle, NVS_KEY_AMPLITUDE, &value);
+    if (err == ESP_OK) amplitude_param = value;
+    
+    err = nvs_get_i32(nvs_handle, NVS_KEY_OFFSET, &value);
+    if (err == ESP_OK) offset_param = value;
+    
+    err = nvs_get_i32(nvs_handle, NVS_KEY_MODE, &value);
+    if (err == ESP_OK) mode_param = value;
+    
+    nvs_close(nvs_handle);
+    
+    ESP_LOGI(TAG, "Parameters loaded: freq=%d, amp=%d, offset=%d, mode=%d", 
+            frequency_param, amplitude_param, offset_param, mode_param);
+    
+    return ESP_OK;
+}
+
+// Action callbacks
+static void save_settings_action(void) {
+    ESP_LOGI(TAG, "Saving settings to NVS...");
+    esp_err_t err = save_parameters_to_nvs();
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Settings saved successfully!");
+    } else {
+        ESP_LOGI(TAG, "Failed to save settings!");
+    }
+}
+
+static void reset_settings_action(void) {
+    ESP_LOGI(TAG, "Resetting settings to defaults...");
+    frequency_param = 100;
+    amplitude_param = 50;
+    offset_param = 0;
+    mode_param = 1;
+    
+    // Save defaults to NVS
+    esp_err_t err = save_parameters_to_nvs();
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Default settings saved to NVS");
+    }
+    
+    // Update display
+    update_menu_display();
+}
+
+static void calibrate_action(void) {
+    ESP_LOGI(TAG, "Starting calibration...");
+    // Calibration routine would go here
+}
+
+// Submenu definitions
+static menu_item_t signal_menu[] = {
+    {"Frequency", MENU_TYPE_PARAMETER, .parameter = {&frequency_param, 1, 1000, 1, "Hz"}},
+    {"Amplitude", MENU_TYPE_PARAMETER, .parameter = {&amplitude_param, 0, 100, 1, "%"}},
+    {"Offset", MENU_TYPE_PARAMETER, .parameter = {&offset_param, -50, 50, 1, "mV"}},
+    {"< Back", MENU_TYPE_BACK, .parameter = {NULL, 0, 0, 0, ""}}
+};
+
+static menu_item_t system_menu[] = {
+    {"Mode", MENU_TYPE_PARAMETER, .parameter = {&mode_param, 1, 3, 1, ""}},
+    {"Save Settings", MENU_TYPE_ACTION, .action = {save_settings_action}},
+    {"Reset Settings", MENU_TYPE_ACTION, .action = {reset_settings_action}},
+    {"Calibrate", MENU_TYPE_ACTION, .action = {calibrate_action}},
+    {"< Back", MENU_TYPE_BACK, .parameter = {NULL, 0, 0, 0, ""}}
+};
+
+// Main menu
+static menu_item_t main_menu[] = {
+    {"Signal Setup", MENU_TYPE_SUBMENU, .submenu = {signal_menu, 4}},
+    {"System", MENU_TYPE_SUBMENU, .submenu = {system_menu, 5}},
+    {"Quick Cal", MENU_TYPE_ACTION, .action = {calibrate_action}}
+};
+
+// Display current menu item with value if it's a parameter
+static void update_menu_display(void) {
+    if (!menu_list || !current_menu) return;
+    
+    char display_text[64];
+    menu_item_t *item = &current_menu[current_item];
+    
+    if (item->type == MENU_TYPE_PARAMETER) {
+        if (in_parameter_edit) {
+            snprintf(display_text, sizeof(display_text), "> %s: %d%s <", 
+                    item->title, *item->parameter.value, 
+                    item->parameter.unit ? item->parameter.unit : "");
+        } else {
+            snprintf(display_text, sizeof(display_text), "%s: %d%s", 
+                    item->title, *item->parameter.value, 
+                    item->parameter.unit ? item->parameter.unit : "");
+        }
+    } else {
+        if (in_parameter_edit) {
+            snprintf(display_text, sizeof(display_text), "> %s <", item->title);
+        } else {
+            strcpy(display_text, item->title);
+        }
+    }
+    
+    lvgl_port_lock(0);
+    lv_label_set_text(menu_list, display_text);
+    lvgl_port_unlock();
+}
+
+// Navigate to a submenu
+static void enter_submenu(menu_item_t *submenu_items, int count) {
+    if (menu_stack_depth < 4) { // Prevent stack overflow
+        menu_stack[menu_stack_depth++] = current_menu;
+        current_menu = submenu_items;
+        menu_item_count = count;
+        current_item = 0;
+        update_menu_display();
+        ESP_LOGI(TAG, "Entered submenu, depth: %d", menu_stack_depth);
+    }
+}
+
+// Go back to parent menu
+static void go_back(void) {
+    if (menu_stack_depth > 0) {
+        current_menu = menu_stack[--menu_stack_depth];
+        menu_item_count = (menu_stack_depth == 0) ? 3 : 4; // Main menu has 3 items, submenus have back button
+        current_item = 0;
+        update_menu_display();
+        ESP_LOGI(TAG, "Went back, depth: %d", menu_stack_depth);
+    }
+}
+
+// Event handler for enhanced menu navigation
+static void menu_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    
+    if (code == LV_EVENT_KEY) {
+        uint32_t key = lv_event_get_key(e);
+        ESP_LOGI(TAG, "Key event: %lu", key);
+        
+        if (key == LV_KEY_UP) {
+            if (in_parameter_edit) {
+                // Adjust parameter value up
+                menu_item_t *item = &current_menu[current_item];
+                if (item->type == MENU_TYPE_PARAMETER) {
+                    int new_val = *item->parameter.value + item->parameter.step;
+                    if (new_val <= item->parameter.max_val) {
+                        *item->parameter.value = new_val;
+                        update_menu_display();
+                        ESP_LOGI(TAG, "Parameter %s increased to %d", item->title, *item->parameter.value);
+                    }
+                }
+            } else {
+                // Navigate menu up
+                current_item = (current_item - 1 + menu_item_count) % menu_item_count;
+                update_menu_display();
+                ESP_LOGI(TAG, "Menu up - current item: %d (%s)", current_item, current_menu[current_item].title);
+            }
+        }
+        else if (key == LV_KEY_DOWN) {
+            if (in_parameter_edit) {
+                // Adjust parameter value down
+                menu_item_t *item = &current_menu[current_item];
+                if (item->type == MENU_TYPE_PARAMETER) {
+                    int new_val = *item->parameter.value - item->parameter.step;
+                    if (new_val >= item->parameter.min_val) {
+                        *item->parameter.value = new_val;
+                        update_menu_display();
+                        ESP_LOGI(TAG, "Parameter %s decreased to %d", item->title, *item->parameter.value);
+                    }
+                }
+            } else {
+                // Navigate menu down
+                current_item = (current_item + 1) % menu_item_count;
+                update_menu_display();
+                ESP_LOGI(TAG, "Menu down - current item: %d (%s)", current_item, current_menu[current_item].title);
+            }
+        }
+        else if (key == LV_KEY_ENTER) {
+            menu_item_t *item = &current_menu[current_item];
+            
+            if (in_parameter_edit) {
+                // Exit parameter edit mode
+                in_parameter_edit = false;
+                update_menu_display();
+                ESP_LOGI(TAG, "Exited parameter edit for %s", item->title);
+            } else {
+                // Handle menu item selection
+                switch (item->type) {
+                    case MENU_TYPE_SUBMENU:
+                        enter_submenu(item->submenu.items, item->submenu.count);
+                        break;
+                    case MENU_TYPE_PARAMETER:
+                        in_parameter_edit = true;
+                        update_menu_display();
+                        ESP_LOGI(TAG, "Entered parameter edit for %s", item->title);
+                        break;
+                    case MENU_TYPE_ACTION:
+                        if (item->action.action) {
+                            item->action.action();
+                        }
+                        break;
+                    case MENU_TYPE_BACK:
+                        go_back();
+                        break;
+                }
+            }
+        }
+    }
+}
+
+static void simple_menu_init(void) {
+    ESP_LOGI(TAG, "Initializing enhanced menu system");
+    
+    // Load parameters from NVS first
+    load_parameters_from_nvs();
+    
+    // Initialize menu state
+    current_menu = main_menu;
+    menu_item_count = 3; // Main menu has 3 items
+    current_item = 0;
+    menu_stack_depth = 0;
+    in_parameter_edit = false;
+    
+    // Lock LVGL for thread-safe object creation
+    lvgl_port_lock(0);
+    
+    // Create a label to show current menu item
+    lv_obj_t *label = lv_label_create(lv_scr_act());
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_12, 0);
+    lv_obj_center(label);
+    
+    // Store reference for updates
+    menu_list = label;
+    
+    // Create a group for input handling
+    menu_group = lv_group_create();
+    lv_group_add_obj(menu_group, label);
+    lv_group_set_default(menu_group);
+    
+    // Add event handler
+    lv_obj_add_event_cb(label, menu_event_handler, LV_EVENT_KEY, NULL);
+    
+    // Unlock LVGL
+    lvgl_port_unlock();
+    
+    // Display initial menu
+    update_menu_display();
+    
+    ESP_LOGI(TAG, "Enhanced menu system initialized");
+}
+
+void simple_menu_navigate_up(void) {
+    if (in_parameter_edit) {
+        // Adjust parameter value up
+        menu_item_t *item = &current_menu[current_item];
+        if (item->type == MENU_TYPE_PARAMETER) {
+            int new_val = *item->parameter.value + item->parameter.step;
+            if (new_val <= item->parameter.max_val) {
+                *item->parameter.value = new_val;
+                update_menu_display();
+                ESP_LOGI(TAG, "Parameter %s increased to %d", item->title, *item->parameter.value);
+            }
+        }
+    } else {
+        // Navigate menu up
+        current_item = (current_item - 1 + menu_item_count) % menu_item_count;
+        update_menu_display();
+        ESP_LOGI(TAG, "Navigate up - current item: %d (%s)", current_item, current_menu[current_item].title);
+    }
+}
+
+void simple_menu_navigate_down(void) {
+    if (in_parameter_edit) {
+        // Adjust parameter value down
+        menu_item_t *item = &current_menu[current_item];
+        if (item->type == MENU_TYPE_PARAMETER) {
+            int new_val = *item->parameter.value - item->parameter.step;
+            if (new_val >= item->parameter.min_val) {
+                *item->parameter.value = new_val;
+                update_menu_display();
+                ESP_LOGI(TAG, "Parameter %s decreased to %d", item->title, *item->parameter.value);
+            }
+        }
+    } else {
+        // Navigate menu down
+        current_item = (current_item + 1) % menu_item_count;
+        update_menu_display();
+        ESP_LOGI(TAG, "Navigate down - current item: %d (%s)", current_item, current_menu[current_item].title);
+    }
+}
+
+void simple_menu_select(void) {
+    menu_item_t *item = &current_menu[current_item];
+    
+    if (in_parameter_edit) {
+        // Exit parameter edit mode
+        in_parameter_edit = false;
+        update_menu_display();
+        ESP_LOGI(TAG, "Exited parameter edit for %s", item->title);
+    } else {
+        // Handle menu item selection
+        switch (item->type) {
+            case MENU_TYPE_SUBMENU:
+                enter_submenu(item->submenu.items, item->submenu.count);
+                break;
+            case MENU_TYPE_PARAMETER:
+                in_parameter_edit = true;
+                update_menu_display();
+                ESP_LOGI(TAG, "Entered parameter edit for %s", item->title);
+                break;
+            case MENU_TYPE_ACTION:
+                if (item->action.action) {
+                    item->action.action();
+                }
+                break;
+            case MENU_TYPE_BACK:
+                go_back();
+                break;
+        }
+    }
 }
