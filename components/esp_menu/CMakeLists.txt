@@ -1,6 +1,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
+
 # Ensure generated directory exists
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/generated")
 
@@ -47,10 +48,11 @@ set(requires
     "nvs_flash"
 )
 
-# Register the component (include generated directory)
 idf_component_register(
     SRCS ${srcs}
     INCLUDE_DIRS "include" "assets" "generated"
     REQUIRES ${requires}
+
 )
 add_dependencies(${COMPONENT_LIB} menu_template_generation)
+
