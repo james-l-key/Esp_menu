@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="dd/dfb/esp__menu_8h" kind="file" language="C++">
+    <compoundname>esp_menu.h</compoundname>
+    <includes local="yes">esp_err.h</includes>
+    <includedby refid="d2/d78/esp__menu_8c" local="yes">src/esp_menu.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>include/esp_menu.h</label>
+        <link refid="dd/dfb/esp__menu_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>esp_err.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>include/esp_menu.h</label>
+        <link refid="dd/dfb/esp__menu_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/esp_menu.c</label>
+        <link refid="d2/d78/esp__menu_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="dd/dfb/esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>esp_err_t</type>
+        <definition>esp_err_t esp_menu_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>esp_menu_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes the ESP Menu system, including OLED display and rotary encoders. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>esp_err_t ESP_OK on success, or an error code on failure.</para>
+</simplesect>
+Initializes the ESP Menu system, including OLED display and rotary encoders.</para>
+<para><simplesect kind="return"><para>esp_err_t ESP_OK on success, or an error code on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/esp_menu.h" line="15" column="11" bodyfile="src/esp_menu.c" bodystart="53" bodyend="413" declfile="include/esp_menu.h" declline="15" declcolumn="11"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Header file for the ESP Menu component, providing menu system initialization and NVS functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ESP_MENU_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ESP_MENU_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_err.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">esp_err_t<sp/><ref refid="dd/dfb/esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" kindref="member">esp_menu_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="include/esp_menu.h"/>
+  </compounddef>
+</doxygen>
