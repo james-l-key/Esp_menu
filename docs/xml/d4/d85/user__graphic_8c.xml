@@ -20,6 +20,223 @@
         <label>lvgl.h</label>
       </node>
     </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" prot="public" static="no">
+        <name>ICON_H</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="11" column="9" bodyfile="assets/user_graphic.c" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" prot="public" static="no">
+        <name>ICON_W</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="10" column="9" bodyfile="assets/user_graphic.c" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" prot="public" static="no">
+        <name>ROW_STRIDE</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="32" column="9" bodyfile="assets/user_graphic.c" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1af47e165dfcb150d9aedf8b86af8e2509" prot="public" static="no" mutable="no">
+        <type>const lv_image_dsc_t</type>
+        <definition>const lv_image_dsc_t next_icon_dsc</definition>
+        <argsstring></argsstring>
+        <name>next_icon_dsc</name>
+        <initializer>= {
+    .header = {
+        .magic = LV_IMAGE_HEADER_MAGIC,
+        .cf = LV_COLOR_FORMAT_I1,
+        .flags = 0,
+        .w = <ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,
+        .h = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,
+        .stride = <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+        .reserved_2 = 0,
+    },
+    .data_size = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref> * <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+    .data = <ref refid="d4/d85/user__graphic_8c_1af41db26ef5b94bd245c6e1f44b8bc599" kindref="member">s_icon_bits_next</ref>,
+    .reserved = NULL,
+    .reserved_2 = NULL,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="66" column="22" bodyfile="assets/user_graphic.c" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1adec659119aefda37c44ffb1cf0d7b5e3" prot="public" static="no" mutable="no">
+        <type>const lv_image_dsc_t</type>
+        <definition>const lv_image_dsc_t pitch_icon_dsc</definition>
+        <argsstring></argsstring>
+        <name>pitch_icon_dsc</name>
+        <initializer>= {
+    .header = {
+        .magic = LV_IMAGE_HEADER_MAGIC,
+        .cf = LV_COLOR_FORMAT_I1,
+        .flags = 0,
+        .w = <ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,
+        .h = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,
+        .stride = <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+        .reserved_2 = 0,
+    },
+    .data_size = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref> * <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+    .data = <ref refid="d4/d85/user__graphic_8c_1a0a6e13340d05c8e1dc7049cbdd5a0ae4" kindref="member">s_icon_bits_pitch</ref>,
+    .reserved = NULL,
+    .reserved_2 = NULL,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="34" column="22" bodyfile="assets/user_graphic.c" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1a6703d64ae0f089e4e385ff6bcd1fb24e" prot="public" static="no" mutable="no">
+        <type>const lv_image_dsc_t</type>
+        <definition>const lv_image_dsc_t prev_icon_dsc</definition>
+        <argsstring></argsstring>
+        <name>prev_icon_dsc</name>
+        <initializer>= {
+    .header = {
+        .magic = LV_IMAGE_HEADER_MAGIC,
+        .cf = LV_COLOR_FORMAT_I1,
+        .flags = 0,
+        .w = <ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,
+        .h = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,
+        .stride = <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+        .reserved_2 = 0,
+    },
+    .data_size = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref> * <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+    .data = <ref refid="d4/d85/user__graphic_8c_1a6cfabed4a04219b6d7f6565fb279d942" kindref="member">s_icon_bits_prev</ref>,
+    .reserved = NULL,
+    .reserved_2 = NULL,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="82" column="22" bodyfile="assets/user_graphic.c" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1af41db26ef5b94bd245c6e1f44b8bc599" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t s_icon_bits_next[]</definition>
+        <argsstring>[]</argsstring>
+        <name>s_icon_bits_next</name>
+        <initializer>= {
+    0x10,0x00, 0x30,0x00, 0x70,0x00, 0xF0,0x00, 0x70,0x00, 0x30,0x00,
+    0x10,0x00, 0x00,0x00, 0x10,0x00, 0x30,0x00, 0x10,0x00, 0x00,0x00,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="22" column="22" bodyfile="assets/user_graphic.c" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1a0a6e13340d05c8e1dc7049cbdd5a0ae4" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t s_icon_bits_pitch[]</definition>
+        <argsstring>[]</argsstring>
+        <name>s_icon_bits_pitch</name>
+        <initializer>= {
+    0xFF,0x0F, 0x81,0x08, 0xBD,0x0B, 0xA5,0x0A, 0xA5,0x0A, 0xBD,0x0B,
+    0x81,0x08, 0xFF,0x0F, 0x00,0x00, 0x70,0x07, 0x50,0x05, 0x70,0x07,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="14" column="22" bodyfile="assets/user_graphic.c" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1a6cfabed4a04219b6d7f6565fb279d942" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t s_icon_bits_prev[]</definition>
+        <argsstring>[]</argsstring>
+        <name>s_icon_bits_prev</name>
+        <initializer>= {
+    0x01,0x00, 0x03,0x00, 0x07,0x00, 0x0F,0x00, 0x07,0x00, 0x03,0x00,
+    0x01,0x00, 0x00,0x00, 0x01,0x00, 0x03,0x00, 0x01,0x00, 0x00,0x00,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="26" column="22" bodyfile="assets/user_graphic.c" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1ac6363efaae998f4b66495ab10467a514" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t s_icon_bits_waveform[]</definition>
+        <argsstring>[]</argsstring>
+        <name>s_icon_bits_waveform</name>
+        <initializer>= {
+    0x01,0x00, 0x03,0x00, 0x07,0x00, 0x0F,0x00, 0x1F,0x00, 0x3F,0x00,
+    0x1F,0x00, 0x0F,0x00, 0x07,0x00, 0x03,0x00, 0x01,0x00, 0x00,0x00,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="18" column="22" bodyfile="assets/user_graphic.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d85/user__graphic_8c_1a8722b36673efdddc8030a53421d3b9bd" prot="public" static="no" mutable="no">
+        <type>const lv_image_dsc_t</type>
+        <definition>const lv_image_dsc_t waveform_icon_dsc</definition>
+        <argsstring></argsstring>
+        <name>waveform_icon_dsc</name>
+        <initializer>= {
+    .header = {
+        .magic = LV_IMAGE_HEADER_MAGIC,
+        .cf = LV_COLOR_FORMAT_I1,
+        .flags = 0,
+        .w = <ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,
+        .h = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,
+        .stride = <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+        .reserved_2 = 0,
+    },
+    .data_size = <ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref> * <ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,
+    .data = <ref refid="d4/d85/user__graphic_8c_1ac6363efaae998f4b66495ab10467a514" kindref="member">s_icon_bits_waveform</ref>,
+    .reserved = NULL,
+    .reserved_2 = NULL,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="assets/user_graphic.c" line="50" column="22" bodyfile="assets/user_graphic.c" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="func">
       <memberdef kind="function" id="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -47,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="assets/user_graphic.c" line="7" column="6" bodyfile="assets/user_graphic.c" bodystart="7" bodyend="13"/>
+        <location file="assets/user_graphic.c" line="98" column="6" bodyfile="assets/user_graphic.c" bodystart="98" bodyend="102"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -59,13 +276,102 @@
 <codeline lineno="1"><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="d4/d81/user__graphic_8h" kindref="compound">user_graphic.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent)</highlight></codeline>
-<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Optional:<sp/>Add<sp/>screen-level<sp/>graphics<sp/>(e.g.,<sp/>background<sp/>image)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Example:<sp/>lv_obj_t<sp/>*bg_img<sp/>=<sp/>lv_img_create(parent);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>lv_img_set_src(bg_img,<sp/>&amp;pitch_icon_dsc);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>lv_obj_align(bg_img,<sp/>LV_ALIGN_CENTER,<sp/>0,<sp/>0);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Provide<sp/>tiny<sp/>12x12<sp/>1-bit<sp/>placeholder<sp/>icons<sp/>so<sp/>the<sp/>demo<sp/>links<sp/>and<sp/>runs.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>LVGL<sp/>v9<sp/>image<sp/>descriptor<sp/>uses<sp/>lv_image_dsc_t<sp/>and<sp/>lv_color_format_t<sp/>from<sp/>lv_color.h</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ICON_W<sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ICON_H<sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Simple<sp/>bitmaps:<sp/>each<sp/>row<sp/>is<sp/>12<sp/>pixels<sp/>packed<sp/>into<sp/>2<sp/>bytes<sp/>(16<sp/>bits<sp/>used,<sp/>upper<sp/>4<sp/>bits<sp/>ignored)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d4/d85/user__graphic_8c_1a0a6e13340d05c8e1dc7049cbdd5a0ae4" kindref="member">s_icon_bits_pitch</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFF,0x0F,<sp/>0x81,0x08,<sp/>0xBD,0x0B,<sp/>0xA5,0x0A,<sp/>0xA5,0x0A,<sp/>0xBD,0x0B,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>0x81,0x08,<sp/>0xFF,0x0F,<sp/>0x00,0x00,<sp/>0x70,0x07,<sp/>0x50,0x05,<sp/>0x70,0x07,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d4/d85/user__graphic_8c_1ac6363efaae998f4b66495ab10467a514" kindref="member">s_icon_bits_waveform</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>0x01,0x00,<sp/>0x03,0x00,<sp/>0x07,0x00,<sp/>0x0F,0x00,<sp/>0x1F,0x00,<sp/>0x3F,0x00,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>0x1F,0x00,<sp/>0x0F,0x00,<sp/>0x07,0x00,<sp/>0x03,0x00,<sp/>0x01,0x00,<sp/>0x00,0x00,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d4/d85/user__graphic_8c_1af41db26ef5b94bd245c6e1f44b8bc599" kindref="member">s_icon_bits_next</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>0x10,0x00,<sp/>0x30,0x00,<sp/>0x70,0x00,<sp/>0xF0,0x00,<sp/>0x70,0x00,<sp/>0x30,0x00,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>0x10,0x00,<sp/>0x00,0x00,<sp/>0x10,0x00,<sp/>0x30,0x00,<sp/>0x10,0x00,<sp/>0x00,0x00,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="d4/d85/user__graphic_8c_1a6cfabed4a04219b6d7f6565fb279d942" kindref="member">s_icon_bits_prev</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>0x01,0x00,<sp/>0x03,0x00,<sp/>0x07,0x00,<sp/>0x0F,0x00,<sp/>0x07,0x00,<sp/>0x03,0x00,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>0x01,0x00,<sp/>0x00,0x00,<sp/>0x01,0x00,<sp/>0x03,0x00,<sp/>0x01,0x00,<sp/>0x00,0x00,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Each<sp/>row<sp/>stride<sp/>in<sp/>bytes<sp/>for<sp/>LV_COLOR_FORMAT_I1<sp/>is<sp/>ceil(width/8).<sp/>For<sp/>12px<sp/>-&gt;<sp/>2<sp/>bytes<sp/>per<sp/>row.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ROW_STRIDE<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lv_image_dsc_t<sp/><ref refid="d4/d85/user__graphic_8c_1adec659119aefda37c44ffb1cf0d7b5e3" kindref="member">pitch_icon_dsc</ref><sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>LV_IMAGE_HEADER_MAGIC,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.cf<sp/>=<sp/>LV_COLOR_FORMAT_I1,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.flags<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.w<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.h<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.stride<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>.data_size<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref><sp/>*<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>.data<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a0a6e13340d05c8e1dc7049cbdd5a0ae4" kindref="member">s_icon_bits_pitch</ref>,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lv_image_dsc_t<sp/><ref refid="d4/d85/user__graphic_8c_1a8722b36673efdddc8030a53421d3b9bd" kindref="member">waveform_icon_dsc</ref><sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>LV_IMAGE_HEADER_MAGIC,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.cf<sp/>=<sp/>LV_COLOR_FORMAT_I1,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.flags<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.w<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.h<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.stride<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>.data_size<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref><sp/>*<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>.data<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1ac6363efaae998f4b66495ab10467a514" kindref="member">s_icon_bits_waveform</ref>,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lv_image_dsc_t<sp/><ref refid="d4/d85/user__graphic_8c_1af47e165dfcb150d9aedf8b86af8e2509" kindref="member">next_icon_dsc</ref><sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>LV_IMAGE_HEADER_MAGIC,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.cf<sp/>=<sp/>LV_COLOR_FORMAT_I1,</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.flags<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.w<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.h<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.stride<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>.data_size<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref><sp/>*<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>.data<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1af41db26ef5b94bd245c6e1f44b8bc599" kindref="member">s_icon_bits_next</ref>,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>lv_image_dsc_t<sp/><ref refid="d4/d85/user__graphic_8c_1a6703d64ae0f089e4e385ff6bcd1fb24e" kindref="member">prev_icon_dsc</ref><sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>LV_IMAGE_HEADER_MAGIC,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.cf<sp/>=<sp/>LV_COLOR_FORMAT_I1,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.flags<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.w<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kindref="member">ICON_W</ref>,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.h<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref>,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.stride<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>.data_size<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kindref="member">ICON_H</ref><sp/>*<sp/><ref refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kindref="member">ROW_STRIDE</ref>,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>.data<sp/>=<sp/><ref refid="d4/d85/user__graphic_8c_1a6cfabed4a04219b6d7f6565fb279d942" kindref="member">s_icon_bits_prev</ref>,</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>.reserved_2<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent)</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>LV_UNUSED(parent);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Optional:<sp/>Add<sp/>screen-level<sp/>graphics<sp/>(e.g.,<sp/>background<sp/>image)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="assets/user_graphic.c"/>
   </compounddef>

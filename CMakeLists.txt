@@ -1,5 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
+if(NOT DEFINED ENV{IDF_TOOLCHAIN})
+	set(ENV{IDF_TOOLCHAIN} "clang")
+endif()
+include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
+# Add global Clang-only suppression before project() so it applies to all components.
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+	idf_build_set_property(COMPILE_OPTIONS "-Wno-logical-not-parentheses" APPEND)
+	idf_build_set_property(COMPILE_OPTIONS "-Wno-error=logical-not-parentheses" APPEND)
+	# Also add as global compile options to ensure third-party/managed targets pick it up
+	add_compile_options($<$<C_COMPILER_ID:Clang>:-Wno-logical-not-parentheses>)
+	add_compile_options($<$<C_COMPILER_ID:Clang>:-Wno-error=logical-not-parentheses>)
+endif()
 # Ensure generated directory exists
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/generated")
 

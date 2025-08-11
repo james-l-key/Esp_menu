@@ -34,7 +34,7 @@
         <argsstring>(next_icon_dsc)</argsstring>
         <name>LV_IMG_DECLARE</name>
         <param>
-          <type>next_icon_dsc</type>
+          <type><ref refid="d4/d85/user__graphic_8c_1af47e165dfcb150d9aedf8b86af8e2509" kindref="member">next_icon_dsc</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -50,7 +50,7 @@
         <argsstring>(pitch_icon_dsc)</argsstring>
         <name>LV_IMG_DECLARE</name>
         <param>
-          <type>pitch_icon_dsc</type>
+          <type><ref refid="d4/d85/user__graphic_8c_1adec659119aefda37c44ffb1cf0d7b5e3" kindref="member">pitch_icon_dsc</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -66,7 +66,7 @@
         <argsstring>(prev_icon_dsc)</argsstring>
         <name>LV_IMG_DECLARE</name>
         <param>
-          <type>prev_icon_dsc</type>
+          <type><ref refid="d4/d85/user__graphic_8c_1a6703d64ae0f089e4e385ff6bcd1fb24e" kindref="member">prev_icon_dsc</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -82,7 +82,7 @@
         <argsstring>(waveform_icon_dsc)</argsstring>
         <name>LV_IMG_DECLARE</name>
         <param>
-          <type>waveform_icon_dsc</type>
+          <type><ref refid="d4/d85/user__graphic_8c_1a8722b36673efdddc8030a53421d3b9bd" kindref="member">waveform_icon_dsc</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="assets/user_graphic.h" line="14" column="6" bodyfile="assets/user_graphic.c" bodystart="7" bodyend="13" declfile="assets/user_graphic.h" declline="14" declcolumn="6"/>
+        <location file="assets/user_graphic.h" line="14" column="6" bodyfile="assets/user_graphic.c" bodystart="98" bodyend="102" declfile="assets/user_graphic.h" declline="14" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -136,10 +136,10 @@
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d81/user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" kindref="member">user_graphic_init</ref>(lv_obj_t<sp/>*parent);</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Image<sp/>declarations</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17" refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(pitch_icon_dsc);</highlight></codeline>
-<codeline lineno="18" refid="d4/d81/user__graphic_8h_1aa6d89d0e7b2bef89a51e08f2f9b0c9ec" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(waveform_icon_dsc);</highlight></codeline>
-<codeline lineno="19" refid="d4/d81/user__graphic_8h_1ab8011c2ae13b5d212a281c5e6c3399ea" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(next_icon_dsc);</highlight></codeline>
-<codeline lineno="20" refid="d4/d81/user__graphic_8h_1ad146271fd191753dfa224f199449ab4f" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(prev_icon_dsc);</highlight></codeline>
+<codeline lineno="17" refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(<ref refid="d4/d85/user__graphic_8c_1adec659119aefda37c44ffb1cf0d7b5e3" kindref="member">pitch_icon_dsc</ref>);</highlight></codeline>
+<codeline lineno="18" refid="d4/d81/user__graphic_8h_1aa6d89d0e7b2bef89a51e08f2f9b0c9ec" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(<ref refid="d4/d85/user__graphic_8c_1a8722b36673efdddc8030a53421d3b9bd" kindref="member">waveform_icon_dsc</ref>);</highlight></codeline>
+<codeline lineno="19" refid="d4/d81/user__graphic_8h_1ab8011c2ae13b5d212a281c5e6c3399ea" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(<ref refid="d4/d85/user__graphic_8c_1af47e165dfcb150d9aedf8b86af8e2509" kindref="member">next_icon_dsc</ref>);</highlight></codeline>
+<codeline lineno="20" refid="d4/d81/user__graphic_8h_1ad146271fd191753dfa224f199449ab4f" refkind="member"><highlight class="normal"><ref refid="d4/d81/user__graphic_8h_1ab6ad000504276a1080d71e57c550170c" kindref="member">LV_IMG_DECLARE</ref>(<ref refid="d4/d85/user__graphic_8c_1a6703d64ae0f089e4e385ff6bcd1fb24e" kindref="member">prev_icon_dsc</ref>);</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>

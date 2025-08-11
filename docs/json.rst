@@ -1,7 +1,9 @@
 Menu System Data
 ================
 
-The ``menu.json`` file defines the menu structure for Esp_menu:
+The ``assets/menu.json`` file defines the menu structure for Esp_menu:
 
-.. literalinclude:: ../main/user_menu/menu.json
+.. literalinclude:: ../assets/menu.json
    :language: json
+
+Top-level keys include ``display``, ``encoders``, ``menu`` (with ``screens`` and ``items``), and optional ``graphics`` declarations.

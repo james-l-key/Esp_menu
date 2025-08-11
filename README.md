@@ -1,203 +1,126 @@
-# ESP Menu
+# ESP Menu Component
 
-A customizable menu system for ESP32 microcontrollers with OLED displays (SSD1306/SH1107) and rotary encoder input.
+Project-agnostic ESP-IDF component that renders a configurable, LVGL-based menu on OLED (SSD1306/SH1107) with a rotary encoder. Menu structure is defined in JSON and compiled to C via Jinja2 templates.
 
-![ESP Menu System](https://via.placeholder.com/640x320.png?text=ESP+Menu+System)
+## Highlights
 
-## Overview
+- LVGL UI with focus styles that work on monochrome OLEDs
+- JSON-driven menu; code generated from templates (no manual UI wiring)
+- Works as a reusable component or via the included example
+- Rotary encoder + button input, NVS persistence hooks
 
-ESP Menu is a flexible and extensible menu creation framework for ESP32-based projects that use OLED displays (SSD1306/SH1107) and rotary encoders for user interaction. It provides a JSON-based configuration system to easily define menu structures and navigation.
+## Quick start (example project)
 
-### Features
+Always build from the example directory, not the repo root.
 
-- **OLED Display Support**: Built-in support for I2C-connected OLED displays (SSD1306/SH1107)
-- **Rotary Encoder Input**: Support for up to 4 rotary encoders with push buttons
-- **LVGL Integration**: High-quality graphics using the LVGL library
-- **JSON-based Menu Definition**: Define menus using simple JSON structures
-- **Template-based Code Generation**: Automatically generates menu code from templates
-- **NVS Support**: Optional save/load of menu parameters to/from non-volatile storage
-- **Component-based Architecture**: Designed as an ESP-IDF component for easy integration
+1. Configure hardware and features
 
-## Hardware Requirements
+```bash
+cd examples/basic_menu
+idf.py menuconfig   # ESP Menu Configuration → set display, height, encoder pins/count
+```
 
-- ESP32 microcontroller
-- OLED display (SSD1306 or SH1107, 128x64 or 128x32)
-- Rotary encoder(s) with push button
-- I2C connections for the display (default: SDA=21, SCL=22)
-- GPIO pins for rotary encoders (configurable)
+2. Generate menu code (from repo root) after editing `assets/menu.json`
 
-## Installation
+```bash
+cd ../..
+python3 scripts/generate_menu_from_templates.py assets/menu.json components/esp_menu/generated assets/templates
+```
 
-### As a Component in Your ESP-IDF Project
+3. Build, flash, and monitor
 
-1. Create a `components` directory in your ESP-IDF project if it doesn't exist:
+```bash
+cd examples/basic_menu
+idf.py build flash monitor
+```
 
-   ```bash
-   mkdir -p components
-   ```
+VS Code tasks are provided: Build Example, Flash Example, Monitor Example.
 
-2. Clone this repository into your components directory:
+## Using as a component in your app
 
-   ```bash
-   cd components
-   git clone https://github.com/yourusername/esp_menu.git
-   ```
-
-3. Include the component in your project's `CMakeLists.txt`:
-
-   ```cmake
-   set(EXTRA_COMPONENT_DIRS ${CMAKE_CURRENT_LIST_DIR}/components/esp_menu)
-   ```
-
-4. Configure the menu system via `menuconfig`:
-
-   ```bash
-   idf.py menuconfig
-   ```
-
-   Navigate to "ESP Menu Configuration" to set your display and encoder settings.
-
-## Usage
-
-### Basic Setup
-
-1. Initialize the menu system in your main application:
-
-   ```c
-   #include "esp_menu.h"
-
-   void app_main(void)
-   {
-       // Initialize the menu system
-       esp_err_t result = esp_menu_init();
-       if (result != ESP_OK) {
-           ESP_LOGE(TAG, "Failed to initialize menu system");
-           return;
-       }
-       
-       // Your application code here
-   }
-   ```
-
-## Configuration
-
-- Edit `assets/menu.json` or set a custom path via `idf.py menuconfig`.
-- Example JSON:
-
-  ```json
-  {
-      "display": {
-          "width": 128,
-          "height": 64,
-          "sda_pin": 21,
-          "scl_pin": 22,
-          "i2c_address": "0x3C"
-      },
-      "encoders": [
-          {
-              "name": "encoder1",
-              "pins": {
-                  "A": 5,
-                  "B": 6,
-                  "switch": 7
-              }
-          }
-      ],
-      "menu": {
-          "screens": [
-              {
-                  "name": "main",
-                  "widgets": [
-                      {
-                          "type": "list",
-                          "controlled_by": "encoder1",
-                          "items": [
-                              {"id": 1, "text": "Option 1", "action": "action1"},
-                              {"id": 2, "text": "Option 2", "screen": "screen2"}
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "name": "screen2",
-                  "widgets": [
-                      {
-                          "type": "image",
-                          "graphic_id": "waveform",
-                          "x": 10,
-                          "y": 10
-                      }
-                  ]
-              }
-          ]
-      },
-      "graphics": [
-          {
-              "id": "waveform",
-              "type": "waveform"
-          }
-      ]
-  }'''
-
-### Implementing Menu Actions
-
-1. Define action callbacks in your code:
+- Add this repo as a component (via git submodule or by setting `EXTRA_COMPONENT_DIRS`).
+- Managed dependencies are declared in `components/esp_menu/idf_component.yml` and resolved by IDF Component Manager (requires ESP-IDF 5.4+):
+    - lvgl/lvgl
+    - espressif/esp_lvgl_port
+    - espressif/button
+    - espressif/knob
+    - esp_lcd
+    - nvs_flash
+- Call the one-line init in your app:
 
 ```c
-// In your_app.c
-void option1_action(void) {
-    // Handle option 1 selection
-    printf("Option 1 selected!\n");
+#include "esp_menu.h"
+
+void app_main(void) {
+        ESP_ERROR_CHECK(esp_menu_init());
 }
 ```
 
-2. Automatically generated header includes:
+## JSON → C code generation
 
-```c
-#include "menu_data.h"  // Contains prototypes for your menu actions
-```
+- Source of truth: `assets/menu.json`
+- Templates: `assets/templates/menu.c.j2` and `menu.h.j2`
+- Generated files: `components/esp_menu/generated/menu.c` and `menu_data.h`
 
-## Code Generation
-
-The menu system uses Python scripts to generate the C code needed for your menu based on your `menu.json` configuration:
+Regenerate after any JSON or template change:
 
 ```bash
-# Run from your project root to generate menu files
-python3 components/esp_menu/generate_menu.py
+python3 scripts/generate_menu_from_templates.py assets/menu.json components/esp_menu/generated assets/templates
 ```
 
-This will:
+Do not edit generated C files directly. Make changes in the templates.
 
-1. Read your `menu.json` definition
-2. Validate it against the schema
-3. Generate the necessary C code for your menu
-4. Place the files in the appropriate build folders
+## File layout
 
-## Configuration Options
+```text
+components/esp_menu/
+    include/        # public headers (esp_menu.h, user_actions.h)
+    src/            # core implementation (esp_menu.c)
+    assets/         # reference JSON/templates (fallbacks)
+    generated/      # auto-generated menu.c/menu_data.h
+    idf_component.yml
+assets/            # project-level JSON/templates & user_* (preferred)
+scripts/           # generator script
+examples/basic_menu
+```
 
-The ESP Menu system is configurable through ESP-IDF's `menuconfig` system. Key options include:
+## Configuration via menuconfig
 
-- Display type and resolution (SSD1306/SH1107 in 64 or 32 pixel heights)
-- I2C addressing and pin configuration
-- Number of rotary encoders (1-4)
-- GPIO pin assignments for each encoder
-- Optional NVS (Non-Volatile Storage) support
+ESP Menu Configuration includes:
 
-## Contributing
+- OLED type: SSD1306 or SH1107
+- Display height: 64 or 32 px
+- I2C host/SDA/SCL/address
+- Rotary encoder count (1–4) and pins (A/B/button) per encoder
+- Optional NVS integration
 
-Contributions to the ESP Menu project are welcome! Please feel free to submit a Pull Request.
+See DISPLAY_CONFIG.md for details.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Actions and persistence
+
+- Implement your app’s actions in `assets/user_actions.c` (project-level) or `components/esp_menu/assets/user_actions.c` (fallback).
+- Action prototypes are generated into `menu_data.h` based on callbacks found in `menu.json`.
+- If NVS is enabled, implement `user_save_params_to_nvs()` and `user_load_params_from_nvs()` in `user_actions.c`.
+
+## Troubleshooting
+
+- Unknown CMake command idf_component_register / “No project() command”
+    - You’re building from the repo root. Build from `examples/basic_menu/`.
+
+- Failed to resolve component 'lvgl' (or 'lvgl__lvgl')
+    - Ensure ESP-IDF 5.4+ is active and `examples/basic_menu` is using IDF’s Component Manager. Re-run `idf.py reconfigure`.
+
+- I2C conflict “driver_ng is not allowed to be used with this old driver”
+    - Avoid mixing legacy `driver/i2c.h` with `esp_driver_i2c`. This component uses the modern driver.
+
+- No focus highlight when turning encoder
+    - The component sets the encoder’s LVGL group as default and applies focus styles; ensure generated code is up to date and the example is flashed.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT. See LICENSE.
 
 ## Acknowledgements
 
-- [ESP-IDF](https://github.com/espressif/esp-idf) - Espressif IoT Development Framework
-- [LVGL](https://lvgl.io/) - Light and Versatile Graphics Library
+- ESP-IDF — <https://github.com/espressif/esp-idf>
+- LVGL — <https://lvgl.io/>

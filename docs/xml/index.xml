@@ -3,6 +3,17 @@
   <compound refid="da/d13/user__actions_8c" kind="file"><name>user_actions.c</name>
   </compound>
   <compound refid="d4/d85/user__graphic_8c" kind="file"><name>user_graphic.c</name>
+    <member refid="d4/d85/user__graphic_8c_1a3448830a646078d19ee4eab3ff066fb8" kind="define"><name>ICON_H</name></member>
+    <member refid="d4/d85/user__graphic_8c_1a1b86da04a676e9ed7c0158d2da986caa" kind="define"><name>ICON_W</name></member>
+    <member refid="d4/d85/user__graphic_8c_1aa8ea13936b94aea33456fc722f9c6bbd" kind="define"><name>ROW_STRIDE</name></member>
+    <member refid="d4/d85/user__graphic_8c_1af47e165dfcb150d9aedf8b86af8e2509" kind="variable"><name>next_icon_dsc</name></member>
+    <member refid="d4/d85/user__graphic_8c_1adec659119aefda37c44ffb1cf0d7b5e3" kind="variable"><name>pitch_icon_dsc</name></member>
+    <member refid="d4/d85/user__graphic_8c_1a6703d64ae0f089e4e385ff6bcd1fb24e" kind="variable"><name>prev_icon_dsc</name></member>
+    <member refid="d4/d85/user__graphic_8c_1af41db26ef5b94bd245c6e1f44b8bc599" kind="variable"><name>s_icon_bits_next</name></member>
+    <member refid="d4/d85/user__graphic_8c_1a0a6e13340d05c8e1dc7049cbdd5a0ae4" kind="variable"><name>s_icon_bits_pitch</name></member>
+    <member refid="d4/d85/user__graphic_8c_1a6cfabed4a04219b6d7f6565fb279d942" kind="variable"><name>s_icon_bits_prev</name></member>
+    <member refid="d4/d85/user__graphic_8c_1ac6363efaae998f4b66495ab10467a514" kind="variable"><name>s_icon_bits_waveform</name></member>
+    <member refid="d4/d85/user__graphic_8c_1a8722b36673efdddc8030a53421d3b9bd" kind="variable"><name>waveform_icon_dsc</name></member>
     <member refid="d4/d85/user__graphic_8c_1a9455f0779e71065c52f70144f3ec36ee" kind="function"><name>user_graphic_init</name></member>
   </compound>
   <compound refid="d4/d81/user__graphic_8h" kind="file"><name>user_graphic.h</name>
@@ -12,7 +23,18 @@
     <member refid="d4/d81/user__graphic_8h_1aa6d89d0e7b2bef89a51e08f2f9b0c9ec" kind="function"><name>LV_IMG_DECLARE</name></member>
     <member refid="d4/d81/user__graphic_8h_1a9455f0779e71065c52f70144f3ec36ee" kind="function"><name>user_graphic_init</name></member>
   </compound>
+  <compound refid="d0/d9b/menu__data_8h" kind="file"><name>menu_data.h</name>
+  </compound>
+  <compound refid="dd/dfb/esp__menu_8h" kind="file"><name>esp_menu.h</name>
+    <member refid="dd/dfb/esp__menu_8h_1a0dd6048fa7183b9c8b034e530abe7bf6" kind="function"><name>esp_menu_init</name></member>
+  </compound>
   <compound refid="d5/d4d/mainpage_8dox" kind="file"><name>mainpage.dox</name>
+  </compound>
+  <compound refid="d2/d78/esp__menu_8c" kind="file"><name>esp_menu.c</name>
+    <member refid="d2/d78/esp__menu_8c_1a61088fe7ad2d295829742a6ec0e19b1a" kind="define"><name>BSP_ERROR_CHECK_RETURN_ERR</name></member>
+    <member refid="d2/d78/esp__menu_8c_1afc3d101f633a076cc1ca84b85b6224b2" kind="define"><name>TAG</name></member>
+    <member refid="d2/d78/esp__menu_8c_1aec6f6a99cec316639057c04e78c15e64" kind="variable"><name>lcd_handle</name></member>
+    <member refid="d2/d78/esp__menu_8c_1a0dd6048fa7183b9c8b034e530abe7bf6" kind="function"><name>esp_menu_init</name></member>
   </compound>
   <compound refid="d0/dd3/group__code__gen" kind="group"><name>code_gen</name>
   </compound>
@@ -23,6 +45,12 @@
   <compound refid="dc/df1/group__input" kind="group"><name>input</name>
   </compound>
   <compound refid="dir_34e9a5f624ac092a9ae2401c28d616d7" kind="dir"><name>assets</name>
+  </compound>
+  <compound refid="dir_84fc5dba3506812825191c0c043e3c97" kind="dir"><name>generated</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
   </compound>
   <compound refid="indexpage" kind="page"><name>index</name>
   </compound>

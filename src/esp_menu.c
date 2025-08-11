@@ -365,6 +365,49 @@ esp_err_t esp_menu_init(void) {
 
     lvgl_port_unlock();
 
+        // Improve focus visibility and spacing at runtime (monochrome-friendly)
+        lvgl_port_lock(0);
+        lv_obj_t *act = lv_scr_act();
+        if (act) {
+            // Try to find the main list as first child
+            lv_obj_t *list = lv_obj_get_child(act, 0);
+            if (list) {
+                static lv_style_t style_focus_rt;
+                static bool style_inited = false;
+                if (!style_inited) {
+                    style_inited = true;
+                    lv_style_init(&style_focus_rt);
+                    lv_style_set_bg_opa(&style_focus_rt, LV_OPA_COVER);
+                    lv_style_set_bg_color(&style_focus_rt, lv_color_white());
+                    lv_style_set_text_color(&style_focus_rt, lv_color_black());
+                    lv_style_set_border_width(&style_focus_rt, 2);
+                    lv_style_set_border_color(&style_focus_rt, lv_color_black());
+                    lv_style_set_outline_width(&style_focus_rt, 1);
+                    lv_style_set_outline_color(&style_focus_rt, lv_color_black());
+                    lv_style_set_pad_top(&style_focus_rt, 2);
+                    lv_style_set_pad_bottom(&style_focus_rt, 2);
+                    lv_style_set_pad_left(&style_focus_rt, 4);
+                    lv_style_set_pad_right(&style_focus_rt, 4);
+                }
+                lv_obj_add_style(list, &style_focus_rt, LV_PART_ITEMS | LV_STATE_FOCUSED);
+
+                // Normalize spacing for all items
+                uint32_t n = lv_obj_get_child_cnt(list);
+                for (uint32_t i = 0; i < n; i++) {
+                    lv_obj_t *child = lv_obj_get_child(list, i);
+                    if (child && lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE)) {
+                        lv_obj_set_style_pad_top(child, 1, 0);
+                        lv_obj_set_style_pad_bottom(child, 1, 0);
+                        lv_obj_set_style_pad_left(child, 4, 0);
+                        lv_obj_set_style_pad_right(child, 4, 0);
+                    }
+                }
+                lv_obj_update_layout(list);
+                lv_obj_invalidate(list);
+            }
+        }
+        lvgl_port_unlock();
+
     ESP_LOGI(TAG, "Menu system fully initialized");
     return ESP_OK;
 }

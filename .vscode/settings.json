@@ -1,8 +1,8 @@
 {
     "C_Cpp.intelliSenseEngine": "default",
-    "idf.espIdfPath": "/home/phi/esp/v5.4.2/esp-idf",
+    "idf.espIdfPath": "/home/phi/esp/v5.5/esp-idf",
     "idf.toolsPath": "/home/phi/.espressif",
-    "idf.pythonInstallPath": "/usr/bin/python",
+    "idf.pythonInstallPath": "/home/phi/.espressif/python_env/idf5.5_py3.11_env/bin/python",
     "terminal.integrated.shell.linux": "fish",
     "terminal.integrated.automationShell.linux": "fish",
     "terminal.integrated.defaultProfile.linux": "esp-idf-fish",
@@ -42,27 +42,27 @@
             "path": "${env:windir}\\System32\\bash.exe",
             "args": [
                 "-c",
-                "source ~/esp/v5.4.2/esp-idf/export.sh && exec bash"
+                "source ~/esp/v5.5/esp-idf/export.sh && exec bash"
             ],
             "icon": "terminal-bash"
         }
     },
     "terminal.integrated.env.linux": {
-        "IDF_PATH": "/home/phi/esp/v5.4.2/esp-idf"
+        "IDF_PATH": "/home/phi/esp/v5.5/esp-idf"
     },
     "terminal.integrated.env.osx": {
-        "IDF_PATH": "$HOME/esp/v5.4.2/esp-idf"
+        "IDF_PATH": "$HOME/esp/v5.5/esp-idf"
     },
     "terminal.integrated.env.windows": {
-        "IDF_PATH": "%USERPROFILE%\\esp\\v5.4.2\\esp-idf"
+        "IDF_PATH": "%USERPROFILE%\\esp\\v5.5\\esp-idf"
     },
-    "clangd.path": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clangd",
+    "clangd.path": "/home/phi/.espressif/tools/esp-clang/esp-clang/esp-19.1.2_20250312/esp-clang/bin/clangd",
     "clangd.arguments": [
         "--background-index",
-        "--query-driver=/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang",
+        "--query-driver=/home/phi/.espressif/tools/esp-clangesp-clang/esp-19.1.2_20250312/esp-clang/bin/clang",
         "--compile-commands-dir=/home/phi/Programming/GitHub/Esp_menu/examples/basic_menu/build"
     ],
-    "C_Cpp.default.compilerPath": "/home/phi/.espressif/tools/esp-clang/esp-18.1.2_20240912/esp-clang/bin/clang",
+    "C_Cpp.default.compilerPath": "/home/phi/.espressif/tools/esp-clang/esp-clang/esp-19.1.2_20250312/esp-clang/bin/clang",
     "C_Cpp.default.compileCommands": "${workspaceFolder}/examples/basic_menu/build/compile_commands.json",
     "taskviewer.showLaunches": true
 }

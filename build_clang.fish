@@ -2,7 +2,7 @@
 # ESP Menu GCC Build Script
 
 # Source ESP-IDF environment directly (non-interactive)
-source /home/phi/esp/v5.4.2/esp-idf/export.fish
+source /home/phi/esp/v5.5/esp-idf/export.fish
 
 echo "Using default GCC toolchain..."
 echo "Toolchain: $IDF_TOOLCHAIN"
